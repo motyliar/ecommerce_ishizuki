@@ -27,10 +27,10 @@ class CategoryCard extends StatelessWidget {
                 Positioned(
                   top: 30,
                   left: 10,
-                  child: Image.asset(
+                  child: Image.network(
                     imgUrl,
-                    width: 170,
-                    height: 170,
+                    width: 180,
+                    height: 180,
                   ),
                 ),
                 Positioned(
@@ -46,7 +46,7 @@ class CategoryCard extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: Image.asset(logoImgUrl),
+                        child: Image.network(logoImgUrl),
                         width: 90,
                         height: 65,
                       ),

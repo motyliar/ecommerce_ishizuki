@@ -48,7 +48,7 @@ class GalleryWidget extends StatelessWidget {
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(2.0),
-                              child: Image.asset(
+                              child: Image.network(
                                 product.imgUrl[index],
                                 width: 60,
                                 height: 60,
@@ -75,7 +75,7 @@ class GalleryWidget extends StatelessWidget {
                         child: Container(
                           width: 240,
                           height: 240,
-                          child: Image.asset(state.image[state.index]),
+                          child: Image.network(state.image[state.index]),
                         ),
                       ),
                       Positioned(

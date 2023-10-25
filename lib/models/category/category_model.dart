@@ -13,15 +13,15 @@ class Category extends Equatable {
   static const List<Category> category = [
     Category(
         name: 'Pots',
-        imgUrl: 'images/pot.jpg',
-        logoImgUrl: 'images/pots_logo.png'),
+        imgUrl: 'http://motyliar.webd.pro/.sharedphotos/pot.jpg',
+        logoImgUrl: 'http://motyliar.webd.pro/.sharedphotos/pots_logo.png'),
     Category(
         name: 'Rocks',
-        imgUrl: 'images/rock.jpg',
-        logoImgUrl: 'images/rocks_logo.png'),
+        imgUrl: 'http://motyliar.webd.pro/.sharedphotos/rock.jpg',
+        logoImgUrl: 'http://motyliar.webd.pro/.sharedphotos/rocks_logo.png'),
     Category(
         name: 'Slabs',
-        imgUrl: 'images/slab.jpg',
-        logoImgUrl: 'images/slabs_logo.png'),
+        imgUrl: 'http://motyliar.webd.pro/.sharedphotos/slab.jpg',
+        logoImgUrl: 'http://motyliar.webd.pro/.sharedphotos/slabs_logo.png'),
   ];
 }

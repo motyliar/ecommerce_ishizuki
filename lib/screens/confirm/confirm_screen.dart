@@ -21,7 +21,7 @@ class ConfirmScreen extends StatelessWidget {
     return Scaffold(
         appBar: CustomAppBar(
           popArrow: false,
-          imgName: 'images/yourorder_logo.png',
+          imgName: 'http://motyliar.webd.pro/.sharedphotos/yourorder_logo.png',
           isPop: true,
         ),
 

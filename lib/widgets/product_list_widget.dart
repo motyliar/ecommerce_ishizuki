@@ -39,7 +39,7 @@ class ProductListWidget extends StatelessWidget {
               Positioned(
                 left: 25,
                 top: 10,
-                child: Image.asset(
+                child: Image.network(
                   product.imgUrl[0],
                   width: size,
                   height: size,

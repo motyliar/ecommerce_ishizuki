@@ -18,7 +18,7 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         popArrow: false,
-        imgName: 'images/cart_logo.png',
+        imgName: 'http://motyliar.webd.pro/.sharedphotos/cart_logo.png',
         isPop: true,
       ),
       bottomNavigationBar: const CustomBottomAppBar(),

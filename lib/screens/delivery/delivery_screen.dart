@@ -4,6 +4,7 @@ import 'package:ecommerce_ishizuki/data/list_data/prices_list.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'widgets.dart';
 
 import '../../config/config_exports.dart';
 
@@ -160,8 +161,8 @@ class DeliveryScreen extends StatelessWidget {
                                     Positioned(
                                         top: 0,
                                         left: 50,
-                                        child: Image.asset(
-                                          'images/cartoon.png',
+                                        child: Image.network(
+                                          'https://tiny.pl/cpscw',
                                           width: 170,
                                           height: 170,
                                         )),
@@ -306,34 +307,5 @@ class DeliveryScreen extends StatelessWidget {
             ]),
           ),
         ));
-  }
-}
-
-class RowPrices extends StatelessWidget {
-  final String text;
-  final String prices;
-  const RowPrices({required this.text, required this.prices, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-            width: 80.0,
-            child: Text(
-              text,
-              style: labelTextMidBlack,
-            )),
-        SizedBox(
-          width: 10.0,
-        ),
-        SizedBox(
-            width: 45,
-            child: Text(
-              prices,
-              style: labelTextMidBlack,
-            )),
-      ],
-    );
   }
 }

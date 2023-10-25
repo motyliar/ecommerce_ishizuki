@@ -1,5 +1,6 @@
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'galery/galery_bloc.dart';
+export 'fetchData/fetch_products_bloc.dart';
 export 'slider/slider_bloc.dart';
 export 'cart/cart_bloc.dart';
 export 'currency/currency_bloc.dart';

@@ -9,7 +9,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String imgName;
   const CustomAppBar({
     this.popArrow = false,
-    this.imgName = 'images/appbar_logo.png',
+    this.imgName = 'http://motyliar.webd.pro/.sharedphotos/appbar_logo.png',
     this.isPop = false,
     super.key,
   });
@@ -57,7 +57,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 width: 5,
               ),
               Expanded(
-                child: Image.asset(
+                child: Image.network(
                   imgName,
                   height: 70,
                 ),

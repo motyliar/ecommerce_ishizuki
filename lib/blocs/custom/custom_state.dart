@@ -16,28 +16,28 @@ class CustomState extends Equatable {
   final Custom customData;
   final CustomStatus status;
   final File? file;
-  final List<int> base64image;
+  
 
   const CustomState(
       {required this.customData,
       this.status = CustomStatus.initial,
       this.file,
-      this.base64image = const []});
+      });
 
   CustomState copyWith(
       {Custom? customData,
       CustomStatus? status,
       File? file,
-      List<int>? base64image}) {
+      }) {
     return CustomState(
         customData: customData ?? this.customData,
         status: status ?? this.status,
         file: file ?? this.file,
-        base64image: base64image ?? this.base64image);
+        );
   }
 
   @override
-  List<Object?> get props => [customData, status, file, base64image];
+  List<Object?> get props => [customData, status, file, ];
 }
 
 final class CustomInitial extends CustomState {
@@ -45,7 +45,7 @@ final class CustomInitial extends CustomState {
       : super(
             customData: const Custom(productKind: 'Rock'),
             status: CustomStatus.initial,
-            base64image: const []);
+            );
 }
 
 class CustomError extends CustomState {

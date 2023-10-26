@@ -15,7 +15,7 @@ class ProductListWidget extends StatelessWidget {
     this.iconSize = 30,
     this.size = 200,
     required this.product,
-    this.isSold = false,
+    required this.isSold,
     super.key,
   });
 
@@ -50,8 +50,8 @@ class ProductListWidget extends StatelessWidget {
                       top: 28,
                       left: 40,
                       child: Container(
-                        width: 170,
-                        height: 170,
+                        width: size - 30,
+                        height: size - 30,
                         color: Colors.black.withOpacity(0.4),
                         child: Center(
                             child: Container(

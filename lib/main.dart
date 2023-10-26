@@ -1,9 +1,9 @@
-import 'package:ecommerce_ishizuki/blocs/confirm/confirm_bloc.dart';
-import 'package:ecommerce_ishizuki/repository/products_repository.dart';
+import 'package:ecommerce_ishizuki/repository/exports.dart';
+
 import 'package:ecommerce_ishizuki/routes/app_routes.dart';
+import 'package:ecommerce_ishizuki/screens/splash/splash_screen.dart';
 import 'blocs/bloc_exports.dart';
 
-import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,16 +32,19 @@ class MyApp extends StatelessWidget {
             BlocProvider(
               create: (context) => CurrencyBloc(),
             ),
-            BlocProvider(create: (_) => ConfirmBloc()..add(StartEvent())),
+            BlocProvider(
+                create: (_) =>
+                    ConfirmBloc(OrderRepository(), ProductRepository())
+                      ..add(StartEvent())),
             BlocProvider(create: (_) => ContactCubit()),
             BlocProvider(create: (_) => DeliveryCubit()),
             BlocProvider(
-              create: (context) => CustomBloc(),
+              create: (context) => CustomBloc(CustomRepository()),
             )
           ],
           child: const MaterialApp(
             onGenerateRoute: AppRoutes.onGenerateRoute,
-            initialRoute: HomeScreen.routeName,
+            initialRoute: SplashScreen.routeName,
             debugShowCheckedModeBanner: false,
           )),
     );

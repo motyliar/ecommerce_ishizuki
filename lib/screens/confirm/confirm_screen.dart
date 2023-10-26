@@ -67,7 +67,7 @@ class ConfirmScreen extends StatelessWidget {
                                               '${index + 1}.',
                                               style: labelTextMidBlack,
                                             ),
-                                            Image.asset(
+                                            Image.network(
                                               state.cart.products[index]
                                                   .imgUrl[0],
                                               width: 60,
@@ -196,7 +196,7 @@ class ConfirmScreen extends StatelessWidget {
                         'Clear',
                         style: labelTextMidBlack,
                       )),
-                  ConfirmDialog(),
+                  const ConfirmDialog(),
                 ],
               )
             ],

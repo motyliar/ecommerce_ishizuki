@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:ecommerce_ishizuki/repository/custom_repository.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bloc/bloc.dart';
@@ -11,7 +12,8 @@ part 'custom_event.dart';
 part 'custom_state.dart';
 
 class CustomBloc extends Bloc<CustomEvent, CustomState> {
-  CustomBloc() : super(CustomInitial()) {
+  CustomRepository _customRepository;
+  CustomBloc(this._customRepository) : super(const CustomInitial()) {
     on<ChangeCustomStatusEvent>(_onChangeStatus);
     on<ChangeCustomValueEvent>(_onChangeValue);
     on<GetKindOfRockEvent>(_onGetKind);
@@ -26,43 +28,36 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.name));
       case 'EMAIL':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.email));
       case 'LONG':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.long));
       case 'WIDTH':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.width));
       case 'HEIGHT':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.height));
       case 'DESCRIPTION':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.description));
       case '':
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            base64image: state.base64image,
             status: CustomStatus.initial));
     }
   }
@@ -73,37 +68,31 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(name: event.value)));
       case 1:
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(email: event.value)));
       case 2:
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(long: event.value)));
       case 3:
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(width: event.value)));
       case 4:
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(height: event.value)));
       case 5:
         return emit(state.copyWith(
             status: state.status,
             file: state.file,
-            base64image: state.base64image,
             customData: state.customData.copyWith(description: event.value)));
     }
   }
@@ -112,26 +101,25 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
     emit(state.copyWith(
         status: state.status,
         file: state.file,
-        base64image: state.base64image,
         customData: state.customData.copyWith(productKind: event.value)));
   }
-  // LOADING PICTRUE FROM MOBILE
-  // For now state base64image is List<int>
-  // in Future need to transform in base64 variable
-  // Base64 is comment at the moment
 
+/* 
+Pictrue is loading to the state like base64 encoding.
+It's the best way to safe transfer image data to server
+*/
   _onLoadPictrue(LoadPictrueEvent event, Emitter<CustomState> emit) async {
     XFile? image;
 
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
     List<int> imageBytes = await image!.readAsBytes();
-    // String base64 = base64Encode(imageBytes);
+    String base64 = base64Encode(imageBytes);
 
     emit(state.copyWith(
-        customData: state.customData,
-        status: state.status,
-        file: File(image.path),
-        base64image: imageBytes));
+      customData: state.customData.copyWith(base64: base64),
+      status: state.status,
+      file: File(image.path),
+    ));
 
     // print('encode base64: $base64');
 
@@ -139,20 +127,17 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
     print(state.file);
   }
 
-  // TO DO
-  // Need to find best way to send image from custom order
-  // First option will sending List of Bytes to server for Fetch in Admin Panel
-  // Second option will buy subscription on EmailJS
-  // Third option, allow to send every information from TextField in Gmail on Mobile
-
-  //
+  /* 
+    It's not exactly sending email.
+    Now, we send custom order to DB, becouse of email free account limit.
+    Here we have method to sending information about order to email, then sending data to DB to fetch in admin panel.
+    */
 
   _onSendEmail(SendCustomEmailEvent event, Emitter<CustomState> emit) async {
     const serviceId = 'service_loy3rqq';
     const templateId = 'template_o2jg9yo';
     const userId = 'cdT7F_odFHGuBXuh3';
-    final String content =
-        'name: ${state.customData.name}\n email:${state.customData.email}\nlong:${state.customData.long}\nwidth:${state.customData.width}\nheight:${state.customData.height}\ndescription:${state.customData.description}\nkind:${state.customData.productKind}\nbase64:${state.base64image}';
+
     final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
     final response = await http.post(url,
         headers: {
@@ -165,16 +150,21 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
           'user_id': userId,
           'template_params': {
             'user_name': state.customData.name,
-            'user_subject': 'Custom Order from ${state.customData.name}',
+            'user_subject': 'New order on DB',
             'user_userEmail': state.customData.email,
-            'user_content': content,
           }
         }));
     print(response.body);
+
+    try {
+      await _customRepository.postData(state.customData);
+    } catch (err) {
+      print(err);
+    }
   }
 
   _onPrint(PrintValues event, Emitter<CustomState> emit) {
     print(
-        'name: ${state.customData.name}\n email:${state.customData.email}\nlong:${state.customData.long}\nwidth:${state.customData.width}\nheight:${state.customData.height}\ndescription:${state.customData.description}\nkind:${state.customData.productKind}\nbase64:${state.base64image}');
+        'name: ${state.customData.name}\n email:${state.customData.email}\nlong:${state.customData.long}\nwidth:${state.customData.width}\nheight:${state.customData.height}\ndescription:${state.customData.description}\nkind:${state.customData.productKind}\nbase64:');
   }
 }

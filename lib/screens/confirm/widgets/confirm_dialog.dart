@@ -85,7 +85,13 @@ class ConfirmDialog extends StatelessWidget {
                                         onPressed: () {
                                           context
                                               .read<ConfirmBloc>()
+                                              .add(SetSoldProduct());
+                                          context
+                                              .read<ConfirmBloc>()
                                               .add(SendConfirmEmail());
+                                          context
+                                              .read<ConfirmBloc>()
+                                              .add(SendOrderToDB());
                                           Navigator.pushNamed(
                                               context, '/order');
                                         },

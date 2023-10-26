@@ -9,7 +9,8 @@ class Custom extends Equatable {
       this.width = '',
       this.height = '',
       this.description = '',
-      this.productKind = 'Rock'});
+      this.productKind = 'Rock',
+      this.base64 = ''});
   final String name;
   final String email;
   final String long;
@@ -17,10 +18,11 @@ class Custom extends Equatable {
   final String height;
   final String description;
   final String productKind;
+  final String base64;
 
   @override
   List<Object> get props =>
-      [name, email, long, width, height, description, productKind];
+      [name, email, long, width, height, description, productKind, base64];
 
   Custom copyWith({
     String? name,
@@ -30,6 +32,7 @@ class Custom extends Equatable {
     String? height,
     String? description,
     String? productKind,
+    String? base64
   }) {
     return Custom(
       name: name ?? this.name,
@@ -39,6 +42,7 @@ class Custom extends Equatable {
       height: height ?? this.height,
       description: description ?? this.description,
       productKind: productKind ?? this.productKind,
+      base64 : base64 ?? this.base64
     );
   }
 }

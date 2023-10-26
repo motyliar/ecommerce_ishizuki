@@ -53,6 +53,7 @@ class CategoryScreen extends StatelessWidget {
                       product: products[index],
                       size: 100,
                       iconSize: 20,
+                      isSold: products[index].isSold,
                     );
                   }));
             } else {

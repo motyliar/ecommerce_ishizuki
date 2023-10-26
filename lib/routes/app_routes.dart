@@ -4,6 +4,7 @@ import 'package:ecommerce_ishizuki/screens/confirm/confirm_screen.dart';
 import 'package:ecommerce_ishizuki/screens/delivery/delivery_screen.dart';
 import 'package:ecommerce_ishizuki/screens/order/order_screen.dart';
 import 'package:ecommerce_ishizuki/screens/screens_export.dart';
+import 'package:ecommerce_ishizuki/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
@@ -31,7 +32,8 @@ class AppRoutes {
         return ConfirmScreen.route();
       case '/about':
         return AboutScreen.route();
-
+      case '/splash':
+        return SplashScreen.route();
       case '/order':
         return OrderScreen.route();
 

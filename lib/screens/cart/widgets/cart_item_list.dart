@@ -51,7 +51,7 @@ class CartItemList extends StatelessWidget {
                               ]),
                           child: Row(
                             children: [
-                              Image.asset(
+                              Image.network(
                                 state.cart.products[index].imgUrl[0],
                                 width: 120,
                                 height: 120,

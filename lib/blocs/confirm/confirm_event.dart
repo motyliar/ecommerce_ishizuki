@@ -44,3 +44,7 @@ class CountryValueEvent extends ConfirmEvent {
 class OrderConfirmSymbol extends ConfirmEvent {}
 
 class SendConfirmEmail extends ConfirmEvent {}
+
+class SendOrderToDB extends ConfirmEvent {}
+
+class SetSoldProduct extends ConfirmEvent {}

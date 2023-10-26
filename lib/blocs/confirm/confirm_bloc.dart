@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:http/http.dart' as http;
 
 import 'package:bloc/bloc.dart';
+import 'package:ecommerce_ishizuki/repository/exports.dart';
 
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:equatable/equatable.dart';
@@ -14,7 +15,10 @@ part 'confirm_event.dart';
 part 'confirm_state.dart';
 
 class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
-  ConfirmBloc() : super(const ConfirmInitial()) {
+  OrderRepository _orderRepository;
+  ProductRepository _productRepository;
+  ConfirmBloc(this._orderRepository, this._productRepository)
+      : super(const ConfirmInitial()) {
     on<StartEvent>(
       (event, emit) async {
         emit(const ConfirmInitial());
@@ -32,6 +36,8 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
     on<CountryValueEvent>(_getCountry);
     on<OrderConfirmSymbol>(_getSymbol);
     on<SendConfirmEmail>(_sendEmail);
+    on<SendOrderToDB>(_sendOrderDB);
+    on<SetSoldProduct>(_setSoldProduct);
   }
 
   _getCart(GetCartEvent event, Emitter<ConfirmState> emit) {
@@ -180,5 +186,24 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
     print(response.body);
     print('message_sent');
     print(state);
+  }
+
+  _sendOrderDB(SendOrderToDB event, Emitter<ConfirmState> emit) async {
+    try {
+      await _orderRepository.postOrder(
+          state.orderSymbol, state.address, state.cart, state.cart.products);
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  _setSoldProduct(SetSoldProduct event, Emitter<ConfirmState> emit) async {
+    List<String> productsId = state.cart.products.map((e) => e.id).toList();
+
+    try {
+      await _productRepository.updateSoldProduct(productsId);
+    } catch (err) {
+      print(err);
+    }
   }
 }

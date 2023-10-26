@@ -3,7 +3,7 @@ import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:http/http.dart' as http;
 
 class ProductRepository {
-  String url = 'http://192.168.1.41:3000/api/product/';
+  String url = 'https://ecommerce-backend-0oii.onrender.com/api/product/';
 
   // GET DATA FROM SERVER
 

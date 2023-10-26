@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 
 class CustomRepository {
-  String url = 'http://192.168.1.41:3000/api/custom/';
+  String url = 'https://ecommerce-backend-0oii.onrender.com/api/custom/';
 
   Future<void> postData(Custom customData) async {
     final Uri uri = Uri.parse(url);

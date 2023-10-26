@@ -4,7 +4,7 @@ import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:http/http.dart' as http;
 
 class OrderRepository {
-  String url = 'http://192.168.1.41:3000/api/order/';
+  String url = 'https://ecommerce-backend-0oii.onrender.com/api/order/';
 
   Future<void> postOrder(String orderSymbol, Address address, Cart cart,
       List<Product> product) async {

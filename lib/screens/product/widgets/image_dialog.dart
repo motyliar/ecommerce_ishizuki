@@ -34,7 +34,7 @@ class ImageDialog extends StatelessWidget {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: NetworkImage(state.image[state.index]),
-                              fit: BoxFit.cover)),
+                              fit: BoxFit.scaleDown)),
                     ),
                     Positioned(
                         bottom: 0,

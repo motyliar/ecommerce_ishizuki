@@ -18,8 +18,8 @@ class ImageContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.0)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.0),
-        child: Image.asset(
-          'images/$image',
+        child: Image.network(
+          'http://motyliar.webd.pro/.sharedphotos/$image',
           width: MediaQuery.of(context).size.width / 2 - 23,
           height: MediaQuery.of(context).size.width / 2 + customHeight,
           fit: BoxFit.cover,

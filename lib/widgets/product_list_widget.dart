@@ -50,8 +50,8 @@ class ProductListWidget extends StatelessWidget {
                       top: 28,
                       left: 40,
                       child: Container(
-                        width: size - 30,
-                        height: size - 30,
+                        width: size - 22,
+                        height: size - 22,
                         color: Colors.black.withOpacity(0.4),
                         child: Center(
                             child: Container(

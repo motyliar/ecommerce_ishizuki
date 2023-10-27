@@ -1,5 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/app_helpers.dart';
+
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 import 'package:flutter/material.dart';
 
@@ -33,31 +33,29 @@ class CategoryScreen extends StatelessWidget {
         body: BlocBuilder<FetchProductsBloc, FetchProductsState>(
           builder: (context, state) {
             if (state is FetchProductsInitial) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             if (state is FetchProductLoaded) {
-              print(state.product);
               List<Product> products = state.product
                   .where((element) => element.category.contains(category.name))
                   .toList();
-              print(products);
-              print(category.name);
+
               return GridView.builder(
                   itemCount: products.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   itemBuilder: ((context, index) {
                     return ProductListWidget(
                       product: products[index],
-                      size: 100,
-                      iconSize: 20,
+                      size: 135,
+                      iconSize: 35,
                       isSold: products[index].isSold,
                     );
                   }));
             } else {
-              return Text('data');
+              return const Text('data');
             }
           },
         ));

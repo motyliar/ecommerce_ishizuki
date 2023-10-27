@@ -37,8 +37,8 @@ class ProductListWidget extends StatelessWidget {
                 height: 220,
               ),
               Positioned(
-                left: 25,
-                top: 10,
+                left: 30,
+                top: 25,
                 child: Image.network(
                   product.imgUrl[0],
                   width: size,
@@ -72,43 +72,46 @@ class ProductListWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(5),
                   child: Text(
                     product.name,
-                    style: labelText,
+                    style: labelText.copyWith(fontSize: 14),
                   ),
                 ),
               ),
-              BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-                  return Positioned(
-                    top: 30,
-                    right: 15,
-                    child: InkWell(
-                      onTap: () {
-                        context
-                            .read<CartBloc>()
-                            .add(AddCartEvent(product: product));
-                        final snackBar = SnackBar(
-                          content: Text('Add to Cart ${product.name}'),
-                          duration: Duration(seconds: 1),
+              product.isSold
+                  ? Container()
+                  : BlocBuilder<CartBloc, CartState>(
+                      builder: (context, state) {
+                        return Positioned(
+                          top: 75,
+                          right: 15,
+                          child: InkWell(
+                            onTap: () {
+                              context
+                                  .read<CartBloc>()
+                                  .add(AddCartEvent(product: product));
+                              final snackBar = SnackBar(
+                                content: Text('Add to Cart ${product.name}'),
+                                duration: Duration(seconds: 1),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(5),
+                              height: iconSize + 10,
+                              width: iconSize + 10,
+                              color: backgroundColor.withOpacity(0.7),
+                              child: Icon(
+                                Icons.add_shopping_cart,
+                                size: iconSize,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
                       },
-                      child: Container(
-                        padding: const EdgeInsets.all(5),
-                        height: iconSize + 10,
-                        width: iconSize + 10,
-                        color: backgroundColor.withOpacity(0.7),
-                        child: Icon(
-                          Icons.add_shopping_cart,
-                          size: iconSize,
-                          color: Colors.white,
-                        ),
-                      ),
                     ),
-                  );
-                },
-              ),
               Positioned(
-                  bottom: 50,
+                  bottom: 20,
                   left: 5,
                   child: Container(
                     padding: const EdgeInsets.all(5),
@@ -116,19 +119,19 @@ class ProductListWidget extends StatelessWidget {
                     child: Text(
                         'Price: ${product.getStringPrice(context, product)} ',
                         style: labelText.copyWith(
-                            color: Colors.white, fontSize: 25)),
+                            color: Colors.white, fontSize: 18)),
                   )),
               product.isNew
                   ? Positioned(
-                      top: 2,
-                      left: 100,
+                      top: 10,
+                      right: 10,
                       child: Container(
                         padding: const EdgeInsets.all(9),
                         color: pallet4.withOpacity(0.7),
                         child: Text(
                           'NEW',
-                          style:
-                              labelText.copyWith(fontWeight: FontWeight.bold),
+                          style: labelText.copyWith(
+                              fontWeight: FontWeight.bold, fontSize: 10),
                         ),
                       ))
                   : Container(),

@@ -49,34 +49,47 @@ class ProductScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    BlocBuilder<CartBloc, CartState>(
-                      builder: (context, state) {
-                        return InkWell(
-                          onTap: () {
-                            context
-                                .read<CartBloc>()
-                                .add(AddCartEvent(product: product));
-                            final snackBar = SnackBar(
-                              content: Text('Add to Cart ${product.name}'),
-                              duration: Duration(seconds: 1),
-                            );
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                          },
-                          child: Padding(
+                    product.isSold
+                        ? Padding(
                             padding: const EdgeInsets.only(right: 30.0),
                             child: Container(
                               padding: const EdgeInsets.all(5),
                               color: Colors.black,
-                              child: const Text(
-                                'ADD TO CART',
-                                style: labelText,
+                              child: Text(
+                                'SOLD',
+                                style: labelText.copyWith(color: Colors.yellow),
                               ),
                             ),
+                          )
+                        : BlocBuilder<CartBloc, CartState>(
+                            builder: (context, state) {
+                              return InkWell(
+                                onTap: () {
+                                  context
+                                      .read<CartBloc>()
+                                      .add(AddCartEvent(product: product));
+                                  final snackBar = SnackBar(
+                                    content:
+                                        Text('Add to Cart ${product.name}'),
+                                    duration: Duration(seconds: 1),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 30.0),
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    color: Colors.black,
+                                    child: const Text(
+                                      'ADD TO CART',
+                                      style: labelText,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
                   ],
                 ),
               ),

@@ -40,8 +40,9 @@ class HomeScreen extends StatelessWidget {
             );
           }
           if (state is FetchProductLoaded) {
-            List<Product> listOfNewProducts =
-                state.product.where((element) => element.isNew).toList();
+            List<Product> listOfNewProducts = state.product
+                .where((element) => element.isSold == false)
+                .toList();
             return Container(
               decoration: const BoxDecoration(color: Colors.white),
               child: Column(
@@ -93,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                     color: backgroundColor,
                     child: Center(
                       child: Text(
-                        'NEW STUFF',
+                        'CHECK OUR ROCKS',
                         style: headText.copyWith(color: Colors.white),
                       ),
                     ),
@@ -109,21 +110,19 @@ class HomeScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: mainTextColor.withOpacity(0.1),
+                        color: Colors.white,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20.0))),
-                    padding: const EdgeInsets.only(left: 70, right: 50),
-                    width: MediaQuery.of(context).size.width - 20,
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: SizedBox(
-                        height: 238 * listOfNewProducts.length.toDouble(),
-                        width: 270,
+                        height: 210 * listOfNewProducts.length.toDouble(),
+                        // width: MediaQuery.of(context).size.width,
                         child: ListView.builder(
                             itemCount: listOfNewProducts.length,
                             scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) => ProductListWidget(
+                            itemBuilder: (context, index) => ProductListHome(
                                   product: listOfNewProducts[index],
-                                  isSold: listOfNewProducts[index].isSold,
                                 ))),
                   ),
                   Container(

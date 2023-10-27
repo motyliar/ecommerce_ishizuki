@@ -86,6 +86,9 @@ class AboutScreen extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
                         const ImageContainer(
                           image: 'product1.jpg',
                           customHeight: 50,
@@ -109,13 +112,6 @@ class AboutScreen extends StatelessWidget {
                   )
                 ],
               ),
-              // ClipRRect(
-              //   borderRadius: BorderRadius.circular(20.0),
-              //   child: Image.asset(
-              //     'images/about4.jpg',
-              //     width: MediaQuery.of(context).size.width - 40,
-              //   ),
-              // ),
               const SizedBox(
                 height: 30,
               ),

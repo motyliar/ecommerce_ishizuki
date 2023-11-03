@@ -20,8 +20,9 @@ class ContactScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           popArrow: false,
           isPop: true,
         ),
@@ -30,7 +31,7 @@ class ContactScreen extends StatelessWidget {
           child: BlocConsumer<ContactCubit, ContactState>(
             listener: (context, state) {
               if (state.status == TextFieldStatus.comeback) {
-                final snackBar = SnackBar(
+                final snackBar = const SnackBar(
                   content: Text('Message sent'),
                   duration: Duration(seconds: 1),
                 );
@@ -65,31 +66,51 @@ class ContactScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30.0,
                     ),
-                    CustomTextField(
-                      title: 'NAME',
-                      controller: contactNameController,
-                      name: 'NAME',
-                    ),
-                    CustomTextField(
-                      title: 'EMAIL',
-                      controller: contactEmailController,
-                      name: 'EMAIL',
-                    ),
-                    CustomTextField(
-                      title: 'SUBJECT',
-                      controller: contactSubjectController,
-                      name: 'SUBJECT',
-                    ),
-                    CustomTextField(
-                      title: 'QUESTION',
-                      controller: contactQuestionController,
-                      name: 'CONTENT',
-                      minLines: 5,
-                      maxLines: 15,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                      child: Form(
+                          key: formKey,
+                          child: Column(
+                            children: [
+                              CustomTextFormField(
+                                name: 'NAME',
+                                validation: 'Required your name',
+                                title: 'NAME',
+                                controller: contactNameController,
+                              ),
+                              CustomTextFormField(
+                                  name: 'EMAIL',
+                                  regExpGeneral:
+                                      r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
+                                  validation: 'Incorrect e-mail',
+                                  title: 'EMAIL',
+                                  controller: contactEmailController),
+                              CustomTextFormField(
+                                  name: 'SUBJECT',
+                                  validation: 'Enter subject',
+                                  title: 'SUBJECT',
+                                  controller: contactSubjectController),
+                              CustomTextFormField(
+                                name: 'CONTENT',
+                                validation: 'Enter a question',
+                                title: 'QUESTION',
+                                controller: contactQuestionController,
+                                minLines: 5,
+                                maxLines: 15,
+                              )
+                            ],
+                          )),
                     ),
                     InkWell(
                       onTap: () {
-                        context.read<ContactCubit>().sendEmail();
+                        if (formKey.currentState!.validate()) {
+                          context.read<ContactCubit>().sendEmail();
+                          const snackBar = SnackBar(
+                            content: Text('Contact Email Send'),
+                            duration: Duration(seconds: 2),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(top: 7.0),
@@ -112,5 +133,59 @@ class ContactScreen extends StatelessWidget {
             },
           ),
         ));
+  }
+}
+
+class CustomTextFormField extends StatelessWidget {
+  final String name;
+  final String regExpGeneral;
+  final String validation;
+  final String title;
+  final int minLines;
+  final int maxLines;
+  final TextEditingController controller;
+  const CustomTextFormField({
+    required this.name,
+    required this.validation,
+    this.regExpGeneral = r'^[a-zA-Z0-9]',
+    required this.title,
+    this.minLines = 1,
+    this.maxLines = 1,
+    required this.controller,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<ContactCubit, ContactState>(
+      builder: (context, state) {
+        return TextFormField(
+          minLines: minLines,
+          maxLines: maxLines,
+          validator: (value) {
+            if (value == '') {
+              return 'Can\'t be empty';
+            } else if (!RegExp(regExpGeneral).hasMatch(value!)) {
+              return validation;
+            } else {
+              return null;
+            }
+          },
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: title,
+            focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: backgroundColor)),
+          ),
+          onTap: () {
+            BlocProvider.of<ContactCubit>(context).changeStatus(name);
+            print(state.status);
+          },
+          onChanged: (value) {
+            BlocProvider.of<ContactCubit>(context).textFieldStates(value);
+          },
+        );
+      },
+    );
   }
 }

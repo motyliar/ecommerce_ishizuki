@@ -3,6 +3,7 @@ import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
 import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class CustomOrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: const CustomAppBar(
         isPop: true,
@@ -66,117 +68,129 @@ class CustomOrderScreen extends StatelessWidget {
                 decoration: shadeBox,
                 child: BlocBuilder<CustomBloc, CustomState>(
                   builder: (context, state) {
-                    return Column(
-                      children: [
-                        CustomTextField(
-                          title: 'Your name',
-                          name: 'NAME',
-                          controller: customNameController,
-                        ),
-                        CustomTextField(
-                          title: 'E-mail',
-                          name: 'EMAIL',
-                          controller: customEmailController,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text('Kind of rock: ',
-                                style: labelTextMidBlack),
-                            DropdownButton(
-                                items: productKind,
-                                value: state.customData.productKind,
-                                onChanged: (value) {
-                                  BlocProvider.of<CustomBloc>(context)
-                                      .add(GetKindOfRockEvent(value: value!));
-                                }),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Dimensions',
-                              style: labelTextMidBlack,
-                            ),
-                            SizedBox(
-                              width: 60,
-                              child: CustomTextField(
-                                title: 'Long',
-                                name: 'LONG',
-                                setPadding: 0,
-                                keybordType: TextInputType.number,
-                                controller: customLongController,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 60,
-                              child: CustomTextField(
-                                title: 'Width',
-                                name: 'WIDTH',
-                                setPadding: 0,
-                                keybordType: TextInputType.number,
-                                controller: customWidthController,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 60,
-                              child: CustomTextField(
-                                title: 'Height',
-                                name: 'HEIGHT',
-                                setPadding: 0,
-                                keybordType: TextInputType.number,
-                                controller: customHeightController,
-                              ),
-                            ),
-                          ],
-                        ),
-                        CustomTextField(
-                          title: 'Description',
-                          name: 'DESCRIPTION',
-                          minLines: 1,
-                          maxLines: 10,
-                          controller: customDescriptionController,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 5.0),
-                          child: Row(
+                    return Form(
+                      key: formKey,
+                      child: Column(
+                        children: [
+                          CustomTextFormField(
+                            title: 'Your name',
+                            name: 'NAME',
+                            controller: customNameController,
+                            validation: 'Enter correct name',
+                          ),
+                          CustomTextFormField(
+                            title: 'E-mail',
+                            name: 'EMAIL',
+                            controller: customEmailController,
+                            validation: 'Enter correct e-mail',
+                            regExpGeneral:
+                                r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Kind of rock: ',
+                                  style: labelTextMidBlack),
+                              DropdownButton(
+                                  items: productKind,
+                                  value: state.customData.productKind,
+                                  onChanged: (value) {
+                                    BlocProvider.of<CustomBloc>(context)
+                                        .add(GetKindOfRockEvent(value: value!));
+                                  }),
+                            ],
+                          ),
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                'Upload your pictrue: ',
+                                'Dimensions',
                                 style: labelTextMidBlack,
                               ),
-                              // GaleryButon(),
-
-                              InkWell(
-                                onTap: () {
-                                  context
-                                      .read<CustomBloc>()
-                                      .add(LoadPictrueEvent());
-                                },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      boxShadow: [boxShadowCustom],
-                                      color: Colors.black,
-                                    ),
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: const Text(
-                                      'UPLOAD',
-                                      style: labelText,
-                                    )),
-                              )
+                              SizedBox(
+                                width: 60,
+                                child: CustomTextFormField(
+                                  title: 'Long',
+                                  name: 'LONG',
+                                  setPadding: 0,
+                                  keybordType: TextInputType.number,
+                                  controller: customLongController,
+                                  validation: 'Wrong',
+                                  regExpGeneral: r'^[0-9]',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 60,
+                                child: CustomTextFormField(
+                                  title: 'Width',
+                                  name: 'WIDTH',
+                                  setPadding: 0,
+                                  keybordType: TextInputType.number,
+                                  validation: 'Wrong',
+                                  controller: customWidthController,
+                                  regExpGeneral: r'^[0-9]',
+                                ),
+                              ),
+                              SizedBox(
+                                width: 60,
+                                child: CustomTextFormField(
+                                  title: 'Height',
+                                  name: 'HEIGHT',
+                                  setPadding: 0,
+                                  keybordType: TextInputType.number,
+                                  controller: customHeightController,
+                                  validation: 'Wrong',
+                                  regExpGeneral: r'^[0-9]',
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                        state.file == null
-                            ? Text('no file')
-                            : Image.file(
-                                state.file!,
-                                width: 50,
-                                height: 50,
-                              ),
-                      ],
+                          CustomTextFormField(
+                            title: 'Description',
+                            name: 'DESCRIPTION',
+                            minLines: 1,
+                            maxLines: 10,
+                            controller: customDescriptionController,
+                            validation: 'Enter description',
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  'Upload your pictrue: ',
+                                  style: labelTextMidBlack,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    context
+                                        .read<CustomBloc>()
+                                        .add(LoadPictrueEvent());
+                                  },
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [boxShadowCustom],
+                                        color: Colors.black,
+                                      ),
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: const Text(
+                                        'UPLOAD',
+                                        style: labelText,
+                                      )),
+                                )
+                              ],
+                            ),
+                          ),
+                          state.file == null
+                              ? Text('no file')
+                              : Image.file(
+                                  state.file!,
+                                  width: 50,
+                                  height: 50,
+                                ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -185,7 +199,14 @@ class CustomOrderScreen extends StatelessWidget {
                 builder: (context, state) {
                   return InkWell(
                     onTap: () {
-                      context.read<CustomBloc>().add(SendCustomEmailEvent());
+                      if (formKey.currentState!.validate()) {
+                        context.read<CustomBloc>().add(SendCustomEmailEvent());
+                        const snackBar = SnackBar(
+                          content: Text('Email sent!'),
+                          duration: Duration(seconds: 2),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(

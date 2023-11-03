@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
 import 'package:ecommerce_ishizuki/repository/custom_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -154,7 +155,15 @@ It's the best way to safe transfer image data to server
             'user_userEmail': state.customData.email,
           }
         }));
-    print(response.body);
+    if (response.body == 'OK') {
+      customNameController.clear();
+      customEmailController.clear();
+      customLongController.clear();
+      customHeightController.clear();
+      customWidthController.clear();
+      customDescriptionController.clear();
+    }
+    ;
 
     try {
       await _customRepository.postData(state.customData);

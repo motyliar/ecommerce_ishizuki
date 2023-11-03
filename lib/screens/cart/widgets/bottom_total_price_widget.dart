@@ -124,30 +124,34 @@ class BottomTotalPriceWidget extends StatelessWidget {
                   if (state is CartLoaded) {
                     BlocProvider.of<ConfirmBloc>(context)
                         .add(GetCartEvent(cart: state.cart));
-                    return Container(
-                      margin: const EdgeInsets.only(top: 6),
-                      padding: const EdgeInsets.all(4),
-                      color: Colors.white,
-                      child: InkWell(
-                        onTap: () {
-                          final snackBar = const SnackBar(
-                            content: Text(
-                              'Need to agree delivery rules',
+                    return state.cart.products.isEmpty
+                        ? Container()
+                        : Container(
+                            margin: const EdgeInsets.only(top: 6),
+                            padding: const EdgeInsets.all(4),
+                            color: Colors.white,
+                            child: InkWell(
+                              onTap: () {
+                                const snackBar = SnackBar(
+                                  content: Text(
+                                    'Need to agree delivery rules',
+                                  ),
+                                  duration: Duration(seconds: 1),
+                                );
+                                state.deliveryAgree
+                                    ? Navigator.pushNamed(
+                                        context, '/confirmScreen')
+                                    : ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+
+                                print(state);
+                              },
+                              child: const Text(
+                                'CONFIRM',
+                                style: headText,
+                              ),
                             ),
-                            duration: Duration(seconds: 1),
                           );
-                          state.deliveryAgree
-                              ? Navigator.pushNamed(context, '/confirmScreen')
-                              : ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                          print(state);
-                        },
-                        child: const Text(
-                          'CONFIRM',
-                          style: headText,
-                        ),
-                      ),
-                    );
                   } else {
                     return const Text('data');
                   }

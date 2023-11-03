@@ -4,7 +4,9 @@ import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'details_text.dart';
 
 class ConfirmDialog extends StatelessWidget {
+  final GlobalKey<FormState> formKey;
   const ConfirmDialog({
+    required this.formKey,
     super.key,
   });
 
@@ -14,101 +16,103 @@ class ConfirmDialog extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            context.read<ConfirmBloc>().add(OrderConfirmSymbol());
-            showGeneralDialog(
-                context: context,
-                pageBuilder: (_, __, ___) {
-                  return Center(
-                    child: SingleChildScrollView(
-                      child: Container(
-                        color: Colors.transparent,
+            if (formKey.currentState!.validate()) {
+              context.read<ConfirmBloc>().add(OrderConfirmSymbol());
+              showGeneralDialog(
+                  context: context,
+                  pageBuilder: (_, __, ___) {
+                    return Center(
+                      child: SingleChildScrollView(
                         child: Container(
-                          margin: const EdgeInsets.all(10),
-                          color: backgroundColor.withOpacity(0.5),
-                          child: Material(
+                          color: Colors.transparent,
+                          child: Container(
+                            margin: const EdgeInsets.all(10),
                             color: backgroundColor.withOpacity(0.5),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  margin: const EdgeInsets.only(left: 20.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      const SizedBox(
-                                        height: 10,
-                                      ),
-                                      const Text(
-                                        'Confirm your details:\n',
-                                        style: labelText,
-                                      ),
-                                      DetailsText(
-                                          title: 'Name:',
-                                          text:
-                                              '${state.address.name} ${state.address.surname}'),
-                                      const SizedBox(height: 5),
-                                      DetailsText(
-                                          title: 'E-mail:',
-                                          text: state.address.email),
-                                      const SizedBox(height: 5),
-                                      const DetailsText(
-                                          title: 'Address:', text: ' '),
-                                      Container(
-                                        margin:
-                                            const EdgeInsets.only(left: 20.0),
-                                        child: Text(
-                                          '${state.address.street} ${state.address.numbers} \n${state.address.city} ${state.address.zipCode}\n${state.address.country}',
-                                          style: labelMidText,
+                            child: Material(
+                              color: backgroundColor.withOpacity(0.5),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(left: 20.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 10,
                                         ),
-                                      ),
-                                      const SizedBox(height: 5),
-                                      DetailsText(
-                                          title: 'Wishes:',
-                                          text: '${state.address.wishes}'),
+                                        const Text(
+                                          'Confirm your details:\n',
+                                          style: labelText,
+                                        ),
+                                        DetailsText(
+                                            title: 'Name:',
+                                            text:
+                                                '${state.address.name} ${state.address.surname}'),
+                                        const SizedBox(height: 5),
+                                        DetailsText(
+                                            title: 'E-mail:',
+                                            text: state.address.email),
+                                        const SizedBox(height: 5),
+                                        const DetailsText(
+                                            title: 'Address:', text: ' '),
+                                        Container(
+                                          margin:
+                                              const EdgeInsets.only(left: 20.0),
+                                          child: Text(
+                                            '${state.address.street} ${state.address.numbers} \n${state.address.city} ${state.address.zipCode}\n${state.address.country}',
+                                            style: labelMidText,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 5),
+                                        DetailsText(
+                                            title: 'Wishes:',
+                                            text: '${state.address.wishes}'),
+                                      ],
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text(
+                                            'BACK',
+                                            style: labelText,
+                                          )),
+                                      TextButton(
+                                          onPressed: () {
+                                            context
+                                                .read<ConfirmBloc>()
+                                                .add(SetSoldProduct());
+                                            context
+                                                .read<ConfirmBloc>()
+                                                .add(SendConfirmEmail());
+                                            context
+                                                .read<ConfirmBloc>()
+                                                .add(SendOrderToDB());
+                                            Navigator.pushNamed(
+                                                context, '/order');
+                                          },
+                                          child: const Text(
+                                            'SEND',
+                                            style: labelText,
+                                          )),
                                     ],
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text(
-                                          'BACK',
-                                          style: labelText,
-                                        )),
-                                    TextButton(
-                                        onPressed: () {
-                                          context
-                                              .read<ConfirmBloc>()
-                                              .add(SetSoldProduct());
-                                          context
-                                              .read<ConfirmBloc>()
-                                              .add(SendConfirmEmail());
-                                          context
-                                              .read<ConfirmBloc>()
-                                              .add(SendOrderToDB());
-                                          Navigator.pushNamed(
-                                              context, '/order');
-                                        },
-                                        child: const Text(
-                                          'SEND',
-                                          style: labelText,
-                                        )),
-                                  ],
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  );
-                });
+                    );
+                  });
+            }
           },
           child: Container(
             padding: const EdgeInsets.all(5),

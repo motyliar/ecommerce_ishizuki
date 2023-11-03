@@ -15,17 +15,17 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       appBar: CustomAppBar(
         popArrow: false,
         imgName: 'http://motyliar.webd.pro/.sharedphotos/cart_logo.png',
         isPop: true,
       ),
-      bottomNavigationBar: const CustomBottomAppBar(),
+      bottomNavigationBar: CustomBottomAppBar(),
 
       //BODY
 
-      body: const Column(
+      body: Column(
         children: [
           // Widget to show every single cart product //
           CartItemList(),

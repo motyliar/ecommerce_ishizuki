@@ -18,6 +18,7 @@ class ConfirmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final keyForm = GlobalKey<FormState>();
     return Scaffold(
         appBar: CustomAppBar(
           popArrow: false,
@@ -39,135 +40,149 @@ class ConfirmScreen extends StatelessWidget {
                   }
                   if (state is ConfirmChanges) {
                     print(state);
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                            width: MediaQuery.of(context).size.width - 10,
-                            height:
-                                (state.cart.products.length * 95).toDouble(),
-                            child: ListView.builder(
-                              itemCount: state.cart.products.length,
-                              itemBuilder: (context, index) {
-                                return Builder(builder: (context) {
-                                  final price =
-                                      '${context.select((CurrencyBloc bloc) => bloc.state.currentConversion * state.cart.products[index].price)} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}';
-                                  return Padding(
-                                    padding: const EdgeInsets.only(
-                                        right: 20.0, left: 0.0, top: 5.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              '${index + 1}.',
-                                              style: labelTextMidBlack,
-                                            ),
-                                            Image.network(
-                                              state.cart.products[index]
-                                                  .imgUrl[0],
-                                              width: 60,
-                                              height: 60,
-                                            ),
-                                            Text(
-                                              state.cart.products[index].name,
-                                              style: headText,
-                                            ),
-                                            Text(
-                                              price.toString(),
-                                              style: labelTextMidBlack,
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                });
-                              },
-                            )),
-                        const Divider(
-                          endIndent: 20,
-                          indent: 20,
-                          thickness: 1.5,
-                          color: backgroundColor,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 30.0),
-                          child: Align(
-                              alignment: Alignment.centerRight,
-                              child: Text(
-                                'Total:   ${state.cart.getTotalPricing} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}',
-                                style: labelTextMidBlack,
+                    return Form(
+                      key: keyForm,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              width: MediaQuery.of(context).size.width - 10,
+                              height:
+                                  (state.cart.products.length * 95).toDouble(),
+                              child: ListView.builder(
+                                itemCount: state.cart.products.length,
+                                itemBuilder: (context, index) {
+                                  return Builder(builder: (context) {
+                                    final price =
+                                        '${context.select((CurrencyBloc bloc) => bloc.state.currentConversion * state.cart.products[index].price)} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}';
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          right: 20.0, left: 0.0, top: 5.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Text(
+                                                '${index + 1}.',
+                                                style: labelTextMidBlack,
+                                              ),
+                                              Image.network(
+                                                state.cart.products[index]
+                                                    .imgUrl[0],
+                                                width: 60,
+                                                height: 60,
+                                              ),
+                                              Text(
+                                                state.cart.products[index].name,
+                                                style: headText,
+                                              ),
+                                              Text(
+                                                price.toString(),
+                                                style: labelTextMidBlack,
+                                              )
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                                },
                               )),
-                        ),
-                        const LabelTexts(
-                          title: 'NAMES',
-                        ),
-                        CustomTextField(
-                          title: 'name',
-                          controller: nameController,
-                          name: 'NAME',
-                        ),
-                        CustomTextField(
-                          title: 'Surname',
-                          controller: surnameController,
-                          name: 'SURNAME',
-                        ),
-                        CustomTextField(
+                          const Divider(
+                            endIndent: 20,
+                            indent: 20,
+                            thickness: 1.5,
+                            color: backgroundColor,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 30.0),
+                            child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  'Total:   ${state.cart.getTotalPricing} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}',
+                                  style: labelTextMidBlack,
+                                )),
+                          ),
+                          const LabelTexts(
+                            title: 'NAMES',
+                          ),
+                          CustomTextFormField(
+                            title: 'name',
+                            controller: nameController,
+                            name: 'NAME',
+                            validation: 'Enter correct name',
+                          ),
+                          CustomTextFormField(
+                            title: 'Surname',
+                            controller: surnameController,
+                            name: 'SURNAME',
+                            validation: 'Enter correct surname',
+                          ),
+                          CustomTextFormField(
                             title: 'E-mail',
                             controller: emailController,
-                            name: 'EMAIL'),
-                        const LabelTexts(title: 'Address'),
-                        CustomTextField(
-                          title: 'street',
-                          controller: streetController,
-                          name: 'STREET',
-                        ),
-                        CustomTextField(
-                          title: 'home number',
-                          controller: numbersController,
-                          name: 'NUMBER',
-                        ),
-                        CustomTextField(
-                          title: 'city',
-                          controller: cityController,
-                          name: 'CITY',
-                        ),
-                        CustomTextField(
-                          title: 'zip-code',
-                          controller: zipCodeController,
-                          name: 'ZIPCODE',
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 40.0, right: 40.0, bottom: 5.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text('Country: '),
-                              DropdownButton(
-                                  items: countryItems,
-                                  value: state.address.country,
-                                  onChanged: (value) {
-                                    BlocProvider.of<ConfirmBloc>(context)
-                                        .add(CountryValueEvent(value: value!));
-
-                                    print(state.address.country);
-                                  }),
-                            ],
+                            name: 'EMAIL',
+                            validation: 'Enter correct e-mail',
+                            regExpGeneral:
+                                r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
                           ),
-                        ),
-                        const LabelTexts(title: 'Special Wishes'),
-                        CustomTextField(
-                          title: 'special wishes',
-                          controller: specialWishesController,
-                          name: 'WISHES',
-                        ),
-                      ],
+                          const LabelTexts(title: 'Address'),
+                          CustomTextFormField(
+                            title: 'street',
+                            controller: streetController,
+                            name: 'STREET',
+                            validation: 'Enter correct street',
+                          ),
+                          CustomTextFormField(
+                            title: 'home number',
+                            controller: numbersController,
+                            name: 'NUMBER',
+                            validation: 'Wrong',
+                          ),
+                          CustomTextFormField(
+                            title: 'city',
+                            controller: cityController,
+                            name: 'CITY',
+                            validation: 'Enter city',
+                          ),
+                          CustomTextFormField(
+                            title: 'zip-code',
+                            controller: zipCodeController,
+                            name: 'ZIPCODE',
+                            validation: 'Enter correct zip code',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 40.0, right: 40.0, bottom: 5.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text('Country: '),
+                                DropdownButton(
+                                    items: countryItems,
+                                    value: state.address.country,
+                                    onChanged: (value) {
+                                      BlocProvider.of<ConfirmBloc>(context).add(
+                                          CountryValueEvent(value: value!));
+
+                                      print(state.address.country);
+                                    }),
+                              ],
+                            ),
+                          ),
+                          const LabelTexts(title: 'Special Wishes'),
+                          CustomTextFormField(
+                            title: 'special wishes',
+                            controller: specialWishesController,
+                            name: 'WISHES',
+                            validation: '',
+                          ),
+                        ],
+                      ),
                     );
                   } else {
                     return const Text('Something Goes Wrong');
@@ -196,7 +211,9 @@ class ConfirmScreen extends StatelessWidget {
                         'Clear',
                         style: labelTextMidBlack,
                       )),
-                  const ConfirmDialog(),
+                  ConfirmDialog(
+                    formKey: keyForm,
+                  ),
                 ],
               )
             ],

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
 
 import 'dart:math';
 
@@ -183,6 +184,16 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
             'user_order': state.orderSymbol
           }
         }));
+    if (response.body == 'OK') {
+      nameController.clear();
+      surnameController.clear();
+      cityController.clear();
+      numbersController.clear();
+      zipCodeController.clear();
+      streetController.clear();
+      specialWishesController.clear();
+      emailController.clear();
+    }
     print(response.body);
     print('message_sent');
     print(state);

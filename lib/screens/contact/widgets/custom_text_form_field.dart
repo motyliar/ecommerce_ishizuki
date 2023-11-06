@@ -1,6 +1,8 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String name;
@@ -14,7 +16,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     required this.name,
     required this.validation,
-    this.regExpGeneral = r'^[a-zA-Z0-9]',
+    this.regExpGeneral = kRegExpGeneralValidation,
     required this.title,
     this.minLines = 1,
     this.maxLines = 1,
@@ -31,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
           maxLines: maxLines,
           validator: (value) {
             if (value == '') {
-              return 'Can\'t be empty';
+              return AppLocalizations.of(context)!.validationEmpty;
             } else if (!RegExp(regExpGeneral).hasMatch(value!)) {
               return validation;
             } else {
@@ -46,7 +48,6 @@ class CustomTextFormField extends StatelessWidget {
           ),
           onTap: () {
             BlocProvider.of<ContactCubit>(context).changeStatus(name);
-            print(state.status);
           },
           onChanged: (value) {
             BlocProvider.of<ContactCubit>(context).textFieldStates(value);

@@ -1,0 +1,187 @@
+{
+    "language": "English",
+    "@language": {
+        "description": "The current Language"
+    },
+    "@_HOME_SCREEN": {},
+    "aboutUs": "About Us",
+    "@aboutUs": {
+        "description": "First category from left at home screen in middle"
+    },
+    "custom": "Custom",
+    "@custom": {
+        "description": "Second category from left at home screen in middle"
+    },
+    "delivery": "Delivery",
+    "@delivery": {
+        "description": "Thrid category at home screen on right side"
+    },
+    "check": "Check our rocks",
+    "@check": {
+        "description": "Label before product list"
+    },
+
+    "@_PRODUCT_SCREEN": {},
+    "price": "Price:",
+    "@price" : {
+        "description": "Price for showing before price from state"
+    },
+    "sold": "Sold",
+    "@sold": {
+        "description": "Showing it after sold any product on Product List and Screen"
+    },
+    "addToCart": "Add to cart",
+    "@addToCart": {
+        "description": "Line for button in product screen"
+    },
+    "description" : "Description",
+    "width": "Width",
+    "height": "Height",
+    "weight": "Weight",
+    "scaleCM": "cm",
+    "scaleKG": "kg",
+    "scaleLBS": "lbs",
+    "buttonQuestion": "Are you have any question?",
+    "@buttonQuestion": {
+        "description": "line for navigate to Question Screen"
+    },
+    "buttonCustom": "Would you like order other?",
+    "@buttonCustom": {
+        "description": "question line for navigate to Custom Screen"
+    },
+    "@_CONTACT_SCREEN" : {},
+    "contact" : "Contact",
+    "contactDescription" : "If you have any questions about our products feel free to send message to us. We will reply to you as fast as will possible. As well if you dosnt find any interesting product now.",
+    "@contactDescription" : {
+        "description": "Text to describe contact screen"
+    },
+    "emailSend": "Contact e-mail send",
+    "@emailSend": {
+        "description": "Text line to inform user about email send in SnackBar"
+    },
+    "send" : "Send",
+    "textFormTitleName" : "Name",
+    "textFormTitleEmail" : "Email",
+    "textFormTitleSubject" : "Subject",
+    "textFormTitleQuestion" : "Question",
+    "textFormTitleSurname" : "Surname",
+    "textFormTitleHomeNumber" : "Home Number",
+    "textFormTitleCity" : "City",
+    "textFormTitleStreet" : "Street",
+    "textFormTitleZipCode" : "Zip-Code",
+    "textFormTitleLong": "Long",
+
+    
+
+
+
+
+    "@_TEXT_FORM_FIELD_VALIDATIONS": {},
+    "validationName" : "Required your name",
+    "@validationName": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationSurname" : "Required your surname",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationEmail" : "Incorrect e-mail",
+    "@validationEmail": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationSubject" : "Enter a Subject",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationWrong" : "Wrong",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationStreet" : "Enter a Correct Street",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationCity" : "Enter a Correct City",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationZipCode" : "Enter a Correct Zip-Code",
+    "@validationSubject": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationQuestion" : "Enter a Question",
+    "@validationName": {
+        "description": "Validation text using in TextFormField"
+    },
+     "validationEmpty" : "Can\"t be empty",
+    "@validationEmpty": {
+        "description": "Validation text using in TextFormField, when Text is empty"
+    },
+    "validationDescription": "Enter a description",
+      "validationClear" : "",
+    "@validationEmpty": {
+        "description": "Validation text using in TextFormField, when Text can be clear"
+    },
+    
+    "errorMessage": "Something went wrong",
+
+    "@_CONFIRM_SCREEN": {},
+    "labelCountry": "Country:",
+    "labelNames": "Names:",
+    "labelWishes": "Special Wishes",
+    "labelAddress": "Address: ",
+    "labelTotal": "Total:",
+    "buttonClear": "Clear",
+
+    "@_ABOUT_SCREEN": {},
+    "aboutDescriptionLeftTop": " \nIshizuki rocks was created from passion to bonsai.\nMy fascination of planting ishizuki and searching for the best rock in good condition awakened the desire to create something of my own.\n",
+    "aboutDescriptionLeftBottom": "Now...\nI am creating rocks, pots and slabs for your bonsai tree. Now, I sent my products worldwide",
+    "aboutDescriptionRightBottom": " Experimenting with lots of materials finally gives me the best product. Natural rusty colors, shapes and edges of rocks, and finally hard and frost-resistant.",
+    "aboutDescriptionLabel": "At beggining\n was only\n idea...",
+
+    "@_CUSTOM_ORDER_SCREEN": {},
+    "noFile": "No file",
+    "labelCustom" : "Custom Order",
+    "labelKindOfRock": "Kind of rock: ",
+    "labelUploadPictrue": "Upload your pictrue",
+    "@labelUploadPictrue": {
+        "description": "Text before upload pictrue in Custom Screen"
+    },
+    "labelDimension": "Dimension: ",
+    "customOrderDescription": "If you can\"t find product for you. You can also order your custom rock if you wish. Take your time and prepare for us, the most details you can know to have. We will contact with you to confirm your order.",
+
+    "@_DELIVERY_SCREEN" : {},
+    "labelDelivery" : "Delivery",
+    "deliveryDescriptiion": "Delivering  around the world needed a lot of care. We are doing our best to shipping safety and fast.\nBelow you can check approximate prices and maximum sizes for one package\nEvery order we need to calculate separatly, becouse of sizes and weight is limited for one package",
+    "@deliveryDescriptiion": {
+        "description": "Full description about delivery process"
+    },
+    "labelMaxWeight": "Max. weight",
+    "labelMaxSize": "Maxiumum sizes",
+    "labelPrices": "Prices:",
+
+    "@_ORDER_SCREEN": {},
+    "thankYou": "Thank You! {username}",
+    "@thankYou": {
+        "description": "Thank to user for order",
+        "placeholders": {
+            "username": {
+                "type": "String"
+            }
+        }
+
+        
+    },
+    
+    
+    "@_SNACKBAR_MESSAGES": {},
+    "snackbarConfirmRules": "Need to agreee delivery rules",
+    "@snackbarConfirmRules": {
+        "description": "Snack Bar Warning when user didnt agree Delivery Rules"
+    }
+
+
+
+
+    
+}

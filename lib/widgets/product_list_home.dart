@@ -1,3 +1,4 @@
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
@@ -17,8 +18,7 @@ class ProductListHome extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
             onTap: () {
-              Navigator.pushNamed(context, '/productScreen',
-                  arguments: product);
+              Navigator.pushNamed(context, kProductScreen, arguments: product);
               context
                   .read<GaleryBloc>()
                   .add(GaleryLoadingEvent(image: product.imgUrl, index: 0));

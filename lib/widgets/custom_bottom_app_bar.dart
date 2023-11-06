@@ -1,4 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,7 +21,7 @@ class CustomBottomAppBar extends StatelessWidget {
           children: [
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/');
+                Navigator.pushNamed(context, kHomeScreen);
               },
               icon: const Icon(
                 FontAwesomeIcons.house,
@@ -29,7 +30,7 @@ class CustomBottomAppBar extends StatelessWidget {
             ),
             IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/cartScreen');
+                Navigator.pushNamed(context, kCartScreen);
               },
               icon: const Icon(
                 FontAwesomeIcons.cartShopping,
@@ -38,16 +39,6 @@ class CustomBottomAppBar extends StatelessWidget {
             ),
             BlocConsumer<CurrencyBloc, CurrencyState>(
               listener: (context, state) {
-                // if (state.currentCurrency == 'EUR') {
-                //   BlocProvider.of<CartBloc>(context).add(GetCurrencyEvent(
-                //       currencyCalculate: state.currentConversion));
-                // } else if (state.currentCurrency == 'USD') {
-                //   BlocProvider.of<CartBloc>(context).add(GetCurrencyEvent(
-                //       currencyCalculate: state.currentConversion));
-                // } else if (state.currentCurrency == 'GBP') {
-                //   BlocProvider.of<CartBloc>(context).add(GetCurrencyEvent(
-                //       currencyCalculate: state.currentConversion));
-                // }
                 if (state is ChangeCurrency) {
                   BlocProvider.of<CartBloc>(context).add(GetCurrencyEvent(
                       currencyCalculate: state.currentConversion));

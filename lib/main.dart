@@ -1,5 +1,9 @@
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
+import 'package:ecommerce_ishizuki/common/l10n/l10n.dart';
 import 'package:ecommerce_ishizuki/repository/exports.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/routes/app_routes.dart';
 import 'package:ecommerce_ishizuki/screens/splash/splash_screen.dart';
 import 'blocs/bloc_exports.dart';
@@ -20,6 +24,9 @@ class MyApp extends StatelessWidget {
       create: (context) => ProductRepository(),
       child: MultiBlocProvider(
           providers: [
+            BlocProvider(
+                create: (context) =>
+                    NetworkBloc()..add(NetworkObserverEvent())),
             BlocProvider(
                 create: (context) => FetchProductsBloc(
                     RepositoryProvider.of<ProductRepository>(context))
@@ -42,11 +49,18 @@ class MyApp extends StatelessWidget {
               create: (context) => CustomBloc(CustomRepository()),
             )
           ],
-          child: const MaterialApp(
-            onGenerateRoute: AppRoutes.onGenerateRoute,
-            initialRoute: SplashScreen.routeName,
-            debugShowCheckedModeBanner: false,
-          )),
+          child: MaterialApp(
+              onGenerateRoute: AppRoutes.onGenerateRoute,
+              initialRoute: kSplashScreen,
+              debugShowCheckedModeBanner: false,
+              supportedLocales: L10n.all,
+              locale: const Locale('en'),
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                AppLocalizations.delegate
+              ])),
     );
   }
 }

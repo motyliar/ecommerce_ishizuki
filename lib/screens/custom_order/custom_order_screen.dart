@@ -1,11 +1,13 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
 import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'widget/exports.dart';
 
@@ -17,10 +19,10 @@ Need to also ensure that emailing is protect of sending by boot
 
 class CustomOrderScreen extends StatelessWidget {
   const CustomOrderScreen({super.key});
-  static const routeName = '/customOrderScreen';
+
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kCustomScreen),
         builder: (_) => const CustomOrderScreen());
   }
 
@@ -29,6 +31,7 @@ class CustomOrderScreen extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: const CustomAppBar(
+        imgName: kAppBarMainLogo,
         isPop: true,
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
@@ -43,7 +46,7 @@ class CustomOrderScreen extends StatelessWidget {
                   margin: const EdgeInsets.only(top: 10),
                   padding: const EdgeInsets.all(7.0),
                   child: Text(
-                    'CUSTOM ORDER',
+                    AppLocalizations.of(context)!.labelCustom.toUpperCase(),
                     style: headText.copyWith(color: Colors.white),
                   )),
               Container(
@@ -52,8 +55,8 @@ class CustomOrderScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(
                     top: 10, right: 30, left: 30, bottom: 10),
                 decoration: shadeBox,
-                child: const Text(
-                  'If you can\'t find product for you. You can also order your custom rock if you wish. Take your time and prepare for us, the most details you can know to have. We will contact with you to confirm your order.',
+                child: Text(
+                  AppLocalizations.of(context)!.customOrderDescription,
                   style: labelTextMidBlack,
                 ),
               ),
@@ -73,18 +76,21 @@ class CustomOrderScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           CustomTextFormField(
-                            title: 'Your name',
+                            title:
+                                AppLocalizations.of(context)!.textFormTitleName,
                             name: 'NAME',
                             controller: customNameController,
-                            validation: 'Enter correct name',
+                            validation:
+                                AppLocalizations.of(context)!.validationName,
                           ),
                           CustomTextFormField(
-                            title: 'E-mail',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleEmail,
                             name: 'EMAIL',
                             controller: customEmailController,
-                            validation: 'Enter correct e-mail',
-                            regExpGeneral:
-                                r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
+                            validation:
+                                AppLocalizations.of(context)!.validationEmail,
+                            regExpGeneral: kRegExpEmailValidation,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,55 +109,60 @@ class CustomOrderScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Dimensions',
+                              Text(
+                                AppLocalizations.of(context)!.labelDimension,
                                 style: labelTextMidBlack,
                               ),
                               SizedBox(
                                 width: 60,
                                 child: CustomTextFormField(
-                                  title: 'Long',
+                                  title: AppLocalizations.of(context)!
+                                      .textFormTitleLong,
                                   name: 'LONG',
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
                                   controller: customLongController,
-                                  validation: 'Wrong',
-                                  regExpGeneral: r'^[0-9]',
+                                  validation: AppLocalizations.of(context)!
+                                      .validationWrong,
+                                  regExpGeneral: kRegExpNumberValidation,
                                 ),
                               ),
                               SizedBox(
                                 width: 60,
                                 child: CustomTextFormField(
-                                  title: 'Width',
+                                  title: AppLocalizations.of(context)!.width,
                                   name: 'WIDTH',
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
-                                  validation: 'Wrong',
+                                  validation: AppLocalizations.of(context)!
+                                      .validationWrong,
                                   controller: customWidthController,
-                                  regExpGeneral: r'^[0-9]',
+                                  regExpGeneral: kRegExpNumberValidation,
                                 ),
                               ),
                               SizedBox(
                                 width: 60,
                                 child: CustomTextFormField(
-                                  title: 'Height',
+                                  title: AppLocalizations.of(context)!.height,
                                   name: 'HEIGHT',
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
                                   controller: customHeightController,
-                                  validation: 'Wrong',
-                                  regExpGeneral: r'^[0-9]',
+                                  validation: AppLocalizations.of(context)!
+                                      .validationWrong,
+                                  regExpGeneral: kRegExpNumberValidation,
                                 ),
                               ),
                             ],
                           ),
                           CustomTextFormField(
-                            title: 'Description',
+                            title: AppLocalizations.of(context)!.description,
                             name: 'DESCRIPTION',
                             minLines: 1,
                             maxLines: 10,
                             controller: customDescriptionController,
-                            validation: 'Enter description',
+                            validation: AppLocalizations.of(context)!
+                                .validationDescription,
                           ),
                           Padding(
                             padding: EdgeInsets.only(top: 5.0),
@@ -159,7 +170,7 @@ class CustomOrderScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Text(
-                                  'Upload your pictrue: ',
+                                  '',
                                   style: labelTextMidBlack,
                                 ),
                                 InkWell(
@@ -183,7 +194,7 @@ class CustomOrderScreen extends StatelessWidget {
                             ),
                           ),
                           state.file == null
-                              ? Text('no file')
+                              ? Text(AppLocalizations.of(context)!.noFile)
                               : Image.file(
                                   state.file!,
                                   width: 50,
@@ -201,11 +212,8 @@ class CustomOrderScreen extends StatelessWidget {
                     onTap: () {
                       if (formKey.currentState!.validate()) {
                         context.read<CustomBloc>().add(SendCustomEmailEvent());
-                        const snackBar = SnackBar(
-                          content: Text('Email sent!'),
-                          duration: Duration(seconds: 2),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        Utils.snackBarMessage(
+                            context, AppLocalizations.of(context)!.emailSend);
                       }
                     },
                     child: Container(
@@ -216,7 +224,7 @@ class CustomOrderScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 10.0),
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
-                        'SEND',
+                        AppLocalizations.of(context)!.send.toUpperCase(),
                         style: headText.copyWith(color: Colors.white),
                       ),
                     ),

@@ -1,6 +1,7 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'widgets_exports.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
@@ -11,10 +12,9 @@ class ProductScreen extends StatelessWidget {
   final Product product;
   const ProductScreen({required this.product, super.key});
 
-  static const routeName = '/productScreen';
   static Route route({required Product product}) {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kProductScreen),
         builder: (_) => ProductScreen(product: product));
   }
 
@@ -43,7 +43,7 @@ class ProductScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: backgroundColor.withOpacity(0.6)),
                       child: Text(
-                        'Price: ${product.getStringPrice(context, product)} ',
+                        '${AppLocalizations.of(context)!.price} ${product.getStringPrice(context, product)} ',
                         style: labelText.copyWith(
                           fontSize: 24,
                         ),
@@ -56,7 +56,9 @@ class ProductScreen extends StatelessWidget {
                               padding: const EdgeInsets.all(5),
                               color: Colors.black,
                               child: Text(
-                                'SOLD',
+                                AppLocalizations.of(context)!
+                                    .sold
+                                    .toUpperCase(),
                                 style: labelText.copyWith(color: Colors.yellow),
                               ),
                             ),
@@ -69,8 +71,8 @@ class ProductScreen extends StatelessWidget {
                                       .read<CartBloc>()
                                       .add(AddCartEvent(product: product));
                                   final snackBar = SnackBar(
-                                    content:
-                                        Text('Add to Cart ${product.name}'),
+                                    content: Text(
+                                        '${AppLocalizations.of(context)!.addToCart}  ${product.name}'),
                                     duration: Duration(seconds: 1),
                                   );
                                   ScaffoldMessenger.of(context)
@@ -81,8 +83,10 @@ class ProductScreen extends StatelessWidget {
                                   child: Container(
                                     padding: const EdgeInsets.all(5),
                                     color: Colors.black,
-                                    child: const Text(
-                                      'ADD TO CART',
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .addToCart
+                                          .toUpperCase(),
                                       style: labelText,
                                     ),
                                   ),
@@ -110,7 +114,7 @@ class ProductScreen extends StatelessWidget {
                 initiallyExpanded: true,
                 title: Center(
                   child: Text(
-                    'DESCRIPTION',
+                    AppLocalizations.of(context)!.description.toUpperCase(),
                     style: labelText.copyWith(color: Colors.black),
                   ),
                 ),
@@ -119,17 +123,23 @@ class ProductScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(children: [
                       DescriptionRow(
-                          rightLabel: 'Description: ',
+                          rightLabel:
+                              '${AppLocalizations.of(context)!.description} :',
                           leftLabel: product.description),
                       DescriptionRow(
-                          rightLabel: 'Height: ',
-                          leftLabel: '${product.dimensionHeight} cm'),
+                          rightLabel:
+                              '${AppLocalizations.of(context)!.height} :',
+                          leftLabel:
+                              '${product.dimensionHeight} ${AppLocalizations.of(context)!.scaleCM}'),
                       DescriptionRow(
-                          rightLabel: 'Width: ',
-                          leftLabel: '${product.dimensionWidth} cm'),
+                          rightLabel:
+                              '${AppLocalizations.of(context)!.width} :',
+                          leftLabel:
+                              '${product.dimensionWidth} ${AppLocalizations.of(context)!.scaleCM}'),
                       DescriptionRow(
-                        rightLabel: 'Weight: ',
-                        leftLabel: '${product.weight} kg',
+                        rightLabel: '${AppLocalizations.of(context)!.width} :',
+                        leftLabel:
+                            '${product.weight} ${AppLocalizations.of(context)!.scaleKG}',
                       )
                     ]),
                   ),
@@ -140,13 +150,13 @@ class ProductScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
-                      const Text(
-                        'ARE YOU HAVE ANY QUESTION?',
+                      Text(
+                        AppLocalizations.of(context)!.buttonQuestion,
                         style: labelTextMidBlack,
                       ),
                       IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/contactScreen');
+                            Navigator.pushNamed(context, kContactScreen);
                           },
                           icon: const Icon(Icons.email)),
                     ],
@@ -156,13 +166,13 @@ class ProductScreen extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
-                      const Text(
-                        'WOULD YOU LIKE ORDER OTHER?',
+                      Text(
+                        AppLocalizations.of(context)!.buttonCustom,
                         style: labelTextMidBlack,
                       ),
                       IconButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/customOrderScreen');
+                            Navigator.pushNamed(context, kCustomScreen);
                           },
                           icon: const Icon(Icons.messenger)),
                     ],

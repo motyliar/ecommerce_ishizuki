@@ -1,3 +1,4 @@
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
@@ -9,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String imgName;
   const CustomAppBar({
     this.popArrow = false,
-    this.imgName = 'http://motyliar.webd.pro/.sharedphotos/appbar_logo.png',
+    required this.imgName,
     this.isPop = false,
     super.key,
   });
@@ -80,7 +81,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       : Container(),
                   IconButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/userScreen');
+                      Navigator.pushNamed(context, kUserScreen);
                     },
                     icon: const Icon(
                       FontAwesomeIcons.user,

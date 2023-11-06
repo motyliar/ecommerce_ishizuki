@@ -4,14 +4,15 @@ import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'widget.dart';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 
-  static const routeName = '/about';
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kAboutScreen),
         builder: (_) => const AboutScreen());
   }
 
@@ -19,6 +20,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
+        imgName: kAppBarMainLogo,
         isPop: true,
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
@@ -34,33 +36,33 @@ class AboutScreen extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ImageContainer(
-                          image: 'about1.jpg',
+                        const ImageContainer(
+                          image: kAboutLeftTopImage,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextContainer(
-                            text:
-                                ' \nIshizuki rocks was created from passion to bonsai.\nMy fascination of planting ishizuki and searching for the best rock in good condition awakened the desire to create something of my own.\n'),
-                        SizedBox(
+                            text: AppLocalizations.of(context)!
+                                .aboutDescriptionLeftTop),
+                        const SizedBox(
                           height: 10.0,
                         ),
-                        ImageContainer(
-                          image: 'about2.jpg',
+                        const ImageContainer(
+                          image: kAboutLeftBottomImage,
                           customHeight: 50,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextContainer(
-                            text:
-                                'Now...\nI am creating rocks, pots and slabs for your bonsai tree. Now, I sent my products worldwide'),
-                        SizedBox(
+                            text: AppLocalizations.of(context)!
+                                .aboutDescriptionLeftBottom),
+                        const SizedBox(
                           height: 10.0,
                         ),
                       ],
@@ -76,11 +78,12 @@ class AboutScreen extends StatelessWidget {
                         Container(
                           decoration: shadeBox,
                           width: MediaQuery.of(context).size.width / 2 - 23,
-                          child: const Padding(
-                            padding: EdgeInsets.all(10.0),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
                             child: Center(
                               child: Text(
-                                ' At beggining\n was only\n idea...',
+                                AppLocalizations.of(context)!
+                                    .aboutDescriptionLabel,
                                 style: headText,
                               ),
                             ),
@@ -90,21 +93,21 @@ class AboutScreen extends StatelessWidget {
                           height: 10.0,
                         ),
                         const ImageContainer(
-                          image: 'product1.jpg',
+                          image: kAboutRightTopImage,
                           customHeight: 50,
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
-                        const TextContainer(
-                          text:
-                              '  Experimenting with lots of materials finally gives me the best product. Natural rusty colors, shapes and edges of rocks, and finally hard and frost-resistant.',
+                        TextContainer(
+                          text: AppLocalizations.of(context)!
+                              .aboutDescriptionRightBottom,
                         ),
                         const SizedBox(
                           height: 10.0,
                         ),
                         const ImageContainer(
-                          image: 'about3.jpg',
+                          image: kAboutRightBottomImage,
                           customHeight: 50,
                         )
                       ],

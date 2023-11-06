@@ -5,16 +5,17 @@ import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets.dart';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import '../../config/config_exports.dart';
 
 class DeliveryScreen extends StatelessWidget {
   const DeliveryScreen({super.key});
 
-  static const routeName = '/delivery';
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kDeliveryScreen),
         builder: (_) => const DeliveryScreen());
   }
 
@@ -24,6 +25,7 @@ class DeliveryScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
           popArrow: false,
+          imgName: kAppBarMainLogo,
           isPop: true,
         ),
         bottomNavigationBar: const CustomBottomAppBar(),
@@ -39,7 +41,7 @@ class DeliveryScreen extends StatelessWidget {
                 color: backgroundColor,
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
-                  'DELIVERY',
+                  AppLocalizations.of(context)!.labelDelivery,
                   style: headText.copyWith(color: Colors.white),
                 ),
               )),
@@ -64,10 +66,10 @@ class DeliveryScreen extends StatelessWidget {
                     ],
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20)),
-                child: const Padding(
+                child: Padding(
                   padding: EdgeInsets.only(right: 30.0, left: 30.0),
                   child: Text(
-                      'Delivering  around the world needed a lot of care. We are doing our best to shipping safety and fast.\nBelow you can check approximate prices and maximum sizes for one package\nEvery order we need to calculate separatly, becouse of sizes and weight is limited for one package',
+                      AppLocalizations.of(context)!.deliveryDescriptiion,
                       style: descriptionText),
                 ),
               ),
@@ -105,7 +107,8 @@ class DeliveryScreen extends StatelessWidget {
                                 return Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Text('Max. weight:'),
+                                    Text(AppLocalizations.of(context)!
+                                        .labelMaxWeight),
                                     Text(
                                       state.weight ? '22 kg' : '48 lbs',
                                       style: labelTextMidBlack.copyWith(
@@ -150,7 +153,7 @@ class DeliveryScreen extends StatelessWidget {
                             return Column(
                               children: [
                                 Text(
-                                  'Maximum sizes:',
+                                  AppLocalizations.of(context)!.labelMaxSize,
                                   style:
                                       labelTextMidBlack.copyWith(fontSize: 18),
                                 ),
@@ -162,7 +165,7 @@ class DeliveryScreen extends StatelessWidget {
                                         top: 0,
                                         left: 50,
                                         child: Image.network(
-                                          'https://tiny.pl/cpscw',
+                                          kDeliveryCartoonImage,
                                           width: 170,
                                           height: 170,
                                         )),
@@ -170,7 +173,9 @@ class DeliveryScreen extends StatelessWidget {
                                       top: 70,
                                       left: 0,
                                       child: Text(
-                                        state.weight ? '40 cm' : '15,5"',
+                                        state.weight
+                                            ? '$kDeliveryPackageWidthCm ${AppLocalizations.of(context)!.scaleCM}'
+                                            : kDeliveryPackageWidthInch,
                                         style: labelTextMidBlack,
                                       ),
                                     ),
@@ -178,7 +183,9 @@ class DeliveryScreen extends StatelessWidget {
                                       bottom: 10,
                                       left: 35,
                                       child: Text(
-                                        state.weight ? '40 cm' : '15,5"',
+                                        state.weight
+                                            ? '$kDeliveryPackageWidthCm ${AppLocalizations.of(context)!.scaleCM}'
+                                            : kDeliveryPackageWidthInch,
                                         style: labelTextMidBlack,
                                       ),
                                     ),
@@ -186,7 +193,9 @@ class DeliveryScreen extends StatelessWidget {
                                       bottom: 10,
                                       right: 30,
                                       child: Text(
-                                        state.weight ? '76 cm' : '30"',
+                                        state.weight
+                                            ? '$kDeliveryPackageLongCm ${AppLocalizations.of(context)!.scaleCM}'
+                                            : '$kDeliveryPackageLongInch',
                                         style: labelTextMidBlack,
                                       ),
                                     ),
@@ -222,7 +231,7 @@ class DeliveryScreen extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
                     child: Text(
-                      'PRICES: ',
+                      AppLocalizations.of(context)!.labelPrices,
                       style: labelTextMidBlack.copyWith(fontSize: 20.0),
                     ),
                   ),
@@ -253,22 +262,30 @@ class DeliveryScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 RowPrices(
-                                  text: state.weight ? '0-5kg' : '0-11lbs',
+                                  text: state.weight
+                                      ? '$kDeliveryMinimumWeightKg ${AppLocalizations.of(context)!.scaleKG}'
+                                      : '$kDeliveryMinimumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
                                       '${pricesList[state.pricesIndex][0]}\$',
                                 ),
                                 RowPrices(
-                                  text: state.weight ? '5-10kg' : '11-22lbs',
+                                  text: state.weight
+                                      ? '$kDeliveryMediumWeightKg${AppLocalizations.of(context)!.scaleKG}'
+                                      : '$kDeliveryMediumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
                                       '${pricesList[state.pricesIndex][1]}\$',
                                 ),
                                 RowPrices(
-                                  text: state.weight ? '10-15kg' : '22-33lbs',
+                                  text: state.weight
+                                      ? '$kDeliveryHighWeightKg${AppLocalizations.of(context)!.scaleKG}'
+                                      : '$kDeliveryHighWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
                                       '${pricesList[state.pricesIndex][2]} \$',
                                 ),
                                 RowPrices(
-                                    text: state.weight ? '15-25kg' : '33-55lbs',
+                                    text: state.weight
+                                        ? '$kDeliveryMaximumWeightKg${AppLocalizations.of(context)!.scaleKG}'
+                                        : '$kDeliveryMaximumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                     prices:
                                         '${pricesList[state.pricesIndex][3]} \$')
                               ],

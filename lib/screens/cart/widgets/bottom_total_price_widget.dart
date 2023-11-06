@@ -1,10 +1,14 @@
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
+import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
 
 class BottomTotalPriceWidget extends StatelessWidget {
+  final Function() snackBarMessage;
   const BottomTotalPriceWidget({
+    required this.snackBarMessage,
     super.key,
   });
 
@@ -50,7 +54,7 @@ class BottomTotalPriceWidget extends StatelessWidget {
                                   }),
                         ]);
                   } else {
-                    return const Text('Something Wrong');
+                    return const ErrorScreen();
                   }
                 },
               ),
@@ -104,7 +108,7 @@ class BottomTotalPriceWidget extends StatelessWidget {
                           style: labelText,
                         );
                       } else {
-                        return const Text('Something Wrong');
+                        return const ErrorScreen();
                       }
                     },
                   ),
@@ -132,19 +136,10 @@ class BottomTotalPriceWidget extends StatelessWidget {
                             color: Colors.white,
                             child: InkWell(
                               onTap: () {
-                                const snackBar = SnackBar(
-                                  content: Text(
-                                    'Need to agree delivery rules',
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                );
                                 state.deliveryAgree
                                     ? Navigator.pushNamed(
-                                        context, '/confirmScreen')
-                                    : ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
-
-                                print(state);
+                                        context, kConfirmScreen)
+                                    : snackBarMessage();
                               },
                               child: const Text(
                                 'CONFIRM',

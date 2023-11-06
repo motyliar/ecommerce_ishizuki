@@ -7,3 +7,4 @@ export 'user/user_screen.dart';
 export 'custom_order/custom_order_screen.dart';
 export 'confirm/confirm_screen.dart';
 export 'delivery/delivery_screen.dart';
+export 'error/error_screen.dart';

@@ -1,24 +1,25 @@
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'widgets/widgets.dart';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 import 'package:flutter/material.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
-  static const routeName = '/cartScreen';
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kCartScreen),
         builder: (_) => const CartScreen());
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CustomAppBar(
         popArrow: false,
-        imgName: 'http://motyliar.webd.pro/.sharedphotos/cart_logo.png',
+        imgName: kAppBarCartLogo,
         isPop: true,
       ),
       bottomNavigationBar: CustomBottomAppBar(),
@@ -33,7 +34,12 @@ class CartScreen extends StatelessWidget {
           DeliveryDialog(),
 
           // Bottom widget of showing costs //
-          BottomTotalPriceWidget()
+          BottomTotalPriceWidget(
+            snackBarMessage: () => Utils.snackBarMessage(
+              context,
+              AppLocalizations.of(context)!.snackbarConfirmRules,
+            ),
+          )
         ],
       ),
     );

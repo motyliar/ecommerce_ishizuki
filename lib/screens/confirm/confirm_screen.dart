@@ -3,16 +3,18 @@ import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/data/list_data/country_drop_down_list.dart';
 import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
 import 'package:ecommerce_ishizuki/screens/confirm/widgets.dart';
+import 'package:ecommerce_ishizuki/screens/error/error_screen.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class ConfirmScreen extends StatelessWidget {
   const ConfirmScreen({super.key});
 
-  static const routeName = '/confirmScreen';
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kConfirmScreen),
         builder: (_) => const ConfirmScreen());
   }
 
@@ -20,9 +22,9 @@ class ConfirmScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final keyForm = GlobalKey<FormState>();
     return Scaffold(
-        appBar: CustomAppBar(
+        appBar: const CustomAppBar(
           popArrow: false,
-          imgName: 'http://motyliar.webd.pro/.sharedphotos/yourorder_logo.png',
+          imgName: kAppBarConfirmLogo,
           isPop: true,
         ),
 
@@ -103,57 +105,71 @@ class ConfirmScreen extends StatelessWidget {
                             child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Text(
-                                  'Total:   ${state.cart.getTotalPricing} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}',
+                                  '${AppLocalizations.of(context)!.labelTotal} ${state.cart.getTotalPricing} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}',
                                   style: labelTextMidBlack,
                                 )),
                           ),
-                          const LabelTexts(
-                            title: 'NAMES',
+                          LabelTexts(
+                            title: AppLocalizations.of(context)!.labelNames,
                           ),
                           CustomTextFormField(
-                            title: 'name',
+                            title:
+                                AppLocalizations.of(context)!.textFormTitleName,
                             controller: nameController,
                             name: 'NAME',
-                            validation: 'Enter correct name',
+                            validation:
+                                AppLocalizations.of(context)!.validationName,
                           ),
                           CustomTextFormField(
-                            title: 'Surname',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleSurname,
                             controller: surnameController,
                             name: 'SURNAME',
-                            validation: 'Enter correct surname',
+                            validation:
+                                AppLocalizations.of(context)!.validationSurname,
                           ),
                           CustomTextFormField(
-                            title: 'E-mail',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleEmail,
                             controller: emailController,
                             name: 'EMAIL',
-                            validation: 'Enter correct e-mail',
-                            regExpGeneral:
-                                r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
+                            validation:
+                                AppLocalizations.of(context)!.validationEmail,
+                            regExpGeneral: kRegExpEmailValidation,
                           ),
-                          const LabelTexts(title: 'Address'),
+                          LabelTexts(
+                              title:
+                                  AppLocalizations.of(context)!.labelAddress),
                           CustomTextFormField(
-                            title: 'street',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleStreet,
                             controller: streetController,
                             name: 'STREET',
-                            validation: 'Enter correct street',
+                            validation:
+                                AppLocalizations.of(context)!.validationStreet,
                           ),
                           CustomTextFormField(
-                            title: 'home number',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleHomeNumber,
                             controller: numbersController,
                             name: 'NUMBER',
-                            validation: 'Wrong',
+                            validation:
+                                AppLocalizations.of(context)!.validationWrong,
                           ),
                           CustomTextFormField(
-                            title: 'city',
+                            title:
+                                AppLocalizations.of(context)!.textFormTitleCity,
                             controller: cityController,
                             name: 'CITY',
                             validation: 'Enter city',
                           ),
                           CustomTextFormField(
-                            title: 'zip-code',
+                            title: AppLocalizations.of(context)!
+                                .textFormTitleZipCode,
                             controller: zipCodeController,
                             name: 'ZIPCODE',
-                            validation: 'Enter correct zip code',
+                            validation:
+                                AppLocalizations.of(context)!.validationZipCode,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(
@@ -161,7 +177,8 @@ class ConfirmScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text('Country: '),
+                                Text(
+                                    '${AppLocalizations.of(context)!.labelCountry} '),
                                 DropdownButton(
                                     items: countryItems,
                                     value: state.address.country,
@@ -174,9 +191,10 @@ class ConfirmScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const LabelTexts(title: 'Special Wishes'),
+                          LabelTexts(
+                              title: AppLocalizations.of(context)!.labelWishes),
                           CustomTextFormField(
-                            title: 'special wishes',
+                            title: AppLocalizations.of(context)!.labelWishes,
                             controller: specialWishesController,
                             name: 'WISHES',
                             validation: '',
@@ -185,11 +203,11 @@ class ConfirmScreen extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return const Text('Something Goes Wrong');
+                    return const ErrorScreen();
                   }
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Row(

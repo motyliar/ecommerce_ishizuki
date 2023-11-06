@@ -1,23 +1,23 @@
 import 'dart:async';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
-  static const routeName = '/order';
+
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kOrderScreen),
         builder: (_) => const OrderScreen());
   }
 
   @override
   Widget build(BuildContext context) {
     Timer.periodic(const Duration(seconds: 5), (timer) {
-      Navigator.pushNamed(context, '/');
+      Navigator.pushNamed(context, kHomeScreen);
       timer.cancel();
     });
     return Scaffold(
@@ -48,7 +48,8 @@ class OrderScreen extends StatelessWidget {
                         height: 35.0,
                       ),
                       Text(
-                        'Thank you ${state.address.name}!',
+                        AppLocalizations.of(context)!
+                            .thankYou(state.address.name),
                         style: headText.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(

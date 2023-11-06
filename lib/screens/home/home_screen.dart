@@ -1,4 +1,6 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
@@ -8,10 +10,10 @@ import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-  static const String routeName = '/';
+
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kHomeScreen),
         builder: (_) => const HomeScreen());
   }
 
@@ -23,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       // APP BAR
       appBar: CustomAppBar(
         popArrow: false,
-        imgName: 'http://motyliar.webd.pro/.sharedphotos/appbar_logo.png',
+        imgName: kAppBarMainLogo,
       ),
 
       // BOTTOM NAVIGATION BAR
@@ -68,21 +70,24 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       MiddleSquare(
-                        text: 'ABOUT US',
-                        route: '/about',
+                        text:
+                            AppLocalizations.of(context)!.aboutUs.toUpperCase(),
+                        route: kAboutScreen,
                       ),
                       MiddleSquare(
-                        route: '/customOrderScreen',
-                        text: 'CUSTOM',
-                      ),
+                          route: kCustomScreen,
+                          text: AppLocalizations.of(context)!
+                              .custom
+                              .toUpperCase()),
                       MiddleSquare(
-                        route: '/delivery',
-                        text: 'DELIVERY',
-                      ),
+                          route: kDeliveryScreen,
+                          text: AppLocalizations.of(context)!
+                              .delivery
+                              .toUpperCase()),
                     ],
                   ),
                   const SizedBox(
@@ -94,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                     color: backgroundColor,
                     child: Center(
                       child: Text(
-                        'CHECK OUR ROCKS',
+                        AppLocalizations.of(context)!.check.toUpperCase(),
                         style: headText.copyWith(color: Colors.white),
                       ),
                     ),

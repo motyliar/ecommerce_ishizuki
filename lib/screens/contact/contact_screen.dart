@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
@@ -11,10 +13,9 @@ import 'widgets.dart';
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
 
-  static const routeName = '/contactScreen';
   static Route route() {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kContactScreen),
         builder: (_) => const ContactScreen());
   }
 
@@ -24,6 +25,7 @@ class ContactScreen extends StatelessWidget {
     return Scaffold(
         appBar: const CustomAppBar(
           popArrow: false,
+          imgName: kAppBarMainLogo,
           isPop: true,
         ),
         bottomNavigationBar: const CustomBottomAppBar(),
@@ -31,13 +33,8 @@ class ContactScreen extends StatelessWidget {
           child: BlocConsumer<ContactCubit, ContactState>(
             listener: (context, state) {
               if (state.status == TextFieldStatus.comeback) {
-                final snackBar = const SnackBar(
-                  content: Text('Message sent'),
-                  duration: Duration(seconds: 1),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 Timer.periodic(const Duration(seconds: 2), (timer) {
-                  Navigator.pushNamed(context, '/');
+                  Navigator.pushNamed(context, kHomeScreen);
                   timer.cancel();
                 });
               }
@@ -49,17 +46,17 @@ class ContactScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    const Center(
+                    Center(
                       child: Text(
-                        'CONTACT',
+                        AppLocalizations.of(context)!.contact.toUpperCase(),
                         style: headText,
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(
+                    Padding(
+                      padding: const EdgeInsets.only(
                           right: 30.0, left: 30.0, top: 40.0, bottom: 20.0),
                       child: Text(
-                        'If you have any questions about our products feel free to send message to us. We will reply to you as fast as will possible. As well if you dosnt find any interesting product now.',
+                        AppLocalizations.of(context)!.contactDescription,
                         style: labelTextMidBlack,
                       ),
                     ),
@@ -74,26 +71,33 @@ class ContactScreen extends StatelessWidget {
                             children: [
                               CustomTextFormField(
                                 name: 'NAME',
-                                validation: 'Required your name',
-                                title: 'NAME',
+                                validation: AppLocalizations.of(context)!
+                                    .validationName,
+                                title: AppLocalizations.of(context)!
+                                    .textFormTitleName,
                                 controller: contactNameController,
                               ),
                               CustomTextFormField(
                                   name: 'EMAIL',
-                                  regExpGeneral:
-                                      r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]',
-                                  validation: 'Incorrect e-mail',
-                                  title: 'EMAIL',
+                                  regExpGeneral: kRegExpEmailValidation,
+                                  validation: AppLocalizations.of(context)!
+                                      .validationEmail,
+                                  title: AppLocalizations.of(context)!
+                                      .textFormTitleEmail,
                                   controller: contactEmailController),
                               CustomTextFormField(
                                   name: 'SUBJECT',
-                                  validation: 'Enter subject',
-                                  title: 'SUBJECT',
+                                  validation: AppLocalizations.of(context)!
+                                      .validationSubject,
+                                  title: AppLocalizations.of(context)!
+                                      .textFormTitleSubject,
                                   controller: contactSubjectController),
                               CustomTextFormField(
                                 name: 'CONTENT',
-                                validation: 'Enter a question',
-                                title: 'QUESTION',
+                                validation: AppLocalizations.of(context)!
+                                    .validationQuestion,
+                                title: AppLocalizations.of(context)!
+                                    .textFormTitleQuestion,
                                 controller: contactQuestionController,
                                 minLines: 5,
                                 maxLines: 15,
@@ -105,11 +109,10 @@ class ContactScreen extends StatelessWidget {
                       onTap: () {
                         if (formKey.currentState!.validate()) {
                           context.read<ContactCubit>().sendEmail();
-                          const snackBar = SnackBar(
-                            content: Text('Contact Email Send'),
-                            duration: Duration(seconds: 2),
+                          Utils.snackBarMessage(
+                            context,
+                            AppLocalizations.of(context)!.emailSend,
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         }
                       },
                       child: Padding(
@@ -117,8 +120,8 @@ class ContactScreen extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(5),
                           color: Colors.black,
-                          child: const Text(
-                            'SEND',
+                          child: Text(
+                            AppLocalizations.of(context)!.send,
                             style: labelText,
                           ),
                         ),

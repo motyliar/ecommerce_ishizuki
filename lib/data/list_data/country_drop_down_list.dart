@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// zrobić widget
 const List<DropdownMenuItem<String>> countryItems = [
   DropdownMenuItem<String>(
     value: 'USA',

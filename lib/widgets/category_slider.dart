@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
@@ -25,7 +26,7 @@ class CategorySlider extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, '/categoryScreen',
+                    Navigator.pushNamed(context, kCategoryScreen,
                         arguments: Category.category[index]);
                   },
                   child: CategoryCard(

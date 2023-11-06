@@ -1,5 +1,6 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +11,10 @@ class CategoryScreen extends StatelessWidget {
   final Category category;
 
   const CategoryScreen({super.key, required this.category});
-  static const routeName = '/categoryScreen';
+
   static Route route({required Category category}) {
     return MaterialPageRoute(
-        settings: const RouteSettings(name: routeName),
+        settings: const RouteSettings(name: kCategoryScreen),
         builder: (_) => CategoryScreen(
               category: category,
             ));
@@ -55,7 +56,7 @@ class CategoryScreen extends StatelessWidget {
                     );
                   }));
             } else {
-              return const Text('data');
+              return const ErrorScreen();
             }
           },
         ));

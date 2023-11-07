@@ -1,6 +1,6 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
-import 'package:ecommerce_ishizuki/data/list_data/prices_list.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -266,28 +266,28 @@ class DeliveryScreen extends StatelessWidget {
                                       ? '$kDeliveryMinimumWeightKg ${AppLocalizations.of(context)!.scaleKG}'
                                       : '$kDeliveryMinimumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
-                                      '${pricesList[state.pricesIndex][0]}\$',
+                                      '${kDeliveryPricesList[state.pricesIndex][0]}\$',
                                 ),
                                 RowPrices(
                                   text: state.weight
                                       ? '$kDeliveryMediumWeightKg${AppLocalizations.of(context)!.scaleKG}'
                                       : '$kDeliveryMediumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
-                                      '${pricesList[state.pricesIndex][1]}\$',
+                                      '${kDeliveryPricesList[state.pricesIndex][1]}\$',
                                 ),
                                 RowPrices(
                                   text: state.weight
                                       ? '$kDeliveryHighWeightKg${AppLocalizations.of(context)!.scaleKG}'
                                       : '$kDeliveryHighWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                   prices:
-                                      '${pricesList[state.pricesIndex][2]} \$',
+                                      '${kDeliveryPricesList[state.pricesIndex][2]} \$',
                                 ),
                                 RowPrices(
                                     text: state.weight
                                         ? '$kDeliveryMaximumWeightKg${AppLocalizations.of(context)!.scaleKG}'
                                         : '$kDeliveryMaximumWeightLbs${AppLocalizations.of(context)!.scaleLBS}',
                                     prices:
-                                        '${pricesList[state.pricesIndex][3]} \$')
+                                        '${kDeliveryPricesList[state.pricesIndex][3]} \$')
                               ],
                             ),
                           ),
@@ -306,7 +306,8 @@ class DeliveryScreen extends StatelessWidget {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20)),
                             child: DropdownButton(
-                              items: dropDownItems,
+                              items: Utils().generateDropDownMenuItemList(
+                                  kDeliveryWorldPlaceChoose),
                               value: state.pricesValue,
                               onChanged: (value) {
                                 context

@@ -1,13 +1,30 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
 
 class MiddleSquare extends StatelessWidget {
   final String route;
   final String text;
+  final double overallWidth;
+  final double overalHeight;
+  final double borderRadius;
+  final double shadeOpacity;
+  final double blurRadius;
+  final double spreadRadius;
+  final double shadeOffsetX;
+  final double shadeOffsetY;
   const MiddleSquare({
     required this.route,
     required this.text,
+    this.borderRadius = kRadiusAppDefault,
+    this.shadeOpacity = kMediumOpacity,
     super.key,
+    this.overallWidth = kMiddleButtonWidth,
+    this.overalHeight = kMiddleButtonHeight,
+    this.blurRadius = kBlurRadiusDefault,
+    this.spreadRadius = kSpreadRadiusDefault,
+    this.shadeOffsetX = kShadeOffsetXDefault,
+    this.shadeOffsetY = kShadeOffsetYDefault,
   });
 
   @override
@@ -19,30 +36,29 @@ class MiddleSquare extends StatelessWidget {
       child: Column(
         children: [
           Container(
-              width: 100,
-              height: 80,
+              width: overallWidth,
+              height: overalHeight,
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                        blurRadius: 3.0,
-                        spreadRadius: 1.0,
-                        color: Colors.grey.withOpacity(0.5),
-                        offset: const Offset(3, -3)),
+                        blurRadius: blurRadius,
+                        spreadRadius: spreadRadius,
+                        color: Colors.grey.withOpacity(shadeOpacity),
+                        offset: Offset(shadeOffsetX, shadeOffsetY)),
                   ],
                   gradient: LinearGradient(colors: [
-                    mainTextColor.withOpacity(0.5),
+                    mainTextColor.withOpacity(shadeOpacity),
                     backgroundColor,
-                    mainTextColor.withOpacity(0.5)
+                    mainTextColor.withOpacity(shadeOpacity)
                   ], begin: Alignment.topCenter),
-                  color: mainTextColor.withOpacity(0.5),
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10))),
+                  color: mainTextColor.withOpacity(shadeOpacity),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(borderRadius),
+                      topRight: Radius.circular(borderRadius))),
               child: Center(
                 child: Text(
                   text,
                   style: labelTextMidBlack,
-                  maxLines: 2,
                 ),
               )),
         ],

@@ -55,8 +55,8 @@ class OrderScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Text(
-                        'Your order is getting ready',
+                      Text(
+                        AppLocalizations.of(context)!.orderGettingReadyMessage,
                         style: labelText,
                       ),
                       const SizedBox(
@@ -65,7 +65,8 @@ class OrderScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(right: 15, left: 15),
                         child: Text(
-                          'We\'ll procced your order and will comeback to you with shipping cost and Payment method on your email: ${state.address.email}. That can take us about 24h, ',
+                          AppLocalizations.of(context)!
+                              .orderEmailMessage(state.address.email),
                           style: labelMidText,
                         ),
                       ),
@@ -74,7 +75,8 @@ class OrderScreen extends StatelessWidget {
                       ),
                       RichText(
                           text: TextSpan(
-                              text: 'Your order:   ',
+                              text: AppLocalizations.of(context)!
+                                  .orderYourOrderLabel,
                               style: labelMidText,
                               children: <TextSpan>[
                             TextSpan(

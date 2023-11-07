@@ -1,11 +1,28 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
   final String imgUrl;
   final String logoImgUrl;
+  final double categoryImageWidth;
+  final double categoryImageHeight;
+  final double categoryContainerWidth;
+  final double categoryContainerHeight;
+  final double productPadding;
+  final double radiusBorder;
+  final double categoryLogoImageWidth;
+  final double categoryLogoImageHeight;
   const CategoryCard({
     required this.imgUrl,
     required this.logoImgUrl,
+    required this.categoryImageWidth,
+    required this.categoryImageHeight,
+    required this.categoryContainerWidth,
+    required this.categoryContainerHeight,
+    required this.categoryLogoImageWidth,
+    required this.categoryLogoImageHeight,
+    this.productPadding = kDefaultPadding,
+    this.radiusBorder = kRadiusAppDefault,
     super.key,
   });
 
@@ -14,23 +31,24 @@ class CategoryCard extends StatelessWidget {
     return Column(
       children: [
         Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+            padding: EdgeInsets.symmetric(
+                horizontal: productPadding, vertical: productPadding),
             child: Stack(
               children: [
                 Container(
-                    height: 230,
-                    width: 190,
-                    padding: const EdgeInsets.all(5),
+                    height: categoryContainerHeight,
+                    width: categoryContainerWidth,
+                    padding: EdgeInsets.all(productPadding),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(radiusBorder),
                     )),
                 Positioned(
                   top: 30,
                   left: 10,
                   child: Image.network(
                     imgUrl,
-                    width: 180,
-                    height: 180,
+                    width: categoryImageWidth,
+                    height: categoryImageHeight,
                   ),
                 ),
                 Positioned(
@@ -39,16 +57,17 @@ class CategoryCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(radiusBorder),
                       ),
                       child: Container(
-                        padding: const EdgeInsets.only(left: 3, right: 3),
+                        padding: EdgeInsets.only(
+                            left: productPadding, right: productPadding),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(radiusBorder),
                         ),
+                        width: categoryLogoImageWidth,
+                        height: categoryLogoImageHeight,
                         child: Image.network(logoImgUrl),
-                        width: 90,
-                        height: 65,
                       ),
                     )),
               ],

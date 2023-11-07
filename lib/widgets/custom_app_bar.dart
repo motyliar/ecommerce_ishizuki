@@ -1,3 +1,4 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,13 +22,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: backgroundColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(0))),
-        toolbarHeight: 120,
+        toolbarHeight: kToolBarHeight,
         automaticallyImplyLeading: popArrow,
         centerTitle: true,
         title: Container(
           width: MediaQuery.of(context).size.width,
           padding: const EdgeInsets.symmetric(
-            horizontal: 5,
+            horizontal: kDefaultPadding,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -55,16 +56,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ],
               ),
               const SizedBox(
-                width: 5,
+                width: kSmallPaddingValue,
               ),
               Expanded(
                 child: Image.network(
                   imgName,
-                  height: 70,
+                  height: kScreenLogoHeight,
                 ),
               ),
               const SizedBox(
-                width: 5,
+                width: kSmallPaddingValue,
               ),
               Column(
                 children: [
@@ -97,5 +98,5 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(110);
+  Size get preferredSize => const Size.fromHeight(kToolBarHeight);
 }

@@ -1,4 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
@@ -13,9 +14,9 @@ class CustomBottomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       color: backgroundColor,
-      height: 60,
+      height: kBottomAppBarHeightSetter,
       child: SizedBox(
-        height: 60,
+        height: kBottomAppBarHeightSetter,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

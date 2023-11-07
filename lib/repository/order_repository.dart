@@ -1,17 +1,15 @@
 import 'dart:convert';
 
+import 'package:ecommerce_ishizuki/common/constans/repository_constans.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class OrderRepository {
-  String url = 'https://ecommerce-backend-0oii.onrender.com/api/order/';
-
   Future<void> postOrder(String orderSymbol, Address address, Cart cart,
       List<Product> product) async {
-    final Uri uri = Uri.parse(url);
-
-    final response = await http.post(uri,
-        headers: {"Content-Type": "application/json"},
+    final response = await http.post(Uri.parse(kOrderToUriParseEndPoint),
+        headers: kHeadersContentType,
         body: jsonEncode({
           "orderNumber": orderSymbol,
           "name": address.name,
@@ -30,6 +28,6 @@ class OrderRepository {
               .toList(),
         }));
 
-    print(response.body);
+    debugPrint(response.body);
   }
 }

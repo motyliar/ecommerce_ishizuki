@@ -1,25 +1,26 @@
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlNavigate {
   Future<void> launchFacebook() async {
-    final Uri facebookUrl = Uri.parse('https://www.facebook.com/ishizukirocks');
+    final Uri facebookUrl = Uri.parse(kFacebookUrl);
 
     if (await canLaunchUrl(facebookUrl)) {
       await launchUrl(facebookUrl);
     }
-    throw 'Could not launch $facebookUrl';
+    debugPrint('Could not launch $facebookUrl');
   }
 
   Future<void> launchInstagram() async {
-    final Uri instagramUrl =
-        Uri.parse('https://www.instagram.com/ishizukirocks');
+    final Uri instagramUrl = Uri.parse(kInstagramUrl);
 
     if (await canLaunchUrl(
       instagramUrl,
     )) {
       launchUrl(instagramUrl);
     } else {
-      throw 'Could not launch $instagramUrl';
+      debugPrint('Could not launch $instagramUrl');
     }
   }
 }

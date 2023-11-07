@@ -1,10 +1,13 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String title;
-  final String name;
+  final TextFieldEnum name;
   final int minLines;
   final int maxLines;
   final double setPadding;
@@ -21,7 +24,7 @@ class CustomTextFormField extends StatelessWidget {
     this.keybordType = TextInputType.emailAddress,
     required this.controller,
     required this.validation,
-    this.regExpGeneral = r'^[a-zA-Z0-9]',
+    this.regExpGeneral = kRegExpGeneralValidation,
     super.key,
   });
 
@@ -34,7 +37,7 @@ class CustomTextFormField extends StatelessWidget {
           child: TextFormField(
             validator: (value) {
               if (value == '') {
-                return 'Can\'t be empty';
+                return AppLocalizations.of(context)!.validationEmpty;
               } else if (!RegExp(regExpGeneral).hasMatch(value!)) {
                 return validation;
               } else {
@@ -53,7 +56,7 @@ class CustomTextFormField extends StatelessWidget {
             keyboardType: keybordType,
             onTap: () {
               BlocProvider.of<CustomBloc>(context)
-                  .add(ChangeCustomStatusEvent(value: name));
+                  .add(ChangeCustomStatusEvent(enumStatus: name));
             },
             onChanged: (value) {
               BlocProvider.of<CustomBloc>(context)

@@ -1,13 +1,23 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
-import 'package:ecommerce_ishizuki/data/list_data/country_drop_down_list.dart';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+
 import 'package:ecommerce_ishizuki/screens/confirm/widgets.dart';
 import 'package:ecommerce_ishizuki/screens/error/error_screen.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
+
+final TextEditingController _nameController = TextEditingController();
+final TextEditingController _surnameController = TextEditingController();
+final TextEditingController _emailController = TextEditingController();
+final TextEditingController _cityController = TextEditingController();
+final TextEditingController _streetController = TextEditingController();
+final TextEditingController _numbersController = TextEditingController();
+final TextEditingController _zipCodeController = TextEditingController();
+final TextEditingController _specialWishesController = TextEditingController();
 
 class ConfirmScreen extends StatelessWidget {
   const ConfirmScreen({super.key});
@@ -115,24 +125,24 @@ class ConfirmScreen extends StatelessWidget {
                           CustomTextFormField(
                             title:
                                 AppLocalizations.of(context)!.textFormTitleName,
-                            controller: nameController,
-                            name: 'NAME',
+                            controller: _nameController,
+                            name: TextFieldEnum.name,
                             validation:
                                 AppLocalizations.of(context)!.validationName,
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleSurname,
-                            controller: surnameController,
-                            name: 'SURNAME',
+                            controller: _surnameController,
+                            name: TextFieldEnum.surname,
                             validation:
                                 AppLocalizations.of(context)!.validationSurname,
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleEmail,
-                            controller: emailController,
-                            name: 'EMAIL',
+                            controller: _emailController,
+                            name: TextFieldEnum.email,
                             validation:
                                 AppLocalizations.of(context)!.validationEmail,
                             regExpGeneral: kRegExpEmailValidation,
@@ -143,31 +153,32 @@ class ConfirmScreen extends StatelessWidget {
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleStreet,
-                            controller: streetController,
-                            name: 'STREET',
+                            controller: _streetController,
+                            name: TextFieldEnum.street,
                             validation:
                                 AppLocalizations.of(context)!.validationStreet,
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleHomeNumber,
-                            controller: numbersController,
-                            name: 'NUMBER',
+                            controller: _numbersController,
+                            name: TextFieldEnum.number,
                             validation:
                                 AppLocalizations.of(context)!.validationWrong,
                           ),
                           CustomTextFormField(
                             title:
                                 AppLocalizations.of(context)!.textFormTitleCity,
-                            controller: cityController,
-                            name: 'CITY',
-                            validation: 'Enter city',
+                            controller: _cityController,
+                            name: TextFieldEnum.city,
+                            validation:
+                                AppLocalizations.of(context)!.validationCity,
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleZipCode,
-                            controller: zipCodeController,
-                            name: 'ZIPCODE',
+                            controller: _zipCodeController,
+                            name: TextFieldEnum.zipcode,
                             validation:
                                 AppLocalizations.of(context)!.validationZipCode,
                           ),
@@ -180,13 +191,12 @@ class ConfirmScreen extends StatelessWidget {
                                 Text(
                                     '${AppLocalizations.of(context)!.labelCountry} '),
                                 DropdownButton(
-                                    items: countryItems,
+                                    items: Utils().generateDropDownMenuItemList(
+                                        kCountryDeliveryDestination),
                                     value: state.address.country,
                                     onChanged: (value) {
                                       BlocProvider.of<ConfirmBloc>(context).add(
                                           CountryValueEvent(value: value!));
-
-                                      print(state.address.country);
                                     }),
                               ],
                             ),
@@ -195,8 +205,8 @@ class ConfirmScreen extends StatelessWidget {
                               title: AppLocalizations.of(context)!.labelWishes),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!.labelWishes,
-                            controller: specialWishesController,
-                            name: 'WISHES',
+                            controller: _specialWishesController,
+                            name: TextFieldEnum.wishes,
                             validation: '',
                           ),
                         ],
@@ -215,14 +225,14 @@ class ConfirmScreen extends StatelessWidget {
                 children: [
                   TextButton(
                       onPressed: () {
-                        nameController.clear();
-                        surnameController.clear();
-                        cityController.clear();
-                        numbersController.clear();
-                        zipCodeController.clear();
-                        streetController.clear();
-                        specialWishesController.clear();
-                        emailController.clear();
+                        _nameController.clear();
+                        _surnameController.clear();
+                        _cityController.clear();
+                        _numbersController.clear();
+                        _zipCodeController.clear();
+                        _streetController.clear();
+                        _specialWishesController.clear();
+                        _emailController.clear();
                         context.read<ConfirmBloc>().add(ClearAddressEvent());
                       },
                       child: const Text(

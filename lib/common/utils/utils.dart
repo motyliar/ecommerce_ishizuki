@@ -11,4 +11,14 @@ class Utils {
     );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
+
+  List<DropdownMenuItem<String>> generateDropDownMenuItemList(
+      List<Map<String, String>> jsonMap) {
+    return jsonMap
+        .map((keys) => DropdownMenuItem<String>(
+              value: keys['value'],
+              child: Text(keys['text']!),
+            ))
+        .toList();
+  }
 }

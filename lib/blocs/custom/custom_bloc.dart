@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+
 import 'package:ecommerce_ishizuki/repository/custom_repository.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,42 +25,43 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
   }
 
   _onChangeStatus(ChangeCustomStatusEvent event, Emitter<CustomState> emit) {
-    switch (event.value) {
-      case 'NAME':
+    switch (event.enumStatus) {
+      case TextFieldEnum.name:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.name));
-      case 'EMAIL':
+            status: TextFieldStatus.name));
+      case TextFieldEnum.email:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.email));
-      case 'LONG':
+            status: TextFieldStatus.email));
+      case TextFieldEnum.long:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.long));
-      case 'WIDTH':
+            status: TextFieldStatus.long));
+      case TextFieldEnum.width:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.width));
-      case 'HEIGHT':
+            status: TextFieldStatus.width));
+      case TextFieldEnum.height:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.height));
-      case 'DESCRIPTION':
+            status: TextFieldStatus.height));
+      case TextFieldEnum.description:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.description));
-      case '':
+            status: TextFieldStatus.description));
+      case TextFieldEnum.initial:
         return emit(state.copyWith(
             customData: state.customData,
             file: state.file,
-            status: CustomStatus.initial));
+            status: TextFieldStatus.initial));
+      default:
     }
   }
 
@@ -123,9 +125,6 @@ It's the best way to safe transfer image data to server
     ));
 
     // print('encode base64: $base64');
-
-    print(image.toString());
-    print(state.file);
   }
 
   /* 
@@ -155,15 +154,7 @@ It's the best way to safe transfer image data to server
             'user_userEmail': state.customData.email,
           }
         }));
-    if (response.body == 'OK') {
-      customNameController.clear();
-      customEmailController.clear();
-      customLongController.clear();
-      customHeightController.clear();
-      customWidthController.clear();
-      customDescriptionController.clear();
-    }
-    ;
+    if (response.body == 'OK') {}
 
     try {
       await _customRepository.postData(state.customData);

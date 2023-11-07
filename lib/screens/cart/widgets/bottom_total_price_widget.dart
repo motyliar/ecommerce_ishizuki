@@ -3,12 +3,13 @@ import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
-import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
 
 class BottomTotalPriceWidget extends StatelessWidget {
   final Function() snackBarMessage;
-  const BottomTotalPriceWidget({
+  List<DropdownMenuItem<String>> dropdownListGenerate;
+  BottomTotalPriceWidget({
     required this.snackBarMessage,
+    required this.dropdownListGenerate,
     super.key,
   });
 
@@ -43,14 +44,14 @@ class BottomTotalPriceWidget extends StatelessWidget {
                                 )
                               : DropdownButton(
                                   dropdownColor: backgroundColor,
-                                  items: dropDownItems,
+                                  items: dropdownListGenerate,
                                   style: labelText,
                                   value: state.cart.value,
                                   onChanged: (value) {
                                     context
                                         .read<CartBloc>()
                                         .add(DeliveryValueEvent(value: value!));
-                                    print(state.cart.value);
+                                    print('this is ${state.cart.value}');
                                   }),
                         ]);
                   } else {

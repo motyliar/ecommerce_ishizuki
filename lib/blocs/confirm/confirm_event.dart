@@ -17,7 +17,7 @@ class GetCartEvent extends ConfirmEvent {
 }
 
 class TextFieldStatusEvent extends ConfirmEvent {
-  final String fieldName;
+  final TextFieldEnum fieldName;
   const TextFieldStatusEvent({required this.fieldName});
   @override
   List<Object> get props => [fieldName];

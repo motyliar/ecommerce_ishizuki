@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 
 class Cart extends Equatable {
@@ -58,4 +60,16 @@ class Cart extends Equatable {
 
   @override
   List<Object?> get props => [products, value, currencyCalculate];
+
+  Cart copyWith({
+    List<Product>? products,
+    String? value,
+    double? currencyCalculate,
+  }) {
+    return Cart(
+      products: products ?? this.products,
+      value: value ?? this.value,
+      currencyCalculate: currencyCalculate ?? this.currencyCalculate,
+    );
+  }
 }

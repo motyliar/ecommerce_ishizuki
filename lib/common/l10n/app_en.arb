@@ -22,6 +22,10 @@
     },
 
     "@_PRODUCT_SCREEN": {},
+    "newDisplay": "new",
+    "@newDisplay": {
+        "description": "Value for emit NEW when product is fresh in base"
+    },
     "price": "Price:",
     "@price" : {
         "description": "Price for showing before price from state"
@@ -49,7 +53,7 @@
     "@buttonCustom": {
         "description": "question line for navigate to Custom Screen"
     },
-    "@_CONTACT_SCREEN" : {},
+    "@_CONTACT_SCREEN": {},
     "contact" : "Contact",
     "contactDescription" : "If you have any questions about our products feel free to send message to us. We will reply to you as fast as will possible. As well if you dosnt find any interesting product now.",
     "@contactDescription" : {
@@ -144,6 +148,7 @@
     "labelCustom" : "Custom Order",
     "labelKindOfRock": "Kind of rock: ",
     "labelUploadPictrue": "Upload your pictrue",
+    "customUploadButton": "Upload",
     "@labelUploadPictrue": {
         "description": "Text before upload pictrue in Custom Screen"
     },
@@ -163,14 +168,26 @@
     "@_ORDER_SCREEN": {},
     "thankYou": "Thank You! {username}",
     "@thankYou": {
-        "description": "Thank to user for order",
+        "description": "Thank to user for order with user name",
         "placeholders": {
             "username": {
                 "type": "String"
             }
+        }        
+    },
+    "orderGettingReadyMessage": "Your order is getting ready",
+    "orderEmailMessage": "We\"ll procced your order and will comeback to you with shipping cost and Payment method on your email: {email}. That can take us about 24h",
+    "@orderEmailMessage": {
+        "description": "Message to User after confirm order with it email",
+        "placeholders": {
+            "email": {
+                "type": "String"
+            }
         }
-
-        
+    },
+    "orderYourOrderLabel": "Your order: ",
+    "@orderYourOrderLabel": {
+        "description" : "Label before Order number"
     },
     
     
@@ -178,6 +195,15 @@
     "snackbarConfirmRules": "Need to agreee delivery rules",
     "@snackbarConfirmRules": {
         "description": "Snack Bar Warning when user didnt agree Delivery Rules"
+    },
+    "snackbarAddToCartMessage": "Add to Cart {product}",
+    "@snackbarAddToCartMessage": {
+        "description": "message to inform about adding product to cart",
+        "placeholder": {
+            "product": {
+                "type": "String"
+            }
+        }
     }
 
 

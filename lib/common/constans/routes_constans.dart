@@ -16,3 +16,8 @@ const kAboutScreen = '/about';
 const kSplashScreen = '/splash';
 const kOrderScreen = '/order';
 const kDeliveryScreen = '/delivery';
+
+// Url address to find social media profile
+
+const kInstagramUrl = 'https://www.instagram.com/ishizukirocks';
+const kFacebookUrl = 'https://www.facebook.com/ishizukirocks';

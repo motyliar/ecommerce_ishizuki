@@ -8,11 +8,11 @@ sealed class CustomEvent extends Equatable {
 }
 
 class ChangeCustomStatusEvent extends CustomEvent {
-  final String value;
-  const ChangeCustomStatusEvent({required this.value});
+  final TextFieldEnum enumStatus;
+  const ChangeCustomStatusEvent({required this.enumStatus});
 
   @override
-  List<Object> get props => [value];
+  List<Object> get props => [enumStatus];
 }
 
 class ChangeCustomValueEvent extends CustomEvent {

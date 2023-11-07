@@ -151,7 +151,9 @@ class ProductScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.buttonQuestion,
+                        AppLocalizations.of(context)!
+                            .buttonQuestion
+                            .toUpperCase(),
                         style: labelTextMidBlack,
                       ),
                       IconButton(
@@ -167,7 +169,9 @@ class ProductScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.buttonCustom,
+                        AppLocalizations.of(context)!
+                            .buttonCustom
+                            .toUpperCase(),
                         style: labelTextMidBlack,
                       ),
                       IconButton(

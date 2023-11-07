@@ -36,9 +36,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
           emit(CartLoaded(
               deliveryAgree: state.deliveryAgree,
               isVisible: state.isVisible,
-              cart: Cart(
+              cart: state.cart.copyWith(
                   products: List.from(state.cart.products)
-                    ..insert(0, event.product))));
+                    ..add(event.product))));
         } else {
           print('in list');
         }
@@ -47,17 +47,25 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 
     on<RemoveCartEvent>((event, emit) {
       final state = this.state as CartLoaded;
-      emit(CartLoaded(
-          isVisible: true,
-          deliveryAgree: state.deliveryAgree,
-          cart: Cart(
-              products: List.from(state.cart.products)..remove(event.product),
-              value: state.cart.value)));
+      if (state.cart.products.length > 1) {
+        emit(CartLoaded(
+            isVisible: true,
+            deliveryAgree: state.deliveryAgree,
+            cart: state.cart.copyWith(
+                products: List.from(state.cart.products)
+                  ..remove(event.product))));
+      } else
+        emit(CartLoaded(
+            isVisible: false,
+            deliveryAgree: state.deliveryAgree,
+            cart: state.cart.copyWith(
+                products: List.from(state.cart.products)
+                  ..remove(event.product))));
     });
     on<DeliveryValueEvent>((event, emit) {
       final state = this.state as CartLoaded;
 
-      if (event.value != '') {
+      if (event.value != '' && state.cart.products.isNotEmpty) {
         emit(state.copyWith(
             isVisible: true,
             deliveryAgree: state.deliveryAgree,

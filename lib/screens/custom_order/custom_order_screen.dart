@@ -1,9 +1,9 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
-import 'package:ecommerce_ishizuki/data/list_data/drop_down_menu_list.dart';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
@@ -11,11 +11,12 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'widget/exports.dart';
 
-/*   TO DO
-For better quaility of sending orders need to create validation in form. 
-Protect of sendind empty messagess
-Need to also ensure that emailing is protect of sending by boot
- */
+TextEditingController _customNameController = TextEditingController();
+TextEditingController _customEmailController = TextEditingController();
+TextEditingController _customLongController = TextEditingController();
+TextEditingController _customWidthController = TextEditingController();
+TextEditingController _customHeightController = TextEditingController();
+TextEditingController _customDescriptionController = TextEditingController();
 
 class CustomOrderScreen extends StatelessWidget {
   const CustomOrderScreen({super.key});
@@ -78,16 +79,16 @@ class CustomOrderScreen extends StatelessWidget {
                           CustomTextFormField(
                             title:
                                 AppLocalizations.of(context)!.textFormTitleName,
-                            name: 'NAME',
-                            controller: customNameController,
+                            name: TextFieldEnum.name,
+                            controller: _customNameController,
                             validation:
                                 AppLocalizations.of(context)!.validationName,
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!
                                 .textFormTitleEmail,
-                            name: 'EMAIL',
-                            controller: customEmailController,
+                            name: TextFieldEnum.email,
+                            controller: _customEmailController,
                             validation:
                                 AppLocalizations.of(context)!.validationEmail,
                             regExpGeneral: kRegExpEmailValidation,
@@ -95,10 +96,12 @@ class CustomOrderScreen extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text('Kind of rock: ',
+                              Text(
+                                  AppLocalizations.of(context)!.labelKindOfRock,
                                   style: labelTextMidBlack),
                               DropdownButton(
-                                  items: productKind,
+                                  items: Utils().generateDropDownMenuItemList(
+                                      kProductKindDropDownList),
                                   value: state.customData.productKind,
                                   onChanged: (value) {
                                     BlocProvider.of<CustomBloc>(context)
@@ -118,10 +121,10 @@ class CustomOrderScreen extends StatelessWidget {
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!
                                       .textFormTitleLong,
-                                  name: 'LONG',
+                                  name: TextFieldEnum.long,
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
-                                  controller: customLongController,
+                                  controller: _customLongController,
                                   validation: AppLocalizations.of(context)!
                                       .validationWrong,
                                   regExpGeneral: kRegExpNumberValidation,
@@ -131,12 +134,12 @@ class CustomOrderScreen extends StatelessWidget {
                                 width: 60,
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!.width,
-                                  name: 'WIDTH',
+                                  name: TextFieldEnum.width,
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
                                   validation: AppLocalizations.of(context)!
                                       .validationWrong,
-                                  controller: customWidthController,
+                                  controller: _customWidthController,
                                   regExpGeneral: kRegExpNumberValidation,
                                 ),
                               ),
@@ -144,10 +147,10 @@ class CustomOrderScreen extends StatelessWidget {
                                 width: 60,
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!.height,
-                                  name: 'HEIGHT',
+                                  name: TextFieldEnum.height,
                                   setPadding: 0,
                                   keybordType: TextInputType.number,
-                                  controller: customHeightController,
+                                  controller: _customHeightController,
                                   validation: AppLocalizations.of(context)!
                                       .validationWrong,
                                   regExpGeneral: kRegExpNumberValidation,
@@ -157,10 +160,10 @@ class CustomOrderScreen extends StatelessWidget {
                           ),
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!.description,
-                            name: 'DESCRIPTION',
+                            name: TextFieldEnum.description,
                             minLines: 1,
                             maxLines: 10,
-                            controller: customDescriptionController,
+                            controller: _customDescriptionController,
                             validation: AppLocalizations.of(context)!
                                 .validationDescription,
                           ),
@@ -185,8 +188,10 @@ class CustomOrderScreen extends StatelessWidget {
                                         color: Colors.black,
                                       ),
                                       padding: const EdgeInsets.all(3.0),
-                                      child: const Text(
-                                        'UPLOAD',
+                                      child: Text(
+                                        AppLocalizations.of(context)!
+                                            .customUploadButton
+                                            .toUpperCase(),
                                         style: labelText,
                                       )),
                                 )
@@ -214,6 +219,12 @@ class CustomOrderScreen extends StatelessWidget {
                         context.read<CustomBloc>().add(SendCustomEmailEvent());
                         Utils.snackBarMessage(
                             context, AppLocalizations.of(context)!.emailSend);
+                        _customNameController.clear();
+                        _customEmailController.clear();
+                        _customLongController.clear();
+                        _customHeightController.clear();
+                        _customWidthController.clear();
+                        _customDescriptionController.clear();
                       }
                     },
                     child: Container(

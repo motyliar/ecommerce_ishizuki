@@ -1,18 +1,21 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String title;
-  final String name;
+  final TextFieldEnum name;
   final TextEditingController controller;
   final String regExpGeneral;
   final String validation;
   const CustomTextFormField({
     required this.title,
     required this.validation,
-    this.regExpGeneral = r'^[a-zA-Z0-9]',
-    this.name = '',
+    this.regExpGeneral = kRegExpGeneralValidation,
+    required this.name,
     required this.controller,
     super.key,
   });
@@ -30,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
           child: TextFormField(
             validator: (value) {
               if (value == '') {
-                return 'Can\'t be empty';
+                return AppLocalizations.of(context)!.validationEmpty;
               } else if (!RegExp(regExpGeneral).hasMatch(value!)) {
                 return validation;
               } else {

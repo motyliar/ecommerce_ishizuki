@@ -1,21 +1,48 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
 class ProductListHome extends StatelessWidget {
   final Product product;
-  const ProductListHome({required this.product, super.key});
+  final double widgetPadding;
+  final double borderRadius;
+  final double shadeBoxOpacity;
+  final double sizedBoxHeigth;
+  final double productImageSquareSize;
+  final int durationInSeconds;
+  final double backgroundOpacity;
+  final double customPaddingBorder;
+  final double iconCartSize;
+  final double distanceIconFromImage;
+  final double iconSpaces;
+
+  const ProductListHome(
+      {required this.product,
+      this.customPaddingBorder = 10.0,
+      this.widgetPadding = kDefaultPadding,
+      this.borderRadius = kRadiusAppDefault,
+      this.shadeBoxOpacity = kMediumOpacity,
+      this.productImageSquareSize = kProductDisplayImageSquareSize,
+      this.durationInSeconds = kDefaultDurationINSeconds,
+      this.backgroundOpacity = kMediumOpacity,
+      this.sizedBoxHeigth = kAvarageMediumPaddingOrMargin,
+      this.iconCartSize = kProductIconCartSize,
+      this.distanceIconFromImage = kProductIconCartSize,
+      this.iconSpaces = kProductIconSpace,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<GaleryBloc, GaleryState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(customPaddingBorder),
           child: InkWell(
             onTap: () {
               Navigator.pushNamed(context, kProductScreen, arguments: product);
@@ -24,9 +51,9 @@ class ProductListHome extends StatelessWidget {
                   .add(GaleryLoadingEvent(image: product.imgUrl, index: 0));
             },
             child: Container(
-              padding: const EdgeInsets.all(10),
-              decoration:
-                  shadeBox.copyWith(color: mainTextColor.withOpacity(0.01)),
+              padding: EdgeInsets.all(customPaddingBorder),
+              decoration: shadeBox.copyWith(
+                  color: mainTextColor.withOpacity(shadeBoxOpacity)),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -45,13 +72,13 @@ class ProductListHome extends StatelessWidget {
                           decoration:
                               shadeBox.copyWith(color: Colors.transparent),
                           child: ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(borderRadius),
+                                topRight: Radius.circular(borderRadius)),
                             child: Image.network(
                               product.imgUrl[0],
-                              width: 150,
-                              height: 150,
+                              width: productImageSquareSize,
+                              height: productImageSquareSize,
                             ),
                           ),
                         ),
@@ -64,12 +91,15 @@ class ProductListHome extends StatelessWidget {
                           children: [
                             product.isNew
                                 ? Padding(
-                                    padding: const EdgeInsets.only(right: 20.0),
+                                    padding:
+                                        EdgeInsets.only(right: sizedBoxHeigth),
                                     child: Container(
-                                      padding: const EdgeInsets.all(9),
-                                      color: pallet4.withOpacity(0.7),
+                                      padding: EdgeInsets.all(widgetPadding),
+                                      color: pallet4
+                                          .withOpacity(backgroundOpacity),
                                       child: Text(
-                                        'NEW',
+                                        AppLocalizations.of(context)!
+                                            .newDisplay,
                                         style: labelText.copyWith(
                                             fontWeight: FontWeight.bold,
                                             color: Colors.yellow),
@@ -84,22 +114,21 @@ class ProductListHome extends StatelessWidget {
                                     context
                                         .read<CartBloc>()
                                         .add(AddCartEvent(product: product));
-                                    final snackBar = SnackBar(
-                                      content:
-                                          Text('Add to Cart ${product.name}'),
-                                      duration: Duration(seconds: 1),
-                                    );
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(snackBar);
+                                    Utils.snackBarMessage(
+                                        context,
+                                        AppLocalizations.of(context)!
+                                            .snackbarAddToCartMessage(
+                                                product.name));
                                   },
                                   child: Container(
-                                    padding: const EdgeInsets.all(5),
-                                    height: 45,
-                                    width: 45,
-                                    color: backgroundColor.withOpacity(0.7),
+                                    padding: EdgeInsets.all(widgetPadding),
+                                    height: iconSpaces,
+                                    width: iconSpaces,
+                                    color: backgroundColor
+                                        .withOpacity(backgroundOpacity),
                                     child: Icon(
                                       Icons.add_shopping_cart,
-                                      size: 35,
+                                      size: iconCartSize,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -109,11 +138,11 @@ class ProductListHome extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 38.0,
+                          height: distanceIconFromImage,
                         ),
                         Container(
-                          padding: const EdgeInsets.all(5),
-                          color: mainTextColor.withOpacity(0.8),
+                          padding: EdgeInsets.all(widgetPadding),
+                          color: mainTextColor.withOpacity(backgroundOpacity),
                           child: Text(
                               'Price: ${product.getStringPrice(context, product)} ',
                               style: labelText.copyWith(

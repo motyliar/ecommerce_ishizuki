@@ -14,42 +14,45 @@ enum CustomStatus {
 
 class CustomState extends Equatable {
   final Custom customData;
-  final CustomStatus status;
+  final TextFieldStatus status;
   final File? file;
-  
 
-  const CustomState(
-      {required this.customData,
-      this.status = CustomStatus.initial,
-      this.file,
-      });
+  const CustomState({
+    required this.customData,
+    this.status = TextFieldStatus.initial,
+    this.file,
+  });
 
-  CustomState copyWith(
-      {Custom? customData,
-      CustomStatus? status,
-      File? file,
-      }) {
+  CustomState copyWith({
+    Custom? customData,
+    TextFieldStatus? status,
+    File? file,
+  }) {
     return CustomState(
-        customData: customData ?? this.customData,
-        status: status ?? this.status,
-        file: file ?? this.file,
-        );
+      customData: customData ?? this.customData,
+      status: status ?? this.status,
+      file: file ?? this.file,
+    );
   }
 
   @override
-  List<Object?> get props => [customData, status, file, ];
+  List<Object?> get props => [
+        customData,
+        status,
+        file,
+      ];
 }
 
 final class CustomInitial extends CustomState {
   const CustomInitial()
       : super(
-            customData: const Custom(productKind: 'Rock'),
-            status: CustomStatus.initial,
-            );
+          customData: const Custom(productKind: 'Rock'),
+          status: TextFieldStatus.initial,
+        );
 }
 
 class CustomError extends CustomState {
-  CustomError(Custom customData, CustomStatus status)
+  CustomError(Custom customData, TextFieldStatus status)
       : super(customData: customData, status: status);
   @override
   List<Object> get props => [customData, status];

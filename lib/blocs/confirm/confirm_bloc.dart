@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+import 'package:flutter/material.dart';
 
 import 'dart:math';
 
@@ -48,86 +49,88 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
 
   _textFieldStatus(TextFieldStatusEvent event, Emitter<ConfirmState> emit) {
     switch (event.fieldName) {
-      case 'NAME':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.name, state.orderSymbol));
-      case 'SURNAME':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.surname, state.orderSymbol));
-      case 'EMAIL':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.email, state.orderSymbol));
-      case 'CITY':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.city, state.orderSymbol));
-      case 'STREET':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.street, state.orderSymbol));
-      case 'NUMBER':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.number, state.orderSymbol));
-      case 'ZIPCODE':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.zipCode, state.orderSymbol));
-      case 'WISHES':
-        emit(ConfirmChanges(
-            state.cart, state.address, TextStatus.wishes, state.orderSymbol));
+      case TextFieldEnum.name:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.name,
+            state.orderSymbol));
+      case TextFieldEnum.surname:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.surname,
+            state.orderSymbol));
+      case TextFieldEnum.email:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.email,
+            state.orderSymbol));
+      case TextFieldEnum.city:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.city,
+            state.orderSymbol));
+      case TextFieldEnum.street:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.street,
+            state.orderSymbol));
+      case TextFieldEnum.number:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.number,
+            state.orderSymbol));
+      case TextFieldEnum.zipcode:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.zipCode,
+            state.orderSymbol));
+      case TextFieldEnum.wishes:
+        emit(ConfirmChanges(state.cart, state.address, TextFieldStatus.wishes,
+            state.orderSymbol));
+      default:
     }
   }
 
   _getName(TextFieldValuesEvent event, Emitter<ConfirmState> emit) {
-    switch (state.status.index) {
-      case 0:
+    switch (state.status) {
+      case TextFieldStatus.initial:
         emit(ConfirmChanges(
             state.cart, state.address, state.status, state.orderSymbol));
-      case 1:
+      case TextFieldStatus.name:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(name: event.value),
             state.status,
             state.orderSymbol));
-      case 2:
+      case TextFieldStatus.surname:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(surname: event.value),
             state.status,
             state.orderSymbol));
-      case 3:
+      case TextFieldStatus.city:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(city: event.value),
             state.status,
             state.orderSymbol));
-      case 4:
+      case TextFieldStatus.street:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(street: event.value),
             state.status,
             state.orderSymbol));
-      case 5:
+      case TextFieldStatus.email:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(email: event.value),
             state.status,
             state.orderSymbol));
-      case 6:
+      case TextFieldStatus.number:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(numbers: event.value),
             state.status,
             state.orderSymbol));
-      case 7:
+      case TextFieldStatus.zipCode:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(zipCode: event.value),
             state.status,
             state.orderSymbol));
-      case 8:
+      case TextFieldStatus.wishes:
         emit(ConfirmChanges(
             state.cart,
             state.address.copyWith(wishes: event.value),
             state.status,
             state.orderSymbol));
+      default:
     }
   }
 
@@ -184,19 +187,7 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
             'user_order': state.orderSymbol
           }
         }));
-    if (response.body == 'OK') {
-      nameController.clear();
-      surnameController.clear();
-      cityController.clear();
-      numbersController.clear();
-      zipCodeController.clear();
-      streetController.clear();
-      specialWishesController.clear();
-      emailController.clear();
-    }
-    print(response.body);
-    print('message_sent');
-    print(state);
+    if (response.body == 'OK') {}
   }
 
   _sendOrderDB(SendOrderToDB event, Emitter<ConfirmState> emit) async {
@@ -214,7 +205,7 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
     try {
       await _productRepository.updateSoldProduct(productsId);
     } catch (err) {
-      print(err);
+      debugPrint('$err');
     }
   }
 }

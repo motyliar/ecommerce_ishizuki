@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 part 'contact_state.dart';
@@ -11,41 +13,43 @@ part 'contact_state.dart';
 class ContactCubit extends Cubit<ContactState> {
   ContactCubit() : super(const ContactInitial());
 
-  changeStatus(String textFieldName) {
-    switch (textFieldName) {
-      case 'NAME':
+  changeStatus(TextFieldEnum name) {
+    switch (name) {
+      case TextFieldEnum.name:
         return emit(state.copyWith(
             contact: state.contact, status: TextFieldStatus.name));
-      case 'EMAIL':
+      case TextFieldEnum.email:
         return emit(state.copyWith(
             contact: state.contact, status: TextFieldStatus.email));
-      case 'SUBJECT':
+      case TextFieldEnum.subject:
         return emit(state.copyWith(
             contact: state.contact, status: TextFieldStatus.subject));
-      case 'CONTENT':
+      case TextFieldEnum.description:
         return emit(state.copyWith(
             contact: state.contact, status: TextFieldStatus.content));
+      default:
     }
   }
 
   textFieldStates(String value) {
-    switch (state.status.index) {
-      case 1:
+    switch (state.status) {
+      case TextFieldStatus.name:
         return emit(state.copyWith(
             contact: state.contact.copyWith(name: value),
             status: state.status));
-      case 2:
+      case TextFieldStatus.email:
         return emit(state.copyWith(
             contact: state.contact.copyWith(userEmail: value),
             status: state.status));
-      case 3:
+      case TextFieldStatus.subject:
         return emit(state.copyWith(
             contact: state.contact.copyWith(subject: value),
             status: state.status));
-      case 4:
+      case TextFieldStatus.content:
         return emit(state.copyWith(
             contact: state.contact.copyWith(content: value),
             status: state.status));
+      default:
     }
   }
 
@@ -54,7 +58,7 @@ class ContactCubit extends Cubit<ContactState> {
         state.contact.userEmail == '' ||
         state.contact.name == '' ||
         state.contact.subject == '') {
-      print('Empty values');
+      debugPrint('Empty values');
     } else {
       const serviceId = 'service_loy3rqq';
       const templateId = 'template_o2jg9yo';
@@ -77,14 +81,10 @@ class ContactCubit extends Cubit<ContactState> {
             }
           }));
       if (response.body == 'OK') {
-        contactEmailController.clear();
-        contactNameController.clear();
-        contactQuestionController.clear();
-        contactSubjectController.clear();
         emit(ContactInitial());
         emit(state.copyWith(status: TextFieldStatus.comeback));
       } else {
-        print('Not sended');
+        debugPrint('Not sended');
       }
     }
     print(state);

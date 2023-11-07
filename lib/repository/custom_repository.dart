@@ -1,17 +1,15 @@
 import 'dart:convert';
 
+import 'package:ecommerce_ishizuki/common/constans/repository_constans.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 
 class CustomRepository {
-  String url = 'https://ecommerce-backend-0oii.onrender.com/api/custom/';
-
   Future<void> postData(Custom customData) async {
-    final Uri uri = Uri.parse(url);
-
-    final response = await http.post(uri,
-        headers: {"Content-Type": "application/json"},
+    final response = await http.post(Uri.parse(kCustomToUriParseEndPoint),
+        headers: kHeadersContentType,
         body: jsonEncode({
           "name": customData.name,
           "email": customData.email,
@@ -23,9 +21,9 @@ class CustomRepository {
           "base64": customData.base64,
         }));
     if (response.statusCode == 200) {
-      print(response.body);
+      debugPrint(response.body);
     } else {
-      print("Error: ${response.statusCode}");
+      debugPrint("Error: ${response.statusCode}");
     }
   }
 }

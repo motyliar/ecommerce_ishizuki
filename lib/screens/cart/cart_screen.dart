@@ -39,6 +39,8 @@ class CartScreen extends StatelessWidget {
               context,
               AppLocalizations.of(context)!.snackbarConfirmRules,
             ),
+            dropdownListGenerate:
+                Utils().generateDropDownMenuItemList(kDeliveryWorldPlaceChoose),
           )
         ],
       ),

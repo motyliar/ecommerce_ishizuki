@@ -1,14 +1,20 @@
 import 'dart:async';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
-import 'package:ecommerce_ishizuki/data/list_data/text_controllers.dart';
+
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets.dart';
+
+TextEditingController _contactNameController = TextEditingController();
+TextEditingController _contactEmailController = TextEditingController();
+TextEditingController _contactQuestionController = TextEditingController();
+TextEditingController _contactSubjectController = TextEditingController();
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -70,35 +76,35 @@ class ContactScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               CustomTextFormField(
-                                name: 'NAME',
+                                name: TextFieldEnum.name,
                                 validation: AppLocalizations.of(context)!
                                     .validationName,
                                 title: AppLocalizations.of(context)!
                                     .textFormTitleName,
-                                controller: contactNameController,
+                                controller: _contactNameController,
                               ),
                               CustomTextFormField(
-                                  name: 'EMAIL',
+                                  name: TextFieldEnum.email,
                                   regExpGeneral: kRegExpEmailValidation,
                                   validation: AppLocalizations.of(context)!
                                       .validationEmail,
                                   title: AppLocalizations.of(context)!
                                       .textFormTitleEmail,
-                                  controller: contactEmailController),
+                                  controller: _contactEmailController),
                               CustomTextFormField(
-                                  name: 'SUBJECT',
+                                  name: TextFieldEnum.subject,
                                   validation: AppLocalizations.of(context)!
                                       .validationSubject,
                                   title: AppLocalizations.of(context)!
                                       .textFormTitleSubject,
-                                  controller: contactSubjectController),
+                                  controller: _contactSubjectController),
                               CustomTextFormField(
-                                name: 'CONTENT',
+                                name: TextFieldEnum.description,
                                 validation: AppLocalizations.of(context)!
                                     .validationQuestion,
                                 title: AppLocalizations.of(context)!
                                     .textFormTitleQuestion,
-                                controller: contactQuestionController,
+                                controller: _contactQuestionController,
                                 minLines: 5,
                                 maxLines: 15,
                               )
@@ -113,6 +119,10 @@ class ContactScreen extends StatelessWidget {
                             context,
                             AppLocalizations.of(context)!.emailSend,
                           );
+                          _contactEmailController.clear();
+                          _contactNameController.clear();
+                          _contactQuestionController.clear();
+                          _contactSubjectController.clear();
                         }
                       },
                       child: Padding(

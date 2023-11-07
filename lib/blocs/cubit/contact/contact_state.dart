@@ -1,7 +1,5 @@
 part of 'contact_cubit.dart';
 
-enum TextFieldStatus { initial, name, email, subject, content, comeback }
-
 class ContactState extends Equatable {
   final Contact contact;
   final TextFieldStatus status;

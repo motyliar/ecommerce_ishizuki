@@ -1,10 +1,9 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
+import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
-
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 
@@ -23,7 +22,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
 
       // APP BAR
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         popArrow: false,
         imgName: kAppBarMainLogo,
       ),
@@ -37,7 +36,7 @@ class HomeScreen extends StatelessWidget {
           child: BlocBuilder<FetchProductsBloc, FetchProductsState>(
         builder: (context, state) {
           if (state is FetchProductsInitial) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }
@@ -50,25 +49,36 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                      height: 270,
+                      height: kHomeScreenCategorySliderHeight,
                       decoration: BoxDecoration(
                           borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15)),
+                              bottomLeft: Radius.circular(kRadiusAppDefault),
+                              bottomRight: Radius.circular(kRadiusAppDefault)),
                           color: mainTextColor.withOpacity(0.1)),
-                      width: MediaQuery.of(context).size.width - 20,
-                      child: const CategorySlider()),
+                      width: MediaQuery.of(context).size.width -
+                          kSidesDefaultPadding,
+                      child: const CategorySlider(
+                        category: kCategoryListForHomeScreen,
+                        categoryImageWidth: kCategoryImageSquareSize,
+                        categoryImageHeight: kCategoryImageSquareSize,
+                        categoryContainerWidth: kCategorySpaceContainerWidth,
+                        categoryContainerHeight: kCategorySpaceContainerHeight,
+                        categoryLogoImageWidth: kCategoryLogoImageWidth,
+                        categoryLogoImageHeight: kCategoryLogoImageHeight,
+                        productPadding: kDefaultPadding,
+                        radiusBorder: kRadiusAppDefault,
+                      )),
                   const SizedBox(
-                    height: 15,
+                    height: kHomeScreenDefaultSizedBoxHeight,
                   ),
                   const Divider(
-                    thickness: 1,
+                    thickness: kDividerThickness,
                     color: backgroundColor,
-                    indent: 30.0,
-                    endIndent: 30.0,
+                    indent: kDividerDefaultIndent,
+                    endIndent: kDividerDefaultIndent,
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: kHomeScreenDefaultSizedBoxHeight,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -91,11 +101,13 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 15.0,
+                    height: kHomeScreenDefaultSizedBoxHeight,
                   ),
                   Container(
-                    padding: const EdgeInsets.all(2),
-                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    margin: const EdgeInsets.only(
+                        left: kAvarageMediumPaddingOrMargin,
+                        right: kAvarageMediumPaddingOrMargin),
                     color: backgroundColor,
                     child: Center(
                       child: Text(
@@ -105,24 +117,26 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: 5,
+                    height: kHomeScreenDefaultSizedBoxHeight,
                   ),
                   const Divider(
-                    thickness: 1,
+                    thickness: kDividerThickness,
                     color: backgroundColor,
-                    indent: 30.0,
-                    endIndent: 30.0,
+                    indent: kDividerDefaultIndent,
+                    endIndent: kDividerDefaultIndent,
                   ),
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                         color: Colors.white,
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20.0))),
-                    padding: const EdgeInsets.only(left: 20, right: 20),
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(kRadiusAppDefault),
+                            topRight: Radius.circular(kRadiusAppDefault))),
+                    padding: const EdgeInsets.only(
+                        left: kAvarageMediumPaddingOrMargin,
+                        right: kAvarageMediumPaddingOrMargin),
                     child: SizedBox(
-                        height: 210 * listOfNewProducts.length.toDouble(),
-                        // width: MediaQuery.of(context).size.width,
+                        height: kHomeScreenSingleListOfProductHeight *
+                            listOfNewProducts.length.toDouble(),
                         child: ListView.builder(
                             itemCount: listOfNewProducts.length,
                             scrollDirection: Axis.vertical,
@@ -131,17 +145,19 @@ class HomeScreen extends StatelessWidget {
                                 ))),
                   ),
                   Container(
-                      padding: const EdgeInsets.only(left: 10),
+                      padding: const EdgeInsets.only(left: kDefaultPadding),
                       alignment: Alignment.centerLeft,
                       child: Row(
                         children: [
-                          const Text(
-                            'ARE YOU HAVE ANY QUESTION?',
+                          Text(
+                            AppLocalizations.of(context)!
+                                .buttonQuestion
+                                .toUpperCase(),
                             style: labelTextMidBlack,
                           ),
                           IconButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/contactScreen');
+                                Navigator.pushNamed(context, kContactScreen);
                               },
                               icon: const Icon(Icons.email)),
                         ],
@@ -150,7 +166,7 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           } else {
-            return Text('Something Went Wrong');
+            return const ErrorScreen();
           }
         },
       )),

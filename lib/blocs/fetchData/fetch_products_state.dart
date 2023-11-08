@@ -17,3 +17,5 @@ class FetchProductLoaded extends FetchProductsState {
   @override
   List<Object> get props => [product];
 }
+
+class FetchProductServerError extends FetchProductsState {}

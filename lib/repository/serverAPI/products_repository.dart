@@ -33,13 +33,13 @@ class ProductRepository {
     await http.post(Uri.parse(kProductToUriParseEndPoint),
         headers: kHeadersContentType,
         body: jsonEncode({
-          "name": "Bogdan",
-          "email": "email@email.com",
-          "long": "23",
+          "name": "",
+          "email": "",
+          "long": "",
           "width": 45,
           "height": 60,
-          "description": "i would like to order something like that",
-          "productKind": "slab"
+          "description": "",
+          "productKind": ""
         }));
     final responseData = getData();
     return responseData;

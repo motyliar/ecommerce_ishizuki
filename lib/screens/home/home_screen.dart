@@ -54,6 +54,13 @@ class HomeScreen extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
+          // TODO
+          // error page implements
+          if (state is FetchProductServerError) {
+            return Center(
+              child: Text('Server error'),
+            );
+          }
           if (state is FetchProductLoaded) {
             List<Product> listOfNewProducts = state.product
                 .where((element) => element.isSold == false)
@@ -179,6 +186,9 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             );
+
+            /* TODO 
+            Error screen implements in file */
           } else {
             return const ErrorScreen();
           }

@@ -1,7 +1,7 @@
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/screens/about/about_screen.dart';
 
-import 'package:ecommerce_ishizuki/screens/network_checker.dart';
+import 'package:ecommerce_ishizuki/screens/network/network_checker.dart';
 import 'package:ecommerce_ishizuki/screens/order/order_screen.dart';
 import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:ecommerce_ishizuki/screens/splash/splash_screen.dart';

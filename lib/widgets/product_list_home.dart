@@ -10,6 +10,7 @@ import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
 const double kProductDisplayImageSquareSize = 150.0;
 const double kProductIconCartSize = 35.0;
+const double kProductBackgroundOpacity = 0.07;
 
 // value for keeping icon in const space
 const double kProductIconSpace = 45.0;
@@ -33,7 +34,7 @@ class ProductListHome extends StatelessWidget {
       this.customPaddingBorder = 10.0,
       this.widgetPadding = kDefaultPadding,
       this.borderRadius = kRadiusAppDefault,
-      this.shadeBoxOpacity = kMediumOpacity,
+      this.shadeBoxOpacity = kProductBackgroundOpacity,
       this.productImageSquareSize = kProductDisplayImageSquareSize,
       this.durationInSeconds = kDefaultDurationINSeconds,
       this.backgroundOpacity = kMediumOpacity,

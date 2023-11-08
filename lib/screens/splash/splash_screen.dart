@@ -3,6 +3,10 @@ import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/config/colors.dart';
 import 'package:flutter/material.dart';
 
+// SPLASH SCREEN CONSTANS
+const double kSplashCenterImageWidth = 270.0;
+const double kSpalshCenterImageHeight = 235.0;
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 

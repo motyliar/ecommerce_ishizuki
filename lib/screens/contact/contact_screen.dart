@@ -11,6 +11,15 @@ import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'widgets.dart';
 
+// Main constans of contact screen
+const double kContactClearSpace = 30.0;
+// validation form sides padding
+const double kContactFormSidesPadding = 40.0;
+// padding of contact label CONTACT
+const double kContactTopLabelPaddingSides = 30.0;
+const double kContactTopLabelPaddingTop = 40.0;
+const double kContactTopLabelPaddingBottom = 20.0;
+
 TextEditingController _contactNameController = TextEditingController();
 TextEditingController _contactEmailController = TextEditingController();
 TextEditingController _contactQuestionController = TextEditingController();

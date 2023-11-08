@@ -6,6 +6,8 @@ import 'package:equatable/equatable.dart';
 part 'cart_event.dart';
 part 'cart_state.dart';
 
+const double kMoreThenSingleItem = 1;
+
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartInitial()) {
     on<StartCartEvent>((event, emit) {
@@ -39,28 +41,27 @@ class CartBloc extends Bloc<CartEvent, CartState> {
               cart: state.cart.copyWith(
                   products: List.from(state.cart.products)
                     ..add(event.product))));
-        } else {
-          print('in list');
-        }
+        } else {}
       }
     });
 
     on<RemoveCartEvent>((event, emit) {
       final state = this.state as CartLoaded;
-      if (state.cart.products.length > 1) {
+      if (state.cart.products.length > kMoreThenSingleItem) {
         emit(CartLoaded(
             isVisible: true,
             deliveryAgree: state.deliveryAgree,
             cart: state.cart.copyWith(
                 products: List.from(state.cart.products)
                   ..remove(event.product))));
-      } else
+      } else {
         emit(CartLoaded(
             isVisible: false,
             deliveryAgree: state.deliveryAgree,
             cart: state.cart.copyWith(
                 products: List.from(state.cart.products)
                   ..remove(event.product))));
+      }
     });
     on<DeliveryValueEvent>((event, emit) {
       final state = this.state as CartLoaded;
@@ -89,7 +90,6 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       final state = this.state as CartLoaded;
       emit(CartLoaded(
           deliveryAgree: true, isVisible: state.isVisible, cart: state.cart));
-      print(state);
     });
   }
 }

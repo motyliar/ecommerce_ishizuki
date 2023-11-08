@@ -48,7 +48,7 @@ class CustomTextFormField extends StatelessWidget {
             },
             minLines: minLines,
             maxLines: maxLines,
-            style: labelMidText,
+            style: descriptionText,
             decoration: InputDecoration(
               hintText: title,
               focusedBorder: const UnderlineInputBorder(

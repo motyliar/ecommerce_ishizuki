@@ -3,18 +3,27 @@ import 'package:equatable/equatable.dart';
 
 part 'delivery_state.dart';
 
+const int kListIndexOfUKPrices = 1;
+const int kListIndexOfUSAPrices = 2;
+const int kListIndexOfOTHERPrices = 3;
+const int kListIndexOfEUROPrices = 0;
+
 class DeliveryCubit extends Cubit<DeliveryState> {
   DeliveryCubit() : super(const DeliveryInitial());
 
   changeCountry(String value) {
     if (value == 'UK') {
-      emit(state.copyWith(pricesValue: value, pricesIndex: 1));
+      emit(state.copyWith(
+          pricesValue: value, pricesIndex: kListIndexOfUKPrices));
     } else if (value == 'USA') {
-      emit(state.copyWith(pricesValue: value, pricesIndex: 2));
+      emit(state.copyWith(
+          pricesValue: value, pricesIndex: kListIndexOfUSAPrices));
     } else if (value == 'Other') {
-      emit(state.copyWith(pricesValue: value, pricesIndex: 3));
+      emit(state.copyWith(
+          pricesValue: value, pricesIndex: kListIndexOfOTHERPrices));
     } else {
-      emit(state.copyWith(pricesValue: value, pricesIndex: 0));
+      emit(state.copyWith(
+          pricesValue: value, pricesIndex: kListIndexOfEUROPrices));
     }
   }
 

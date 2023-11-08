@@ -5,6 +5,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/routes/url_navigate.dart';
 
+// value used for create litlle space between widgets
+const double kSmallPaddingValue = 5.0;
+// const using to set app bar height
+const double kToolBarHeight = 120;
+// center logo height in app bar
+const double kScreenLogoHeight = 70.0;
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool isPop;
   final bool popArrow;

@@ -8,6 +8,12 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
+const double kProductDisplayImageSquareSize = 150.0;
+const double kProductIconCartSize = 35.0;
+
+// value for keeping icon in const space
+const double kProductIconSpace = 45.0;
+
 class ProductListHome extends StatelessWidget {
   final Product product;
   final double widgetPadding;

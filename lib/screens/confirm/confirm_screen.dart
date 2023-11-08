@@ -19,6 +19,22 @@ final TextEditingController _numbersController = TextEditingController();
 final TextEditingController _zipCodeController = TextEditingController();
 final TextEditingController _specialWishesController = TextEditingController();
 
+//Sized Box height
+const double kConfirmSizedBoxSpace = 10.0;
+// Right padding of total pricig
+const double kConfirmTotalPricePadding = 30.0;
+// Dimension of Product image in confirm product list
+const double kConfirmProductListImageDimension = 60.0;
+// increment number using to show postion on order list
+const int kConfirmIncrementIndex = 1;
+// padding of one product display in confirm product list
+const double kConfirmPaddingProductRight = 20.0;
+const double kConfirmPaddingProductTop = 5.0;
+// height of one product box used to multiply when is more then one product
+const double kConfirmSingleProductHeight = 95.0;
+// side padding to set width od single product box
+const double kConfirmSingleProductPadding = 10.0;
+
 class ConfirmScreen extends StatelessWidget {
   const ConfirmScreen({super.key});
 

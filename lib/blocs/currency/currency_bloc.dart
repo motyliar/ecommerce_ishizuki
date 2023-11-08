@@ -4,6 +4,10 @@ import 'package:equatable/equatable.dart';
 part 'currency_event.dart';
 part 'currency_state.dart';
 
+const double kCurrencyToCalculatePriceEuro = 1.0;
+const double kCurrencyToCalculatePriceUSD = 1.05;
+const double kCurrencyToCalculatePriceGBP = 0.87;
+
 class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
   CurrencyBloc() : super(CurrencyInitial()) {
     on<ChangeCurrencyEvent>(_onChange);
@@ -11,15 +15,15 @@ class CurrencyBloc extends Bloc<CurrencyEvent, CurrencyState> {
 
   _onChange(ChangeCurrencyEvent event, Emitter<CurrencyState> emit) {
     if (state.currentCurrency == 'EUR') {
-      emit(ChangeCurrency(
+      emit(const ChangeCurrency(
         'USD',
         '\$',
-        1.05,
+        kCurrencyToCalculatePriceUSD,
       ));
     } else if (state.currentCurrency == 'USD') {
-      emit(ChangeCurrency('GBP', '£', 0.87));
+      emit(const ChangeCurrency('GBP', '£', kCurrencyToCalculatePriceGBP));
     } else {
-      emit(ChangeCurrency('EUR', '€', 1));
+      emit(const ChangeCurrency('EUR', '€', kCurrencyToCalculatePriceEuro));
     }
   }
 }

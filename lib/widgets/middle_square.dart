@@ -2,6 +2,10 @@ import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
 
+//Middlesquare sizes of reqtangle shape
+const double kButtonHeight = 80.0;
+const double kButtonWidth = 100.0;
+
 class MiddleSquare extends StatelessWidget {
   final String route;
   final String text;
@@ -19,8 +23,8 @@ class MiddleSquare extends StatelessWidget {
     this.borderRadius = kRadiusAppDefault,
     this.shadeOpacity = kMediumOpacity,
     super.key,
-    this.overallWidth = kMiddleButtonWidth,
-    this.overalHeight = kMiddleButtonHeight,
+    this.overallWidth = kButtonWidth,
+    this.overalHeight = kButtonHeight,
     this.blurRadius = kBlurRadiusDefault,
     this.spreadRadius = kSpreadRadiusDefault,
     this.shadeOffsetX = kShadeOffsetXDefault,

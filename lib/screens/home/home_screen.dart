@@ -7,6 +7,20 @@ import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 
+// Sizes of main image in category slider as shape square.
+const double kCategoryImageSquareSize = 180.0;
+// Container size where inside is Category Image Stack
+const double kCategorySpaceContainerWidth = 190.0;
+const double kCategorySpaceContainerHeight = 230.0;
+// Logo sizes below category image as rectangle shape
+const double kCategoryLogoImageWidth = 90.0;
+const double kCategoryLogoImageHeight = 60.0;
+// Category Slider dimensions
+const double kHomeScreenCategorySliderHeight = 270.0;
+const double kHomeScreenDefaultSizedBoxHeight = 15.0;
+// Value of single height one product box
+const double kHomeScreenSingleListOfProductHeight = 210.0;
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

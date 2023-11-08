@@ -13,7 +13,7 @@ sealed class CurrencyState extends Equatable {
 }
 
 final class CurrencyInitial extends CurrencyState {
-  CurrencyInitial() : super('EUR', 1.0, '€');
+  const CurrencyInitial() : super('EUR', kCurrencyToCalculatePriceEuro, '€');
 }
 
 class ChangeCurrency extends CurrencyState {

@@ -1,3 +1,5 @@
+import 'package:ecommerce_ishizuki/models/category/category_model.dart';
+
 /* 
 This file contains every const that is needed to support the application.
 If you want to find a specific one, see the description.
@@ -5,8 +7,6 @@ If you want to find a specific one, see the description.
  */
 
 // constans to menage validation in TextFormField in RegExp class //
-
-import 'package:ecommerce_ishizuki/models/category/category_model.dart';
 
 const kRegExpGeneralValidation = r'^[a-zA-Z0-9]';
 const kRegExpEmailValidation = r'^[a-zA-Z0-9.-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]';
@@ -167,7 +167,7 @@ const double kLabelTextPadding = 15.0;
 const double kDividerThickness = 1.0;
 const double kDividerDefaultIndent = 30.0;
 
-// TextFormField
+// TEXT FORM FIELD
 // const of padding text form
 const double kTextFormPaddingSides = 40.0;
 const double kTextFormPaddingBottom = 5.0;
@@ -175,90 +175,15 @@ const int kTextFormDefaultSetLines = 1;
 const double kTextFormNumberPadding = 40.0;
 const double kTextFormDefaultPadding = 0.0;
 
-// SPLASH SCREEN CONSTANS
-const double kSplashCenterImageWidth = 270.0;
-const double kSpalshCenterImageHeight = 235.0;
-
-//HOME SCREEN CONSTANS
-const double kHomeScreenCategorySliderHeight = 270.0;
-const double kHomeScreenDefaultSizedBoxHeight = 15.0;
-// Value of single height one product box
-const double kHomeScreenSingleListOfProductHeight = 210.0;
-
-//APP BAR
-// const using to set app bar height
-const double kToolBarHeight = 120;
-// center logo height in app bar
-const double kScreenLogoHeight = 70.0;
-
-//BOTTOM APP BAR
-//Value to set const height of bottom app bar
-const double kBottomAppBarHeightSetter = 60.0;
-// value used for create litlle space between widgets
-const double kSmallPaddingValue = 5.0;
-//Middlesquare sizes of reqtangle shape
-const double kMiddleButtonHeight = 80.0;
-const double kMiddleButtonWidth = 100.0;
-// PRODUCT SCREEN CONSTANS
-
-const double kProductDisplayImageSquareSize = 150.0;
-const double kProductIconCartSize = 35.0;
-// value for keeping icon in const space
-const double kProductIconSpace = 45.0;
-
-// Value used for 20.0 margin or padding in app containers
-const double kAvarageMediumPaddingOrMargin = 20.0;
-
-// Sizes of main image in category slider as shape square.
-const double kCategoryImageSquareSize = 180.0;
-// Container size where inside is Category Image Stack
-const double kCategorySpaceContainerWidth = 190.0;
-const double kCategorySpaceContainerHeight = 230.0;
-// Logo sizes below category image as rectangle shape
-const double kCategoryLogoImageWidth = 90.0;
-const double kCategoryLogoImageHeight = 60.0;
-
-//ABOUT SCREEN CONSTANS
-//padding around text
-const double kAboutTextPadding = 10.0;
-
-//CARTSCREEN CONST
-
-// const of cart item list
-// every value are used in main container to show product list
-
-// margin space default
-const double kMarginSideDefault = 10.0;
-
-//CONTACT SCREEN
-// Main constans of contact screen
-const double kContactClearSpace = 30.0;
-// validation form sides padding
-const double kContactFormSidesPadding = 40.0;
-// padding of contact label CONTACT
-const double kContactTopLabelPaddingSides = 30.0;
-const double kContactTopLabelPaddingTop = 40.0;
-const double kContactTopLabelPaddingBottom = 20.0;
 // text field settting of minimium and maximum lines
 const int kContactFormMinLines = 5;
 const int kContactFormMaxLInes = 15;
 
-//CUSTOM ORDER SCREEN
-//const of privder image from mobile
-const double kCustomUserImageFromMobile = 50.0;
-// box size which contains text form field to get numbers
-const double kCustomNumberTextFieldBox = 60.0;
-// screen background opacity
-const double kCustomBackgroundOpacity = 0.08;
-// space between label and form
-const double kCustomSpaceLabelToForm = 20.0;
-// padding of container which contains form
-const double kCustomFormContainerBottom = 10.0;
-const double kCustomFormContainerSides = 25.0;
-// padding of top label CUSTOM inscription
-const double kCustomLabelPaddingTopBottom = 10.0;
-const double kCustomLabelPaddingSides = 30.0;
+// Value used for 20.0 margin or padding in app containers
+const double kAvarageMediumPaddingOrMargin = 20.0;
 
-// DELIVERY SCREEN
-// bottom container to showing maxium delivery weight and prices
+//padding around text
+const double kAboutTextPadding = 10.0;
 
+// margin space default
+const double kMarginSideDefault = 10.0;

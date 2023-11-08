@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+import 'package:ecommerce_ishizuki/repository/emailAPI/email_repository.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:math';
@@ -17,18 +20,23 @@ part 'confirm_event.dart';
 part 'confirm_state.dart';
 
 class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
-  OrderRepository _orderRepository;
-  ProductRepository _productRepository;
-  ConfirmBloc(this._orderRepository, this._productRepository)
+  final OrderRepository _orderRepository;
+  final ProductRepository _productRepository;
+  final EmailRepository _emailRepository;
+  ConfirmBloc(
+      this._orderRepository, this._productRepository, this._emailRepository)
       : super(const ConfirmInitial()) {
     on<StartEvent>(
       (event, emit) async {
         emit(const ConfirmInitial());
         try {
-          await Future<void>.delayed(const Duration(seconds: 1));
+          await Future<void>.delayed(
+              const Duration(seconds: kDefaultDurationINSeconds));
           emit(ConfirmChanges(
               state.cart, state.address, state.status, state.orderSymbol));
-        } catch (e) {}
+        } catch (e) {
+          Utils.printDebugError(errorMessage: e.toString());
+        }
       },
     );
     on<GetCartEvent>(_getCart);
@@ -148,46 +156,50 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
   }
 
   _getSymbol(OrderConfirmSymbol event, Emitter<ConfirmState> emit) {
-    String creatingSymbol() {
-      final DateTime data = DateTime.now();
-      final dataFormat = data.month.toString();
-      String characters = 'ABCDEFGHIJKLMNOPRSTUWXYZ123456789';
-      List randomSymbol = [];
-      Random random = Random();
-      for (int i = 0; i < 6; i++) {
-        randomSymbol.add(characters[random.nextInt(characters.length)]);
-      }
-      return '2023 -${randomSymbol.join()}-${dataFormat}';
-    }
+    // String creatingSymbol() {
+    //   final DateTime data = DateTime.now();
+    //   final dataFormat = data.month.toString();
+    //   String characters = 'ABCDEFGHIJKLMNOPRSTUWXYZ123456789';
+    //   List randomSymbol = [];
+    //   Random random = Random();
+    //   for (int i = 0; i < 6; i++) {
+    //     randomSymbol.add(characters[random.nextInt(characters.length)]);
+    //   }
+    //   return '2023 -${randomSymbol.join()}-${dataFormat}';
+    // }
 
     emit(ConfirmChanges(
-        state.cart, state.address, state.status, creatingSymbol()));
+        state.cart, state.address, state.status, Utils().creatingSymbol()));
   }
 
   _sendEmail(
     SendConfirmEmail event,
     Emitter<ConfirmState> emit,
   ) async {
-    const serviceId = 'service_loy3rqq';
-    const templateId = 'template_cwp9sg7';
-    const userId = 'cdT7F_odFHGuBXuh3';
-    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-    final response = await http.post(url,
-        headers: {
-          'origin': 'http://localhost',
-          'Content-Type': 'application/json'
-        },
-        body: json.encode({
-          'service_id': serviceId,
-          'template_id': templateId,
-          'user_id': userId,
-          'template_params': {
-            'user_name': state.address.name,
-            'user_email': state.address.email,
-            'user_order': state.orderSymbol
-          }
-        }));
-    if (response.body == 'OK') {}
+    // const serviceId = 'service_loy3rqq';
+    // const templateId = 'template_cwp9sg7';
+    // const userId = 'cdT7F_odFHGuBXuh3';
+    // final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    // final response = await http.post(url,
+    //     headers: {
+    //       'origin': 'http://localhost',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: json.encode({
+    //       'service_id': serviceId,
+    //       'template_id': templateId,
+    //       'user_id': userId,
+    //       'template_params': {
+    //         'user_name': state.address.name,
+    //         'user_email': state.address.email,
+    //         'user_order': state.orderSymbol
+    //       }
+    //     }));
+    // if (response.body == 'OK') {}
+    _emailRepository.sendConfirmEmailToUser(
+        userName: state.address.name,
+        userEmail: state.address.email,
+        orderSymbol: state.orderSymbol);
   }
 
   _sendOrderDB(SendOrderToDB event, Emitter<ConfirmState> emit) async {

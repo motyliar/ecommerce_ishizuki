@@ -5,6 +5,10 @@ import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'details_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
+// alert confirm
+const double kConfirmAlertMargin = 10.0;
+const double kConfirmAlertBackgroundOpacity = 0.5;
+
 class ConfirmDialog extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final double mainContainerMargin;

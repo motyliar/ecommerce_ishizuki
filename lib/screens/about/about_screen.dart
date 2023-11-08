@@ -8,6 +8,17 @@ import 'widget.dart';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
+// space between widgets
+const double kAboutSpaceBetweenWidgetsHeight = 10.0;
+
+const double kAboutSpaceToAlignHeightOfRowHeight = 30.0;
+// opacity to set background color in text and image boxes
+const double kAboutOpacityOfMainColorScreenBackground = 0.07;
+
+// space values to calculate dimensions of container for about screen rows
+const double kAboutPaddingSpaceAndBorder = 23.0;
+const double kAboutImageHeightAddition = 50.0;
+
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
 

@@ -5,6 +5,9 @@ import 'package:equatable/equatable.dart';
 part 'galery_event.dart';
 part 'galery_state.dart';
 
+const int kIncrementOnePositionOfStateIndex = 1;
+const int kDecrementOnePOsitionOfStateIndex = 1;
+
 class GaleryBloc extends Bloc<GaleryEvent, GaleryState> {
   GaleryBloc() : super(GaleryInitial()) {
     on<GaleryUpdate>(_onGaleryUpdate);
@@ -24,27 +27,18 @@ class GaleryBloc extends Bloc<GaleryEvent, GaleryState> {
       IncrementGaleryIndex event, Emitter<GaleryState> emit) {
     final state = this.state as GaleryLoaded;
     if (state.index < state.maxIndex) {
-      emit(GaleryLoaded(index: state.index + 1));
-      print(state.index);
+      emit(
+          GaleryLoaded(index: state.index + kIncrementOnePositionOfStateIndex));
     }
-
-    print('${state.maxIndex} this is max state');
   }
 
   void _onDecrementGalery(
       DecrementGaleryIndex event, Emitter<GaleryState> emit) {
     final state = this.state as GaleryLoaded;
     if (state.index > 0) {
-      emit(GaleryLoaded(index: state.index - 1));
+      emit(
+          GaleryLoaded(index: state.index - kDecrementOnePOsitionOfStateIndex));
       emit(GaleryLoaded(isStart: true));
     }
-    print(state.index);
   }
 }
-
-
-// on<GaleryLoadingEvent>((event, emit) {
-    //   final state = this.state as GaleryLoaded;
-    //   emit(state.copyWith(image: event.image));
-    //   print('${state.image}');
-    // });

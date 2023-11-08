@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:ecommerce_ishizuki/common/enums/enums.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 
-import 'package:ecommerce_ishizuki/repository/custom_repository.dart';
+import 'package:ecommerce_ishizuki/repository/serverAPI/custom_repository.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:bloc/bloc.dart';
@@ -21,7 +22,6 @@ class CustomBloc extends Bloc<CustomEvent, CustomState> {
     on<GetKindOfRockEvent>(_onGetKind);
     on<LoadPictrueEvent>(_onLoadPictrue);
     on<SendCustomEmailEvent>(_onSendEmail);
-    on<PrintValues>(_onPrint);
   }
 
   _onChangeStatus(ChangeCustomStatusEvent event, Emitter<CustomState> emit) {
@@ -134,37 +134,32 @@ It's the best way to safe transfer image data to server
     */
 
   _onSendEmail(SendCustomEmailEvent event, Emitter<CustomState> emit) async {
-    const serviceId = 'service_loy3rqq';
-    const templateId = 'template_o2jg9yo';
-    const userId = 'cdT7F_odFHGuBXuh3';
+    // const serviceId = 'service_loy3rqq';
+    // const templateId = 'template_o2jg9yo';
+    // const userId = 'cdT7F_odFHGuBXuh3';
 
-    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-    final response = await http.post(url,
-        headers: {
-          'origin': 'http://localhost',
-          'Content-Type': 'application/json'
-        },
-        body: json.encode({
-          'service_id': serviceId,
-          'template_id': templateId,
-          'user_id': userId,
-          'template_params': {
-            'user_name': state.customData.name,
-            'user_subject': 'New order on DB',
-            'user_userEmail': state.customData.email,
-          }
-        }));
-    if (response.body == 'OK') {}
+    // final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    // final response = await http.post(url,
+    //     headers: {
+    //       'origin': 'http://localhost',
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: json.encode({
+    //       'service_id': serviceId,
+    //       'template_id': templateId,
+    //       'user_id': userId,
+    //       'template_params': {
+    //         'user_name': state.customData.name,
+    //         'user_subject': 'New order on DB',
+    //         'user_userEmail': state.customData.email,
+    //       }
+    //     }));
+    // if (response.body == 'OK') {}
 
     try {
       await _customRepository.postData(state.customData);
     } catch (err) {
-      print(err);
+      Utils.printDebugError(errorMessage: err.toString());
     }
-  }
-
-  _onPrint(PrintValues event, Emitter<CustomState> emit) {
-    print(
-        'name: ${state.customData.name}\n email:${state.customData.email}\nlong:${state.customData.long}\nwidth:${state.customData.width}\nheight:${state.customData.height}\ndescription:${state.customData.description}\nkind:${state.customData.productKind}\nbase64:');
   }
 }

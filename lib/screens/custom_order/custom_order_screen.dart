@@ -11,6 +11,21 @@ import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'widget/exports.dart';
 
+//const of privder image from mobile
+const double kCustomUserImageFromMobile = 50.0;
+// box size which contains text form field to get numbers
+const double kCustomNumberTextFieldBox = 60.0;
+// screen background opacity
+const double kCustomBackgroundOpacity = 0.08;
+// space between label and form
+const double kCustomSpaceLabelToForm = 20.0;
+// padding of container which contains form
+const double kCustomFormContainerBottom = 10.0;
+const double kCustomFormContainerSides = 25.0;
+// padding of top label CUSTOM inscription
+const double kCustomLabelPaddingTopBottom = 10.0;
+const double kCustomLabelPaddingSides = 30.0;
+
 TextEditingController _customNameController = TextEditingController();
 TextEditingController _customEmailController = TextEditingController();
 TextEditingController _customLongController = TextEditingController();

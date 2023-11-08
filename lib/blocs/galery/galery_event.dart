@@ -10,7 +10,7 @@ sealed class GaleryEvent extends Equatable {
 class GaleryLoadingEvent extends GaleryEvent {
   final List<String> image;
   final int index;
-  GaleryLoadingEvent({required this.image, required this.index});
+  const GaleryLoadingEvent({required this.image, required this.index});
   @override
   List<Object?> get props => [image, index];
 }
@@ -18,7 +18,7 @@ class GaleryLoadingEvent extends GaleryEvent {
 class GaleryUpdate extends GaleryEvent {
   final List<String> image;
   final int maxIndex;
-  GaleryUpdate({this.image = const <String>[], this.maxIndex = 0});
+  const GaleryUpdate({this.image = const <String>[], this.maxIndex = 0});
   @override
   List<Object?> get props => [image, maxIndex];
 }

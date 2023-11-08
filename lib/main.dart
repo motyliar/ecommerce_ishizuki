@@ -1,5 +1,6 @@
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:ecommerce_ishizuki/common/l10n/l10n.dart';
+import 'package:ecommerce_ishizuki/repository/emailAPI/email_repository.dart';
 import 'package:ecommerce_ishizuki/repository/exports.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -40,10 +41,10 @@ class MyApp extends StatelessWidget {
               create: (context) => CurrencyBloc(),
             ),
             BlocProvider(
-                create: (_) =>
-                    ConfirmBloc(OrderRepository(), ProductRepository())
-                      ..add(StartEvent())),
-            BlocProvider(create: (_) => ContactCubit()),
+                create: (_) => ConfirmBloc(
+                    OrderRepository(), ProductRepository(), EmailRepository())
+                  ..add(StartEvent())),
+            BlocProvider(create: (_) => ContactCubit(EmailRepository())),
             BlocProvider(create: (_) => DeliveryCubit()),
             BlocProvider(
               create: (context) => CustomBloc(CustomRepository()),

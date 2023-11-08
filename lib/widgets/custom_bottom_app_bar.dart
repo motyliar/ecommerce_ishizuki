@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+//Value to set const height of bottom app bar
+const double kBottomAppBarHeightSetter = 60.0;
+
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({
     super.key,

@@ -11,14 +11,14 @@ sealed class SliderEvent extends Equatable {
 
 class SliderIncrementEvent extends SliderEvent {
   final int index;
-  SliderIncrementEvent({this.index = 0});
+  const SliderIncrementEvent({this.index = 0});
   @override
   List<Object?> get props => [index];
 }
 
 class SliderDecrementEvent extends SliderEvent {
   final int index;
-  SliderDecrementEvent({this.index = 0});
+  const SliderDecrementEvent({this.index = 0});
   @override
   List<Object?> get props => [index];
 }

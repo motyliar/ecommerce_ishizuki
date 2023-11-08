@@ -168,6 +168,9 @@ const double kDividerDefaultIndent = 30.0;
 // const of padding text form
 const double kTextFormPaddingSides = 40.0;
 const double kTextFormPaddingBottom = 5.0;
+const int kTextFormDefaultSetLines = 1;
+const double kTextFormNumberPadding = 40.0;
+const double kTextFormDefaultPadding = 0.0;
 
 // SPLASH SCREEN CONSTANS
 const double kSplashCenterImageWidth = 270.0;
@@ -251,6 +254,9 @@ const double kCartSizedBoxHeight = 150.0;
 // delivery alert dialog consts
 const double kCartDeliveryDimensionOfDialog = 250.0;
 
+// margin space default
+const double kMarginSideDefault = 10.0;
+
 //CATEGORY SCREEN
 // size of display image of product in category screen
 const double kCategoryProductImageSize = 135.0;
@@ -276,3 +282,36 @@ const double kConfirmSingleProductPadding = 10.0;
 // alert confirm
 const double kConfirmAlertMargin = 10.0;
 const double kConfirmAlertBackgroundOpacity = 0.5;
+
+//CONTACT SCREEN
+// Main constans of contact screen
+const double kContactClearSpace = 30.0;
+// validation form sides padding
+const double kContactFormSidesPadding = 40.0;
+// padding of contact label CONTACT
+const double kContactTopLabelPaddingSides = 30.0;
+const double kContactTopLabelPaddingTop = 40.0;
+const double kContactTopLabelPaddingBottom = 20.0;
+// text field settting of minimium and maximum lines
+const int kContactFormMinLines = 5;
+const int kContactFormMaxLInes = 15;
+
+//CUSTOM ORDER SCREEN
+//const of privder image from mobile
+const double kCustomUserImageFromMobile = 50.0;
+// box size which contains text form field to get numbers
+const double kCustomNumberTextFieldBox = 60.0;
+// screen background opacity
+const double kCustomBackgroundOpacity = 0.08;
+// space between label and form
+const double kCustomSpaceLabelToForm = 20.0;
+// padding of container which contains form
+const double kCustomFormContainerBottom = 10.0;
+const double kCustomFormContainerSides = 25.0;
+// padding of top label CUSTOM inscription
+const double kCustomLabelPaddingTopBottom = 10.0;
+const double kCustomLabelPaddingSides = 30.0;
+
+// DELIVERY SCREEN
+// bottom container to showing maxium delivery weight and prices
+

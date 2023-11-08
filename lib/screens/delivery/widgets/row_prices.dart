@@ -1,26 +1,39 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
+
+const double kWeightBoxWidth = 80.0;
+const double kPricesBoxWidth = 45.0;
 
 class RowPrices extends StatelessWidget {
   final String text;
   final String prices;
-  const RowPrices({required this.text, required this.prices, super.key});
+  final double weightTextsWidth;
+  final double spaceBetweenText;
+  final double priceTextsWidth;
+  const RowPrices(
+      {required this.text,
+      required this.prices,
+      this.weightTextsWidth = kWeightBoxWidth,
+      this.spaceBetweenText = kDefaultSpaceBetweenWidgets,
+      this.priceTextsWidth = kPricesBoxWidth,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         SizedBox(
-            width: 80.0,
+            width: weightTextsWidth,
             child: Text(
               text,
               style: labelTextMidBlack,
             )),
         SizedBox(
-          width: 10.0,
+          width: spaceBetweenText,
         ),
         SizedBox(
-            width: 45,
+            width: priceTextsWidth,
             child: Text(
               prices,
               style: labelTextMidBlack,

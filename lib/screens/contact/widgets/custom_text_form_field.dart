@@ -19,8 +19,8 @@ class CustomTextFormField extends StatelessWidget {
     required this.validation,
     this.regExpGeneral = kRegExpGeneralValidation,
     required this.title,
-    this.minLines = 1,
-    this.maxLines = 1,
+    this.minLines = kTextFormDefaultSetLines,
+    this.maxLines = kTextFormDefaultSetLines,
     required this.controller,
     super.key,
   });

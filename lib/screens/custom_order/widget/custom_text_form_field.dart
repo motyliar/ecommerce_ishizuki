@@ -15,16 +15,18 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String validation;
   final String regExpGeneral;
+  final double textFormPadding;
   const CustomTextFormField({
     required this.title,
     required this.name,
-    this.minLines = 1,
-    this.maxLines = 1,
-    this.setPadding = 40,
+    this.minLines = kTextFormDefaultSetLines,
+    this.maxLines = kTextFormDefaultSetLines,
+    this.setPadding = kTextFormNumberPadding,
     this.keybordType = TextInputType.emailAddress,
     required this.controller,
     required this.validation,
     this.regExpGeneral = kRegExpGeneralValidation,
+    this.textFormPadding = kDefaultSpaceBetweenWidgets,
     super.key,
   });
 
@@ -33,7 +35,7 @@ class CustomTextFormField extends StatelessWidget {
     return BlocBuilder<CustomBloc, CustomState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 10.0),
+          padding: EdgeInsets.only(bottom: textFormPadding),
           child: TextFormField(
             validator: (value) {
               if (value == '') {
@@ -46,7 +48,7 @@ class CustomTextFormField extends StatelessWidget {
             },
             minLines: minLines,
             maxLines: maxLines,
-            style: labelText.copyWith(fontSize: 14, color: backgroundColor),
+            style: labelMidText,
             decoration: InputDecoration(
               hintText: title,
               focusedBorder: const UnderlineInputBorder(

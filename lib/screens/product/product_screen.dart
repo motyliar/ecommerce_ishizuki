@@ -7,6 +7,10 @@ import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
 import 'package:flutter/material.dart';
 
+// button Add To Cart padding
+const double kRightPaddingOfButtonAddToCart = 30.0;
+const double kPriceLabelBackgroundOpacity = 0.6;
+
 // screen class of single product view
 class ProductScreen extends StatelessWidget {
   final Product product;
@@ -34,14 +38,16 @@ class ProductScreen extends StatelessWidget {
             children: [
               GalleryWidget(product: product),
               Padding(
-                padding: const EdgeInsets.only(left: 10, top: 5),
+                padding: const EdgeInsets.only(
+                    left: kDefaultSpaceBetweenWidgets, top: kDefaultPadding),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(kDefaultPadding),
                       decoration: BoxDecoration(
-                          color: backgroundColor.withOpacity(0.6)),
+                          color: backgroundColor
+                              .withOpacity(kPriceLabelBackgroundOpacity)),
                       child: Text(
                         '${AppLocalizations.of(context)!.price} ${product.getStringPrice(context, product)} ',
                         style: labelText.copyWith(
@@ -51,9 +57,10 @@ class ProductScreen extends StatelessWidget {
                     ),
                     product.isSold
                         ? Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
+                            padding: const EdgeInsets.only(
+                                right: kRightPaddingOfButtonAddToCart),
                             child: Container(
-                              padding: const EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(kDefaultPadding),
                               color: Colors.black,
                               child: Text(
                                 AppLocalizations.of(context)!
@@ -79,9 +86,11 @@ class ProductScreen extends StatelessWidget {
                                       .showSnackBar(snackBar);
                                 },
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 30.0),
+                                  padding: const EdgeInsets.only(
+                                      right: kRightPaddingOfButtonAddToCart),
                                   child: Container(
-                                    padding: const EdgeInsets.all(5),
+                                    padding:
+                                        const EdgeInsets.all(kDefaultPadding),
                                     color: Colors.black,
                                     child: Text(
                                       AppLocalizations.of(context)!
@@ -98,13 +107,13 @@ class ProductScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 7,
+                height: kDefaultSpaceBetweenWidgets,
               ),
               const Divider(
-                thickness: 1,
+                thickness: kDividerThickness,
                 color: backgroundColor,
-                indent: 20,
-                endIndent: 40,
+                indent: kDividerDefaultIndent,
+                endIndent: kDividerDefaultIndent,
               ),
 
               // DESCRIPTION PANEL
@@ -120,7 +129,7 @@ class ProductScreen extends StatelessWidget {
                 ),
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(kDefaultPadding),
                     child: Column(children: [
                       DescriptionRow(
                           rightLabel:
@@ -146,7 +155,8 @@ class ProductScreen extends StatelessWidget {
                 ],
               ),
               Container(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding:
+                      const EdgeInsets.only(left: kDefaultSpaceBetweenWidgets),
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [
@@ -164,7 +174,8 @@ class ProductScreen extends StatelessWidget {
                     ],
                   )),
               Container(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding:
+                      const EdgeInsets.only(left: kDefaultSpaceBetweenWidgets),
                   alignment: Alignment.centerLeft,
                   child: Row(
                     children: [

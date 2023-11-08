@@ -38,23 +38,29 @@ class CustomOrderScreen extends StatelessWidget {
       bottomNavigationBar: const CustomBottomAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          color: mainTextColor.withOpacity(0.08),
+          color: mainTextColor.withOpacity(kCustomBackgroundOpacity),
           child: Column(
             children: [
               Container(
                   decoration: BoxDecoration(
                       color: Colors.black, boxShadow: [boxShadowCustom]),
-                  margin: const EdgeInsets.only(top: 10),
-                  padding: const EdgeInsets.all(7.0),
+                  margin:
+                      const EdgeInsets.only(top: kDefaultSpaceBetweenWidgets),
+                  padding: const EdgeInsets.all(kDefaultPadding),
                   child: Text(
                     AppLocalizations.of(context)!.labelCustom.toUpperCase(),
-                    style: headText.copyWith(color: Colors.white),
+                    style: labelTwentyTwoText,
                   )),
               Container(
-                margin:
-                    const EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
+                margin: const EdgeInsets.only(
+                    top: kSidesDefaultPadding,
+                    right: kSidesDefaultPadding,
+                    left: kSidesDefaultPadding),
                 padding: const EdgeInsets.only(
-                    top: 10, right: 30, left: 30, bottom: 10),
+                    top: kCustomLabelPaddingTopBottom,
+                    right: kCustomLabelPaddingSides,
+                    left: kCustomLabelPaddingSides,
+                    bottom: kCustomLabelPaddingTopBottom),
                 decoration: shadeBox,
                 child: Text(
                   AppLocalizations.of(context)!.customOrderDescription,
@@ -62,13 +68,18 @@ class CustomOrderScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 20.0,
+                height: kCustomSpaceLabelToForm,
               ),
               Container(
                 padding: const EdgeInsets.only(
-                    bottom: 10.0, right: 25.0, left: 25.0),
+                    bottom: kCustomFormContainerBottom,
+                    right: kCustomFormContainerSides,
+                    left: kCustomFormContainerSides),
                 margin: const EdgeInsets.only(
-                    right: 20.0, left: 20.0, top: 5.0, bottom: 5.0),
+                    right: kSidesDefaultPadding,
+                    left: kSidesDefaultPadding,
+                    top: kDefaultPadding,
+                    bottom: kDefaultPadding),
                 decoration: shadeBox,
                 child: BlocBuilder<CustomBloc, CustomState>(
                   builder: (context, state) {
@@ -117,12 +128,12 @@ class CustomOrderScreen extends StatelessWidget {
                                 style: labelTextMidBlack,
                               ),
                               SizedBox(
-                                width: 60,
+                                width: kCustomNumberTextFieldBox,
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!
                                       .textFormTitleLong,
                                   name: TextFieldEnum.long,
-                                  setPadding: 0,
+                                  setPadding: kTextFormDefaultPadding,
                                   keybordType: TextInputType.number,
                                   controller: _customLongController,
                                   validation: AppLocalizations.of(context)!
@@ -131,11 +142,11 @@ class CustomOrderScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: 60,
+                                width: kCustomNumberTextFieldBox,
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!.width,
                                   name: TextFieldEnum.width,
-                                  setPadding: 0,
+                                  setPadding: kTextFormDefaultPadding,
                                   keybordType: TextInputType.number,
                                   validation: AppLocalizations.of(context)!
                                       .validationWrong,
@@ -144,11 +155,11 @@ class CustomOrderScreen extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: 60,
+                                width: kCustomNumberTextFieldBox,
                                 child: CustomTextFormField(
                                   title: AppLocalizations.of(context)!.height,
                                   name: TextFieldEnum.height,
-                                  setPadding: 0,
+                                  setPadding: kTextFormDefaultPadding,
                                   keybordType: TextInputType.number,
                                   controller: _customHeightController,
                                   validation: AppLocalizations.of(context)!
@@ -161,14 +172,15 @@ class CustomOrderScreen extends StatelessWidget {
                           CustomTextFormField(
                             title: AppLocalizations.of(context)!.description,
                             name: TextFieldEnum.description,
-                            minLines: 1,
-                            maxLines: 10,
+                            minLines: kTextFormDefaultSetLines,
+                            maxLines: kContactFormMaxLInes,
                             controller: _customDescriptionController,
                             validation: AppLocalizations.of(context)!
                                 .validationDescription,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 5.0),
+                            padding:
+                                const EdgeInsets.only(top: kDefaultPadding),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -187,7 +199,8 @@ class CustomOrderScreen extends StatelessWidget {
                                         boxShadow: [boxShadowCustom],
                                         color: Colors.black,
                                       ),
-                                      padding: const EdgeInsets.all(3.0),
+                                      padding:
+                                          const EdgeInsets.all(kDefaultPadding),
                                       child: Text(
                                         AppLocalizations.of(context)!
                                             .customUploadButton
@@ -202,8 +215,8 @@ class CustomOrderScreen extends StatelessWidget {
                               ? Text(AppLocalizations.of(context)!.noFile)
                               : Image.file(
                                   state.file!,
-                                  width: 50,
-                                  height: 50,
+                                  width: kCustomUserImageFromMobile,
+                                  height: kCustomUserImageFromMobile,
                                 ),
                         ],
                       ),
@@ -232,8 +245,9 @@ class CustomOrderScreen extends StatelessWidget {
                         boxShadow: [boxShadowCustom],
                         color: Colors.black,
                       ),
-                      margin: const EdgeInsets.only(top: 10.0),
-                      padding: const EdgeInsets.all(5.0),
+                      margin: const EdgeInsets.only(
+                          top: kDefaultSpaceBetweenWidgets),
+                      padding: const EdgeInsets.all(kDefaultPadding),
                       child: Text(
                         AppLocalizations.of(context)!.send.toUpperCase(),
                         style: headText.copyWith(color: Colors.white),

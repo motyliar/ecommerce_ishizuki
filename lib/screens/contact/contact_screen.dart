@@ -50,7 +50,7 @@ class ContactScreen extends StatelessWidget {
                 builder: (context, state) {
                   return Column(children: [
                     const SizedBox(
-                      height: 30,
+                      height: kContactClearSpace,
                     ),
                     Center(
                       child: Text(
@@ -60,17 +60,22 @@ class ContactScreen extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          right: 30.0, left: 30.0, top: 40.0, bottom: 20.0),
+                          right: kContactTopLabelPaddingSides,
+                          left: kContactTopLabelPaddingSides,
+                          top: kContactTopLabelPaddingTop,
+                          bottom: kContactTopLabelPaddingBottom),
                       child: Text(
                         AppLocalizations.of(context)!.contactDescription,
                         style: labelTextMidBlack,
                       ),
                     ),
                     const SizedBox(
-                      height: 30.0,
+                      height: kContactClearSpace,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                      padding: const EdgeInsets.only(
+                          left: kContactFormSidesPadding,
+                          right: kContactFormSidesPadding),
                       child: Form(
                           key: formKey,
                           child: Column(
@@ -105,8 +110,8 @@ class ContactScreen extends StatelessWidget {
                                 title: AppLocalizations.of(context)!
                                     .textFormTitleQuestion,
                                 controller: _contactQuestionController,
-                                minLines: 5,
-                                maxLines: 15,
+                                minLines: kContactFormMinLines,
+                                maxLines: kContactFormMaxLInes,
                               )
                             ],
                           )),
@@ -126,9 +131,9 @@ class ContactScreen extends StatelessWidget {
                         }
                       },
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 7.0),
+                        padding: const EdgeInsets.only(top: kDefaultPadding),
                         child: Container(
-                          padding: const EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(kDefaultPadding),
                           color: Colors.black,
                           child: Text(
                             AppLocalizations.of(context)!.send,
@@ -138,7 +143,7 @@ class ContactScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 30.0,
+                      height: kContactClearSpace,
                     ),
                   ]);
                 },

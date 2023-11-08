@@ -1,9 +1,15 @@
 import 'dart:async';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
+
+// dimensions sizes of main container
+const double kDimensionOfMainView = 300.0;
+const double kTopMarginSpace = 35.0;
+const double kEmailTextPaddingSides = 15.0;
 
 class OrderScreen extends StatelessWidget {
   const OrderScreen({super.key});
@@ -29,23 +35,18 @@ class OrderScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 300,
-                  height: 300,
+                  width: kDimensionOfMainView,
+                  height: kDimensionOfMainView,
                   decoration: BoxDecoration(
-                      color: mainTextColor.withOpacity(0.5),
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(2, -2),
-                            blurRadius: 10,
-                            spreadRadius: 10,
-                            color: Colors.grey.withOpacity(0.3))
-                      ]),
+                      color: mainTextColor.withOpacity(kMediumOpacity),
+                      borderRadius: const BorderRadius.all(
+                          Radius.circular(kRadiusAppDefault)),
+                      boxShadow: [orderScreenBoxShadow]),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 35.0,
+                        height: kTopMarginSpace,
                       ),
                       Text(
                         AppLocalizations.of(context)!
@@ -53,17 +54,19 @@ class OrderScreen extends StatelessWidget {
                         style: headText.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: kDefaultSpaceBetweenWidgets,
                       ),
                       Text(
                         AppLocalizations.of(context)!.orderGettingReadyMessage,
                         style: labelText,
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: kDefaultSpaceBetweenWidgets,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 15, left: 15),
+                        padding: const EdgeInsets.only(
+                            right: kEmailTextPaddingSides,
+                            left: kEmailTextPaddingSides),
                         child: Text(
                           AppLocalizations.of(context)!
                               .orderEmailMessage(state.address.email),
@@ -71,7 +74,7 @@ class OrderScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(
-                        height: 15,
+                        height: kDefaultSpaceBetweenWidgets,
                       ),
                       RichText(
                           text: TextSpan(
@@ -81,8 +84,7 @@ class OrderScreen extends StatelessWidget {
                               children: <TextSpan>[
                             TextSpan(
                                 text: '${state.orderSymbol}',
-                                style: labelText.copyWith(
-                                    fontSize: 18, color: Colors.amber))
+                                style: orderNumberTextStyle)
                           ])),
                     ],
                   ),

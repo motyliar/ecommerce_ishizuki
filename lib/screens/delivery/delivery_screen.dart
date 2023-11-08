@@ -1,5 +1,6 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
@@ -9,6 +10,37 @@ import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 import '../../config/config_exports.dart';
+
+const double kSpaceBetweenWidgets = 20.0;
+const double kBackgroundOpacity = 0.08;
+const double kBoxShadowOffsetX = 1;
+const double kBoxShadowOffsetY = 1;
+const double kShadowOpacity = 0.2;
+const double kDescriptionTextPaddingSides = 30.0;
+const double kImageStackSizeWidth = 210.0;
+const double kImageStackSizeHeight = 170.0;
+const double kMaxWeightBoxWidth = 120.0;
+const double kMaxWeightBoxPaddingTopBottom = 50.0;
+const double kMaxWeightBoxPaddingSide = 8.0;
+// max weight weight label
+const kMaxWeightKG = '22 kg';
+const kMaxWeightLBS = '48 lbs';
+
+// values of image stack
+const double kImageLeftPosition = 50.0;
+const double kImageSizeShapeSquare = 170.0;
+const double kImageStackLeftInscriptionPostionTop = 70.0;
+const double kIMageStackBottomInscriptionPositionBottom = 10.0;
+const double kIMageStackBottomInscriptionPositionLeft = 35.0;
+const double kIMageStackRightInscriptionPositionBottom = 10.0;
+const double kIMageStackRightInscriptionPositionRight = 30.0;
+//dropdown button padding
+const double kDropDownButtonPaddingSides = 8.0;
+// prices label padding
+const double kPricingLabelPaddingSides = 80.0;
+// pricing table padding
+const double kPriceTablePaddingRight = 40.0;
+const double kPriceTablePaddingLeft = 30.0;
 
 class DeliveryScreen extends StatelessWidget {
   const DeliveryScreen({super.key});
@@ -30,56 +62,54 @@ class DeliveryScreen extends StatelessWidget {
         ),
         bottomNavigationBar: const CustomBottomAppBar(),
         body: Container(
-          color: mainTextColor.withOpacity(0.08),
+          color: mainTextColor.withOpacity(kBackgroundOpacity),
           child: SingleChildScrollView(
             child: Column(children: [
               const SizedBox(
-                height: 20.0,
+                height: kSpaceBetweenWidgets,
               ),
               Center(
                   child: Container(
                 color: backgroundColor,
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(kDefaultPadding),
                 child: Text(
                   AppLocalizations.of(context)!.labelDelivery,
                   style: headText.copyWith(color: Colors.white),
                 ),
               )),
               Divider(
-                endIndent: 20.0,
-                indent: 20.0,
-                thickness: 1.0,
+                endIndent: kDividerDefaultIndent,
+                indent: kDividerDefaultIndent,
+                thickness: kDividerThickness,
               ),
               const SizedBox(
-                height: 20,
+                height: kSpaceBetweenWidgets,
               ),
               Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                margin: const EdgeInsets.only(
+                    left: kMarginSideDefault, right: kMarginSideDefault),
+                padding: const EdgeInsets.only(
+                    top: kDefaultPadding, bottom: kDefaultPadding),
                 decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(1, 1),
-                          blurRadius: 8.0,
-                          spreadRadius: 2.0,
-                          color: Colors.grey.withOpacity(0.2)),
-                    ],
+                    boxShadow: [deliveryBoxShadow],
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(20)),
+                    borderRadius: BorderRadius.circular(kRadiusAppDefault)),
                 child: Padding(
-                  padding: EdgeInsets.only(right: 30.0, left: 30.0),
+                  padding: const EdgeInsets.only(
+                      right: kDescriptionTextPaddingSides,
+                      left: kDescriptionTextPaddingSides),
                   child: Text(
                       AppLocalizations.of(context)!.deliveryDescriptiion,
                       style: descriptionText),
                 ),
               ),
-              Divider(
-                endIndent: 20.0,
-                indent: 20.0,
-                thickness: 1.0,
+              const Divider(
+                endIndent: kDividerDefaultIndent,
+                indent: kDividerDefaultIndent,
+                thickness: kDividerThickness,
               ),
               const SizedBox(
-                height: 10.0,
+                height: kDefaultSpaceBetweenWidgets,
               ),
               Column(
                 children: [
@@ -88,20 +118,21 @@ class DeliveryScreen extends StatelessWidget {
                       Column(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(left: 6.0),
+                            margin:
+                                const EdgeInsets.only(left: kDefaultPadding),
                             padding: const EdgeInsets.only(
-                                top: 50, bottom: 50, left: 8, right: 8),
+                                top: kMaxWeightBoxPaddingTopBottom,
+                                bottom: kMaxWeightBoxPaddingTopBottom,
+                                left: kMaxWeightBoxPaddingSide,
+                                right: kMaxWeightBoxPaddingSide),
                             decoration: BoxDecoration(
                                 boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(1, 1),
-                                      blurRadius: 8.0,
-                                      spreadRadius: 2.0,
-                                      color: Colors.grey.withOpacity(0.2)),
+                                  deliveryBoxShadow,
                                 ],
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20)),
-                            width: 120,
+                                borderRadius:
+                                    BorderRadius.circular(kRadiusAppDefault)),
+                            width: kMaxWeightBoxWidth,
                             child: BlocBuilder<DeliveryCubit, DeliveryState>(
                               builder: (context, state) {
                                 return Column(
@@ -110,9 +141,10 @@ class DeliveryScreen extends StatelessWidget {
                                     Text(AppLocalizations.of(context)!
                                         .labelMaxWeight),
                                     Text(
-                                      state.weight ? '22 kg' : '48 lbs',
-                                      style: labelTextMidBlack.copyWith(
-                                          fontSize: 34),
+                                      state.weight
+                                          ? kMaxWeightKG
+                                          : kMaxWeightLBS,
+                                      style: headDeliveryText,
                                     ),
                                     IconButton(
                                         onPressed: () {
@@ -120,7 +152,7 @@ class DeliveryScreen extends StatelessWidget {
                                               .read<DeliveryCubit>()
                                               .changeWeight();
                                         },
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.change_circle,
                                           color: Colors.black,
                                         ))
@@ -132,45 +164,44 @@ class DeliveryScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        width: 20.0,
+                        width: kSpaceBetweenWidgets,
                       ),
                       Container(
-                        margin: const EdgeInsets.only(left: 10, right: 10),
+                        margin: const EdgeInsets.only(
+                            left: kMarginSideDefault,
+                            right: kMarginSideDefault),
                         padding: const EdgeInsets.only(
-                            top: 5, bottom: 5, left: 8, right: 8),
+                            top: kDefaultPadding,
+                            bottom: kDefaultPadding,
+                            left: kDefaultPadding,
+                            right: kDefaultPadding),
                         decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 8.0,
-                                  spreadRadius: 2.0,
-                                  color: Colors.grey.withOpacity(0.2)),
-                            ],
+                            boxShadow: [deliveryBoxShadow],
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(20)),
+                            borderRadius:
+                                BorderRadius.circular(kRadiusAppDefault)),
                         child: BlocBuilder<DeliveryCubit, DeliveryState>(
                           builder: (context, state) {
                             return Column(
                               children: [
                                 Text(
                                   AppLocalizations.of(context)!.labelMaxSize,
-                                  style:
-                                      labelTextMidBlack.copyWith(fontSize: 18),
+                                  style: headTextEightTeen,
                                 ),
                                 SizedBox(
-                                  width: 210,
-                                  height: 170,
+                                  width: kImageStackSizeWidth,
+                                  height: kImageStackSizeHeight,
                                   child: Stack(children: [
                                     Positioned(
                                         top: 0,
-                                        left: 50,
+                                        left: kImageLeftPosition,
                                         child: Image.network(
                                           kDeliveryCartoonImage,
-                                          width: 170,
-                                          height: 170,
+                                          width: kImageSizeShapeSquare,
+                                          height: kImageSizeShapeSquare,
                                         )),
                                     Positioned(
-                                      top: 70,
+                                      top: kImageStackLeftInscriptionPostionTop,
                                       left: 0,
                                       child: Text(
                                         state.weight
@@ -180,8 +211,10 @@ class DeliveryScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: 10,
-                                      left: 35,
+                                      bottom:
+                                          kIMageStackBottomInscriptionPositionBottom,
+                                      left:
+                                          kIMageStackBottomInscriptionPositionLeft,
                                       child: Text(
                                         state.weight
                                             ? '$kDeliveryPackageWidthCm ${AppLocalizations.of(context)!.scaleCM}'
@@ -190,8 +223,10 @@ class DeliveryScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Positioned(
-                                      bottom: 10,
-                                      right: 30,
+                                      bottom:
+                                          kIMageStackRightInscriptionPositionBottom,
+                                      right:
+                                          kIMageStackRightInscriptionPositionRight,
                                       child: Text(
                                         state.weight
                                             ? '$kDeliveryPackageLongCm ${AppLocalizations.of(context)!.scaleCM}'
@@ -211,34 +246,32 @@ class DeliveryScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width - 10,
+                width: MediaQuery.of(context).size.width - kMarginSideDefault,
                 child: Column(children: [
                   const SizedBox(
-                    height: 10.0,
+                    height: kDefaultSpaceBetweenWidgets,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
+                    margin: const EdgeInsets.only(
+                        left: kMarginSideDefault, right: kMarginSideDefault),
                     padding: const EdgeInsets.only(
-                        top: 5, bottom: 5, left: 80, right: 80),
+                        top: kDefaultPadding,
+                        bottom: kDefaultPadding,
+                        left: kPricingLabelPaddingSides,
+                        right: kPricingLabelPaddingSides),
                     decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                              offset: Offset(1, 1),
-                              blurRadius: 8.0,
-                              spreadRadius: 2.0,
-                              color: Colors.grey.withOpacity(0.2)),
-                        ],
+                        boxShadow: [deliveryBoxShadow],
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
+                        borderRadius: BorderRadius.circular(kRadiusAppDefault)),
                     child: Text(
                       AppLocalizations.of(context)!.labelPrices,
-                      style: labelTextMidBlack.copyWith(fontSize: 20.0),
+                      style: headTextMid,
                     ),
                   ),
-                  Divider(
-                    endIndent: 20.0,
-                    indent: 20.0,
-                    thickness: 1.0,
+                  const Divider(
+                    endIndent: kDividerDefaultIndent,
+                    indent: kDividerDefaultIndent,
+                    thickness: kDividerThickness,
                   ),
                   BlocBuilder<DeliveryCubit, DeliveryState>(
                     builder: (context, state) {
@@ -246,19 +279,19 @@ class DeliveryScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(top: 10, bottom: 10),
+                            margin: const EdgeInsets.only(
+                                top: kMarginSideDefault,
+                                bottom: kMarginSideDefault),
                             padding: const EdgeInsets.only(
-                                top: 5, bottom: 5, left: 30, right: 40),
+                                top: kDefaultPadding,
+                                bottom: kDefaultPadding,
+                                left: kPriceTablePaddingLeft,
+                                right: kPriceTablePaddingRight),
                             decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(1, 1),
-                                      blurRadius: 8.0,
-                                      spreadRadius: 2.0,
-                                      color: Colors.grey.withOpacity(0.2)),
-                                ],
+                                boxShadow: [deliveryBoxShadow],
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20)),
+                                borderRadius:
+                                    BorderRadius.circular(kRadiusAppDefault)),
                             child: Column(
                               children: [
                                 RowPrices(
@@ -292,19 +325,19 @@ class DeliveryScreen extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            margin: const EdgeInsets.only(
+                                left: kMarginSideDefault,
+                                right: kMarginSideDefault),
                             padding: const EdgeInsets.only(
-                                top: 5, bottom: 5, left: 8, right: 8),
+                                top: kDefaultPadding,
+                                bottom: kDefaultPadding,
+                                left: kDropDownButtonPaddingSides,
+                                right: kDropDownButtonPaddingSides),
                             decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      offset: Offset(1, 1),
-                                      blurRadius: 8.0,
-                                      spreadRadius: 2.0,
-                                      color: Colors.grey.withOpacity(0.2)),
-                                ],
+                                boxShadow: [deliveryBoxShadow],
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(20)),
+                                borderRadius:
+                                    BorderRadius.circular(kRadiusAppDefault)),
                             child: DropdownButton(
                               items: Utils().generateDropDownMenuItemList(
                                   kDeliveryWorldPlaceChoose),

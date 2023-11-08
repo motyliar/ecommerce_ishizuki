@@ -87,7 +87,7 @@ class GalleryWidget extends StatelessWidget {
                                 color: backgroundColor.withOpacity(0.6)),
                             child: Text(
                               product.name,
-                              style: labelText.copyWith(fontSize: 35),
+                              style: bigLabelText,
                             ),
                           ))
                     ]),

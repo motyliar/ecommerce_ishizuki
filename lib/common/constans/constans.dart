@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 /* 
 This file contains every const that is needed to support the application.
 If you want to find a specific one, see the description.
@@ -30,6 +29,9 @@ const kAboutRightTopImage =
     'http://motyliar.webd.pro/.sharedphotos/product1.jpg';
 const kAboutRightBottomImage =
     'http://motyliar.webd.pro/.sharedphotos/about3.jpg';
+// Center Logo in SplashScreen
+const kSplashScreenMiddleLogo =
+    'http://motyliar.webd.pro/.sharedphotos/ishizuki_logo.png';
 
 // cartoon image in Delivery Screen
 const kDeliveryCartoonImage = 'https://tiny.pl/cpscw';
@@ -152,10 +154,24 @@ const double kShadeOffsetYDefault = 3.0;
 const double kSidesDefaultPadding = 20.0;
 const double kMultiplyToHalf = 0.5;
 const double kDefaultSpaceBetweenWidgets = 10.0;
+const double kRadiusAppDefault = 20.0;
+const double kDefaultPadding = 5.0;
+
+// Label Text widget paddings
+const double kLabelTextPadding = 15.0;
 
 // Divider default constans
 const double kDividerThickness = 1.0;
 const double kDividerDefaultIndent = 30.0;
+
+// TextFormField
+// const of padding text form
+const double kTextFormPaddingSides = 40.0;
+const double kTextFormPaddingBottom = 5.0;
+
+// SPLASH SCREEN CONSTANS
+const double kSplashCenterImageWidth = 270.0;
+const double kSpalshCenterImageHeight = 235.0;
 
 //HOME SCREEN CONSTANS
 const double kHomeScreenCategorySliderHeight = 270.0;
@@ -178,8 +194,7 @@ const double kSmallPaddingValue = 5.0;
 const double kMiddleButtonHeight = 80.0;
 const double kMiddleButtonWidth = 100.0;
 // PRODUCT SCREEN CONSTANS
-const double kRadiusAppDefault = 20.0;
-const double kDefaultPadding = 5.0;
+
 const double kProductDisplayImageSquareSize = 150.0;
 const double kProductIconCartSize = 35.0;
 // value for keeping icon in const space
@@ -235,3 +250,29 @@ const double kCartSizedBoxWidth = 80.0;
 const double kCartSizedBoxHeight = 150.0;
 // delivery alert dialog consts
 const double kCartDeliveryDimensionOfDialog = 250.0;
+
+//CATEGORY SCREEN
+// size of display image of product in category screen
+const double kCategoryProductImageSize = 135.0;
+// size of add button icon in category screen
+const double kCategoryIconSize = 35.0;
+
+//CONFIRM SCREEN CONSTANS
+//Sized Box height
+const double kConfirmSizedBoxSpace = 10.0;
+// Right padding of total pricig
+const double kConfirmTotalPricePadding = 30.0;
+// Dimension of Product image in confirm product list
+const double kConfirmProductListImageDimension = 60.0;
+// increment number using to show postion on order list
+const int kConfirmIncrementIndex = 1;
+// padding of one product display in confirm product list
+const double kConfirmPaddingProductRight = 20.0;
+const double kConfirmPaddingProductTop = 5.0;
+// height of one product box used to multiply when is more then one product
+const double kConfirmSingleProductHeight = 95.0;
+// side padding to set width od single product box
+const double kConfirmSingleProductPadding = 10.0;
+// alert confirm
+const double kConfirmAlertMargin = 10.0;
+const double kConfirmAlertBackgroundOpacity = 0.5;

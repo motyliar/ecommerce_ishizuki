@@ -50,8 +50,8 @@ class CategoryScreen extends StatelessWidget {
                   itemBuilder: ((context, index) {
                     return ProductListWidget(
                       product: products[index],
-                      size: 135,
-                      iconSize: 35,
+                      size: kCategoryProductImageSize,
+                      iconSize: kCategoryIconSize,
                       isSold: products[index].isSold,
                     );
                   }));

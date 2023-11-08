@@ -11,12 +11,16 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String regExpGeneral;
   final String validation;
+  final double textFormPaddingSides;
+  final double textFormPaddingBottom;
   const CustomTextFormField({
     required this.title,
     required this.validation,
     this.regExpGeneral = kRegExpGeneralValidation,
     required this.name,
     required this.controller,
+    this.textFormPaddingSides = kTextFormPaddingSides,
+    this.textFormPaddingBottom = kTextFormPaddingBottom,
     super.key,
   });
 
@@ -25,10 +29,10 @@ class CustomTextFormField extends StatelessWidget {
     return BlocBuilder<ConfirmBloc, ConfirmState>(
       builder: (context, state) {
         return Padding(
-          padding: const EdgeInsets.only(
-            left: 40.0,
-            right: 40.0,
-            bottom: 5.0,
+          padding: EdgeInsets.only(
+            left: textFormPaddingSides,
+            right: textFormPaddingSides,
+            bottom: textFormPaddingBottom,
           ),
           child: TextFormField(
             validator: (value) {
@@ -40,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
                 return null;
               }
             },
-            style: labelText.copyWith(fontSize: 12, color: backgroundColor),
+            style: hintText,
             decoration: InputDecoration(
               hintText: title,
               focusedBorder: const UnderlineInputBorder(

@@ -51,18 +51,19 @@ class ConfirmScreen extends StatelessWidget {
                     );
                   }
                   if (state is ConfirmChanges) {
-                    print(state);
                     return Form(
                       key: keyForm,
                       child: Column(
                         children: [
                           const SizedBox(
-                            height: 10,
+                            height: kConfirmSizedBoxSpace,
                           ),
-                          Container(
-                              width: MediaQuery.of(context).size.width - 10,
-                              height:
-                                  (state.cart.products.length * 95).toDouble(),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width -
+                                  kConfirmSingleProductPadding,
+                              height: (state.cart.products.length *
+                                      kConfirmSingleProductHeight)
+                                  .toDouble(),
                               child: ListView.builder(
                                 itemCount: state.cart.products.length,
                                 itemBuilder: (context, index) {
@@ -71,7 +72,8 @@ class ConfirmScreen extends StatelessWidget {
                                         '${context.select((CurrencyBloc bloc) => bloc.state.currentConversion * state.cart.products[index].price)} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}';
                                     return Padding(
                                       padding: const EdgeInsets.only(
-                                          right: 20.0, left: 0.0, top: 5.0),
+                                          right: kConfirmPaddingProductRight,
+                                          top: kConfirmPaddingProductTop),
                                       child: Column(
                                         children: [
                                           Row(
@@ -79,14 +81,16 @@ class ConfirmScreen extends StatelessWidget {
                                                 MainAxisAlignment.spaceEvenly,
                                             children: [
                                               Text(
-                                                '${index + 1}.',
+                                                '${index + kConfirmIncrementIndex}.',
                                                 style: labelTextMidBlack,
                                               ),
                                               Image.network(
                                                 state.cart.products[index]
                                                     .imgUrl[0],
-                                                width: 60,
-                                                height: 60,
+                                                width:
+                                                    kConfirmProductListImageDimension,
+                                                height:
+                                                    kConfirmProductListImageDimension,
                                               ),
                                               Text(
                                                 state.cart.products[index].name,
@@ -105,13 +109,14 @@ class ConfirmScreen extends StatelessWidget {
                                 },
                               )),
                           const Divider(
-                            endIndent: 20,
-                            indent: 20,
-                            thickness: 1.5,
+                            endIndent: kDividerDefaultIndent,
+                            indent: kDividerDefaultIndent,
+                            thickness: kDividerThickness,
                             color: backgroundColor,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(right: 30.0),
+                            padding: const EdgeInsets.only(
+                                right: kConfirmTotalPricePadding),
                             child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Text(
@@ -218,7 +223,7 @@ class ConfirmScreen extends StatelessWidget {
                 },
               ),
               const SizedBox(
-                height: 5,
+                height: kConfirmSizedBoxSpace,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -235,8 +240,8 @@ class ConfirmScreen extends StatelessWidget {
                         _emailController.clear();
                         context.read<ConfirmBloc>().add(ClearAddressEvent());
                       },
-                      child: const Text(
-                        'Clear',
+                      child: Text(
+                        AppLocalizations.of(context)!.buttonClear,
                         style: labelTextMidBlack,
                       )),
                   ConfirmDialog(

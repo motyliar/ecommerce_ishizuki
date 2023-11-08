@@ -1,12 +1,23 @@
+import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'details_text.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class ConfirmDialog extends StatelessWidget {
   final GlobalKey<FormState> formKey;
+  final double mainContainerMargin;
+  final double mainContainerBackgroundOpacity;
+  final double textMarginLeft;
+  final double textSpaceBetweenHeight;
+
   const ConfirmDialog({
     required this.formKey,
+    this.mainContainerMargin = kConfirmAlertMargin,
+    this.mainContainerBackgroundOpacity = kConfirmAlertBackgroundOpacity,
+    this.textMarginLeft = kSidesDefaultPadding,
+    this.textSpaceBetweenHeight = kDefaultPadding,
     super.key,
   });
 
@@ -26,48 +37,59 @@ class ConfirmDialog extends StatelessWidget {
                         child: Container(
                           color: Colors.transparent,
                           child: Container(
-                            margin: const EdgeInsets.all(10),
-                            color: backgroundColor.withOpacity(0.5),
+                            margin: EdgeInsets.all(mainContainerMargin),
+                            color: backgroundColor
+                                .withOpacity(mainContainerBackgroundOpacity),
                             child: Material(
-                              color: backgroundColor.withOpacity(0.5),
+                              color: backgroundColor
+                                  .withOpacity(mainContainerBackgroundOpacity),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: const EdgeInsets.only(left: 20.0),
+                                    margin:
+                                        EdgeInsets.only(left: textMarginLeft),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const SizedBox(
-                                          height: 10,
+                                        SizedBox(
+                                          height: textSpaceBetweenHeight,
                                         ),
-                                        const Text(
-                                          'Confirm your details:\n',
+                                        Text(
+                                          AppLocalizations.of(context)!
+                                              .confirmDetails,
                                           style: labelText,
                                         ),
                                         DetailsText(
-                                            title: 'Name:',
+                                            title: AppLocalizations.of(context)!
+                                                .textFormTitleName,
                                             text:
                                                 '${state.address.name} ${state.address.surname}'),
-                                        const SizedBox(height: 5),
+                                        SizedBox(
+                                            height: textSpaceBetweenHeight),
                                         DetailsText(
-                                            title: 'E-mail:',
+                                            title: AppLocalizations.of(context)!
+                                                .textFormTitleEmail,
                                             text: state.address.email),
-                                        const SizedBox(height: 5),
-                                        const DetailsText(
-                                            title: 'Address:', text: ' '),
+                                        SizedBox(
+                                            height: textSpaceBetweenHeight),
+                                        DetailsText(
+                                            title: AppLocalizations.of(context)!
+                                                .labelAddress,
+                                            text: ' '),
                                         Container(
-                                          margin:
-                                              const EdgeInsets.only(left: 20.0),
+                                          margin: EdgeInsets.only(
+                                              left: textMarginLeft),
                                           child: Text(
                                             '${state.address.street} ${state.address.numbers} \n${state.address.city} ${state.address.zipCode}\n${state.address.country}',
                                             style: labelMidText,
                                           ),
                                         ),
-                                        const SizedBox(height: 5),
+                                        const SizedBox(height: kDefaultPadding),
                                         DetailsText(
-                                            title: 'Wishes:',
+                                            title: AppLocalizations.of(context)!
+                                                .labelWishes,
                                             text: '${state.address.wishes}'),
                                       ],
                                     ),
@@ -80,8 +102,9 @@ class ConfirmDialog extends StatelessWidget {
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: const Text(
-                                            'BACK',
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .buttonBack,
                                             style: labelText,
                                           )),
                                       TextButton(
@@ -96,10 +119,12 @@ class ConfirmDialog extends StatelessWidget {
                                                 .read<ConfirmBloc>()
                                                 .add(SendOrderToDB());
                                             Navigator.pushNamed(
-                                                context, '/order');
+                                                context, kOrderScreen);
                                           },
-                                          child: const Text(
-                                            'SEND',
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .send
+                                                .toUpperCase(),
                                             style: labelText,
                                           )),
                                     ],
@@ -115,11 +140,11 @@ class ConfirmDialog extends StatelessWidget {
             }
           },
           child: Container(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(kDefaultPadding),
             color: backgroundColor,
             child: Text(
-              'REASUME',
-              style: labelText.copyWith(fontSize: 25),
+              AppLocalizations.of(context)!.buttonResume,
+              style: labelButtonText,
             ),
           ),
         );

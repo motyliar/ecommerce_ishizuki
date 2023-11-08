@@ -1,13 +1,16 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
 class DetailsText extends StatelessWidget {
   final String title;
   final String text;
+  final double betweenTextSpace;
 
   const DetailsText({
     required this.title,
     required this.text,
+    this.betweenTextSpace = kDefaultSpaceBetweenWidgets,
     super.key,
   });
 
@@ -21,7 +24,7 @@ class DetailsText extends StatelessWidget {
           style: label16Text,
         ),
         SizedBox(
-          width: 10,
+          width: betweenTextSpace,
         ),
         Text(
           text,

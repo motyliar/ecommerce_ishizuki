@@ -74,6 +74,7 @@
     "textFormTitleStreet" : "Street",
     "textFormTitleZipCode" : "Zip-Code",
     "textFormTitleLong": "Long",
+    "textFormTitleAddress": "Address",
 
     "@_CART_SCREEN": {},
     "bottomInactiveDeliveryMessage": "Delivery price: ",
@@ -151,10 +152,13 @@
     "@_CONFIRM_SCREEN": {},
     "labelCountry": "Country:",
     "labelNames": "Names:",
-    "labelWishes": "Special Wishes",
+    "labelWishes": "Special Wishes:",
     "labelAddress": "Address: ",
     "labelTotal": "Total:",
     "buttonClear": "Clear",
+    "confirmDetails": "Confirm your details:\n",
+    "buttonBack": "Back",
+    "buttonResume": "Resume",
 
     "@_ABOUT_SCREEN": {},
     "aboutDescriptionLeftTop": " \nIshizuki rocks was created from passion to bonsai.\nMy fascination of planting ishizuki and searching for the best rock in good condition awakened the desire to create something of my own.\n",

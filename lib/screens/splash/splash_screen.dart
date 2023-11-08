@@ -24,11 +24,11 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
+              padding: const EdgeInsets.only(bottom: kSidesDefaultPadding),
               child: Image.network(
-                'http://motyliar.webd.pro/.sharedphotos/ishizuki_logo.png',
-                width: 270,
-                height: 235,
+                kSplashScreen,
+                width: kSplashCenterImageWidth,
+                height: kSpalshCenterImageHeight,
               ),
             )
           ],

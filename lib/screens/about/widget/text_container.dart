@@ -1,11 +1,16 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter/material.dart';
 
 class TextContainer extends StatelessWidget {
-  final String text;
+  final String textToDisplay;
+  final double textContainerWidthSize;
+  final double textPadding;
   const TextContainer({
-    required this.text,
+    required this.textToDisplay,
+    required this.textContainerWidthSize,
+    this.textPadding = kAboutTextPadding,
     super.key,
   });
 
@@ -13,12 +18,12 @@ class TextContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: shadeBox,
-      width: MediaQuery.of(context).size.width / 2 - 23,
+      width: textContainerWidthSize,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(textPadding),
         child: Text(
-          text,
-          style: labelTextMidBlack.copyWith(fontSize: 14),
+          textToDisplay,
+          style: descriptionText,
         ),
       ),
     );

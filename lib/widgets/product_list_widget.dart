@@ -1,4 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 
@@ -25,7 +26,7 @@ class ProductListWidget extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            Navigator.pushNamed(context, '/productScreen', arguments: product);
+            Navigator.pushNamed(context, kProductScreen, arguments: product);
             context
                 .read<GaleryBloc>()
                 .add(GaleryLoadingEvent(image: product.imgUrl, index: 0));

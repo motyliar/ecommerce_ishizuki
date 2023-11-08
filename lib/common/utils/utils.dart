@@ -1,3 +1,4 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:flutter/material.dart';
 
 const int kSnackbarDuration = 2;
@@ -20,5 +21,17 @@ class Utils {
               child: Text(keys['text']!),
             ))
         .toList();
+  }
+
+  static void printDebugError({required String errorMessage}) {
+    debugPrint('Something wrong: $errorMessage');
+  }
+
+  double calculateRowWidthDimension(
+      {required BuildContext context,
+      double multiplyWidth = kMultiplyToHalf,
+      double spaceToSubstraction = 0}) {
+    return MediaQuery.of(context).size.width * multiplyWidth -
+        spaceToSubstraction;
   }
 }

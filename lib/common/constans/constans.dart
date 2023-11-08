@@ -109,7 +109,10 @@ const List<Map<String, String>> kProductKindDropDownList = [
   {'value': 'Rock', 'text': 'Rock'},
   {'value': 'Pot', 'text': 'Pot'},
 ];
-// List using for change price in delivery screen for information user about prices range
+/* List using for change price in delivery screen for information user about prices range
+First price is for smallest weight, next medium weight, high weight and maximum weight price
+First list is for EU, Second UK, Third USA and last for Others Country
+*/
 const List<List<int>> kDeliveryPricesList = [
   [10, 20, 30, 40],
   [30, 60, 90, 120],
@@ -175,6 +178,9 @@ const double kMiddleButtonWidth = 100.0;
 const double kRadiusAppDefault = 20.0;
 const double kDefaultPadding = 5.0;
 const double kProductDisplayImageSquareSize = 150.0;
+const double kProductIconCartSize = 35.0;
+// value for keeping icon in const space
+const double kProductIconSpace = 45.0;
 
 // Value used for 20.0 margin or padding in app containers
 const double kAvarageMediumPaddingOrMargin = 20.0;

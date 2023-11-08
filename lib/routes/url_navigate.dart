@@ -1,5 +1,6 @@
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
-import 'package:flutter/material.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlNavigate {
@@ -9,7 +10,7 @@ class UrlNavigate {
     if (await canLaunchUrl(facebookUrl)) {
       await launchUrl(facebookUrl);
     }
-    debugPrint('Could not launch $facebookUrl');
+    Utils.printDebugError(errorMessage: facebookUrl.toString());
   }
 
   Future<void> launchInstagram() async {
@@ -20,7 +21,7 @@ class UrlNavigate {
     )) {
       launchUrl(instagramUrl);
     } else {
-      debugPrint('Could not launch $instagramUrl');
+      Utils.printDebugError(errorMessage: instagramUrl.toString());
     }
   }
 }

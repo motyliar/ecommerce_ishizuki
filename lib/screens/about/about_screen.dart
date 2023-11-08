@@ -1,3 +1,4 @@
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
@@ -25,13 +26,15 @@ class AboutScreen extends StatelessWidget {
       ),
       bottomNavigationBar: const CustomBottomAppBar(),
       body: Container(
-        color: mainTextColor.withOpacity(0.07),
+        color:
+            mainTextColor.withOpacity(kAboutOpacityOfMainColorScreenBackground),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+            padding: const EdgeInsets.only(
+                right: kSidesDefaultPadding, left: kSidesDefaultPadding),
             child: Column(children: [
               const SizedBox(
-                height: 10.0,
+                height: kAboutSpaceBetweenWidgetsHeight,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,36 +43,58 @@ class AboutScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const ImageContainer(
+                        ImageContainer(
                           image: kAboutLeftTopImage,
+                          imageNetworkWidth: Utils().calculateRowWidthDimension(
+                              context: context,
+                              spaceToSubstraction: kAboutPaddingSpaceAndBorder),
+                          imageNetworkHeight: Utils()
+                              .calculateRowWidthDimension(context: context),
                         ),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
                         TextContainer(
-                            text: AppLocalizations.of(context)!
-                                .aboutDescriptionLeftTop),
-                        const SizedBox(
-                          height: 10.0,
+                          textToDisplay: AppLocalizations.of(context)!
+                              .aboutDescriptionLeftTop,
+                          textContainerWidthSize: Utils()
+                              .calculateRowWidthDimension(
+                                  context: context,
+                                  spaceToSubstraction:
+                                      kAboutPaddingSpaceAndBorder),
                         ),
-                        const ImageContainer(
+                        const SizedBox(
+                          height: kAboutSpaceBetweenWidgetsHeight,
+                        ),
+                        ImageContainer(
                           image: kAboutLeftBottomImage,
-                          customHeight: 50,
+                          imageNetworkWidth: Utils().calculateRowWidthDimension(
+                              context: context,
+                              spaceToSubstraction: kAboutPaddingSpaceAndBorder),
+                          imageNetworkHeight: Utils()
+                              .calculateRowWidthDimension(
+                                  context: context,
+                                  spaceToAddition: kAboutImageHeightAddition),
                         ),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
                         TextContainer(
-                            text: AppLocalizations.of(context)!
-                                .aboutDescriptionLeftBottom),
+                            textToDisplay: AppLocalizations.of(context)!
+                                .aboutDescriptionLeftBottom,
+                            textContainerWidthSize: Utils()
+                                .calculateRowWidthDimension(
+                                    context: context,
+                                    spaceToSubstraction:
+                                        kAboutPaddingSpaceAndBorder)),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(
-                    width: 10.0,
+                    width: kAboutSpaceBetweenWidgetsHeight,
                   ),
                   Expanded(
                     child: Column(
@@ -77,9 +102,11 @@ class AboutScreen extends StatelessWidget {
                       children: [
                         Container(
                           decoration: shadeBox,
-                          width: MediaQuery.of(context).size.width / 2 - 23,
+                          width: Utils().calculateRowWidthDimension(
+                              context: context,
+                              spaceToSubstraction: kAboutPaddingSpaceAndBorder),
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(kAboutTextPadding),
                             child: Center(
                               child: Text(
                                 AppLocalizations.of(context)!
@@ -90,25 +117,41 @@ class AboutScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
-                        const ImageContainer(
+                        ImageContainer(
                           image: kAboutRightTopImage,
-                          customHeight: 50,
+                          imageNetworkWidth: Utils().calculateRowWidthDimension(
+                              context: context,
+                              spaceToSubstraction: kAboutPaddingSpaceAndBorder),
+                          imageNetworkHeight: Utils()
+                              .calculateRowWidthDimension(
+                                  context: context,
+                                  spaceToAddition: kAboutImageHeightAddition),
                         ),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
                         TextContainer(
-                          text: AppLocalizations.of(context)!
-                              .aboutDescriptionRightBottom,
-                        ),
+                            textToDisplay: AppLocalizations.of(context)!
+                                .aboutDescriptionRightBottom,
+                            textContainerWidthSize: Utils()
+                                .calculateRowWidthDimension(
+                                    context: context,
+                                    spaceToSubstraction:
+                                        kAboutPaddingSpaceAndBorder)),
                         const SizedBox(
-                          height: 10.0,
+                          height: kAboutSpaceBetweenWidgetsHeight,
                         ),
-                        const ImageContainer(
+                        ImageContainer(
                           image: kAboutRightBottomImage,
-                          customHeight: 50,
+                          imageNetworkWidth: Utils().calculateRowWidthDimension(
+                              context: context,
+                              spaceToSubstraction: kAboutPaddingSpaceAndBorder),
+                          imageNetworkHeight: Utils()
+                              .calculateRowWidthDimension(
+                                  context: context,
+                                  spaceToAddition: kAboutImageHeightAddition),
                         )
                       ],
                     ),
@@ -116,7 +159,7 @@ class AboutScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 30,
+                height: kAboutSpaceToAlignHeightOfRowHeight,
               ),
             ]),
           ),

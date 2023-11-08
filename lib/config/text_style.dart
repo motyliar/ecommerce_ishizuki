@@ -6,6 +6,8 @@ const TextStyle headText =
 
 const TextStyle labelText =
     TextStyle(fontFamily: 'nunito', fontSize: 18, color: Colors.white);
+const TextStyle labelAlertText =
+    TextStyle(fontFamily: 'nunito', fontSize: 13, color: Colors.white);
 
 const TextStyle labelMidText =
     TextStyle(fontFamily: 'nunito', fontSize: 14, color: Colors.white);

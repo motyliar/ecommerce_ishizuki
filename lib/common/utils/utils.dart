@@ -30,8 +30,10 @@ class Utils {
   double calculateRowWidthDimension(
       {required BuildContext context,
       double multiplyWidth = kMultiplyToHalf,
-      double spaceToSubstraction = 0}) {
+      double spaceToSubstraction = 0,
+      double spaceToAddition = 0}) {
     return MediaQuery.of(context).size.width * multiplyWidth -
-        spaceToSubstraction;
+        spaceToSubstraction +
+        spaceToAddition;
   }
 }

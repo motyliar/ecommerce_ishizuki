@@ -17,21 +17,21 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         popArrow: false,
         imgName: kAppBarCartLogo,
         isPop: true,
       ),
-      bottomNavigationBar: CustomBottomAppBar(),
+      bottomNavigationBar: const CustomBottomAppBar(),
 
       //BODY
 
       body: Column(
         children: [
           // Widget to show every single cart product //
-          CartItemList(),
+          const CartItemList(),
           // Show Dialog to user about DeliveryRules
-          DeliveryDialog(),
+          const DeliveryDialog(),
 
           // Bottom widget of showing costs //
           BottomTotalPriceWidget(

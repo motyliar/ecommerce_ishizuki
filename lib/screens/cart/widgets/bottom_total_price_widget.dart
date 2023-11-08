@@ -1,15 +1,30 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class BottomTotalPriceWidget extends StatelessWidget {
   final Function() snackBarMessage;
-  List<DropdownMenuItem<String>> dropdownListGenerate;
-  BottomTotalPriceWidget({
+  final List<DropdownMenuItem<String>> dropdownListGenerate;
+  final double rowProductPadding;
+  final double dividerThickness;
+  final double dividerIndents;
+  final double spaceBetweenWidgetsHeight;
+  final double bottomButtonMargin;
+  final double bottomButtonPadding;
+
+  const BottomTotalPriceWidget({
     required this.snackBarMessage,
     required this.dropdownListGenerate,
+    this.rowProductPadding = kSidesDefaultPadding,
+    this.dividerThickness = kDividerThickness,
+    this.dividerIndents = kDividerDefaultIndent,
+    this.spaceBetweenWidgetsHeight = kDefaultSpaceBetweenWidgets,
+    this.bottomButtonMargin = kDefaultPadding,
+    this.bottomButtonPadding = kDefaultPadding,
     super.key,
   });
 
@@ -20,11 +35,12 @@ class BottomTotalPriceWidget extends StatelessWidget {
         color: backgroundColor,
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: spaceBetweenWidgetsHeight,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              padding: EdgeInsets.only(
+                  left: rowProductPadding, right: rowProductPadding),
               child: BlocBuilder<CartBloc, CartState>(
                 builder: (context, state) {
                   if (state is CartLoaded) {
@@ -33,8 +49,10 @@ class BottomTotalPriceWidget extends StatelessWidget {
                         children: [
                           Text(
                             state.isVisible
-                                ? 'Delivery price: '
-                                : 'Choose your place: ',
+                                ? AppLocalizations.of(context)!
+                                    .bottomInactiveDeliveryMessage
+                                : AppLocalizations.of(context)!
+                                    .bottomActiveDeliveryMessage,
                             style: labelText,
                           ),
                           state.isVisible
@@ -51,7 +69,6 @@ class BottomTotalPriceWidget extends StatelessWidget {
                                     context
                                         .read<CartBloc>()
                                         .add(DeliveryValueEvent(value: value!));
-                                    print('this is ${state.cart.value}');
                                   }),
                         ]);
                   } else {
@@ -64,12 +81,13 @@ class BottomTotalPriceWidget extends StatelessWidget {
               height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              padding: EdgeInsets.only(
+                  left: rowProductPadding, right: rowProductPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Products Price: ',
+                  Text(
+                    AppLocalizations.of(context)!.bottomProductPriceMessage,
                     style: labelText,
                   ),
                   BlocBuilder<CartBloc, CartState>(
@@ -80,25 +98,26 @@ class BottomTotalPriceWidget extends StatelessWidget {
                           style: labelText,
                         );
                       }
-                      return const Text('0');
+                      return const ErrorScreen();
                     },
                   )
                 ],
               ),
             ),
-            const Divider(
+            Divider(
               color: Colors.white,
-              endIndent: 20.0,
-              indent: 20.0,
-              thickness: 1.3,
+              endIndent: dividerIndents,
+              indent: dividerIndents,
+              thickness: dividerThickness,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              padding: EdgeInsets.only(
+                  left: rowProductPadding, right: rowProductPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
-                    'Total price: ',
+                  Text(
+                    AppLocalizations.of(context)!.bottomTotalPriceMessage,
                     style: labelText,
                   ),
                   BlocBuilder<CartBloc, CartState>(
@@ -132,8 +151,8 @@ class BottomTotalPriceWidget extends StatelessWidget {
                     return state.cart.products.isEmpty
                         ? Container()
                         : Container(
-                            margin: const EdgeInsets.only(top: 6),
-                            padding: const EdgeInsets.all(4),
+                            margin: EdgeInsets.only(top: bottomButtonMargin),
+                            padding: EdgeInsets.all(bottomButtonPadding),
                             color: Colors.white,
                             child: InkWell(
                               onTap: () {
@@ -142,14 +161,16 @@ class BottomTotalPriceWidget extends StatelessWidget {
                                         context, kConfirmScreen)
                                     : snackBarMessage();
                               },
-                              child: const Text(
-                                'CONFIRM',
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .bottomButtonConfirm
+                                    .toUpperCase(),
                                 style: headText,
                               ),
                             ),
                           );
                   } else {
-                    return const Text('data');
+                    return const ErrorScreen();
                   }
                 },
               );

@@ -1,12 +1,18 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/config/box_decoration.dart';
 import 'package:flutter/material.dart';
 
 class ImageContainer extends StatelessWidget {
   final String image;
-  final double customHeight;
+  final double borderRadiusCircular;
+  final double imageNetworkWidth;
+  final double imageNetworkHeight;
+
   const ImageContainer({
     required this.image,
-    this.customHeight = 0,
+    this.borderRadiusCircular = kRadiusAppDefault,
+    required this.imageNetworkWidth,
+    required this.imageNetworkHeight,
     super.key,
   });
 
@@ -15,14 +21,14 @@ class ImageContainer extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           boxShadow: [boxShadowCustom],
-          borderRadius: BorderRadius.circular(20.0)),
+          borderRadius: BorderRadius.circular(borderRadiusCircular)),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(borderRadiusCircular),
         child: Image.network(
           image,
           // to change
-          width: MediaQuery.of(context).size.width / 2 - 23,
-          height: MediaQuery.of(context).size.width / 2 + customHeight,
+          width: imageNetworkWidth,
+          height: imageNetworkHeight,
           fit: BoxFit.cover,
         ),
       ),

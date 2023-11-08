@@ -1,9 +1,39 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
+import 'package:ecommerce_ishizuki/config/box_decoration.dart';
+import 'package:ecommerce_ishizuki/screens/error/error_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
 class CartItemList extends StatelessWidget {
+  final double productImageSquareSize;
+  final double borderRadiusCircular;
+  final double borderRadiusElipticalX;
+  final double borderRadiusElipticalY;
+  final double imageBoxOpacity;
+  final double buttonBackgroundOpacity;
+  final double backgroundGradientOpacity;
+  final double mainContainerPaddingLeft;
+  final double mainContainerPaddingRight;
+  final double mainContainerPaddingBottom;
+  final double mainContainerPaddingTop;
+  final double sizedBoxWidth;
+  final double sizedBoxHeight;
   const CartItemList({
+    this.borderRadiusCircular = kRadiusAppDefault,
+    this.borderRadiusElipticalX = kCartMainContainerRadiusElipticalX,
+    this.borderRadiusElipticalY = kCartMainContainerRadiusElipticalY,
+    this.imageBoxOpacity = kCartMainContainerBackgroundOpacity,
+    this.backgroundGradientOpacity = kCartMainContainerGradientOpacity,
+    this.mainContainerPaddingRight = kCartMainContainerPaddingRight,
+    this.mainContainerPaddingLeft = kCartMainContainerPaddingLeft,
+    this.mainContainerPaddingBottom = kCartMainContainerPaddingBottom,
+    this.mainContainerPaddingTop = kCartMainContainerPaddingTop,
+    this.buttonBackgroundOpacity = kCartRemoveButtonOpacity,
+    this.productImageSquareSize = kCartProductImageSize,
+    this.sizedBoxHeight = kCartSizedBoxHeight,
+    this.sizedBoxWidth = kCartSizedBoxWidth,
     super.key,
   });
 
@@ -26,37 +56,41 @@ class CartItemList extends StatelessWidget {
                       final price =
                           '${context.select((CurrencyBloc bloc) => bloc.state.currentConversion * state.cart.products[index].price)} ${context.select((CurrencyBloc bloc) => bloc.state.currentSign)}';
                       return Padding(
-                        padding: const EdgeInsets.only(top: 15, left: 20),
+                        padding: EdgeInsets.only(
+                            top: borderRadiusCircular,
+                            left: borderRadiusCircular),
                         child: Container(
-                          margin: const EdgeInsets.only(right: 20),
-                          padding: const EdgeInsets.only(
-                              right: 20, top: 3, left: 15, bottom: 5),
+                          margin: const EdgeInsets.only(
+                              right: kDefaultSpaceBetweenWidgets),
+                          padding: EdgeInsets.only(
+                              right: mainContainerPaddingRight,
+                              top: mainContainerPaddingTop,
+                              left: mainContainerPaddingLeft,
+                              bottom: mainContainerPaddingBottom),
                           decoration: BoxDecoration(
-                              color: mainTextColor.withOpacity(0.3),
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                bottomRight: Radius.elliptical(20, 40),
+                              color: mainTextColor.withOpacity(imageBoxOpacity),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(borderRadiusCircular),
+                                bottomRight: Radius.elliptical(
+                                    borderRadiusElipticalX,
+                                    borderRadiusElipticalY),
                               ),
                               gradient: LinearGradient(colors: [
-                                mainTextColor.withOpacity(0.5),
+                                mainTextColor
+                                    .withOpacity(backgroundGradientOpacity),
                                 backgroundColor,
-                                mainTextColor.withOpacity(0.5)
+                                mainTextColor
+                                    .withOpacity(backgroundGradientOpacity)
                               ], begin: Alignment.topCenter),
-                              boxShadow: [
-                                BoxShadow(
-                                    blurRadius: 3.0,
-                                    spreadRadius: 2.0,
-                                    color: Colors.grey.withOpacity(0.2),
-                                    offset: const Offset(4, -4)),
-                              ]),
+                              boxShadow: [boxShadowLight]),
                           child: Row(
                             children: [
                               Image.network(
                                 state.cart.products[index].imgUrl[0],
-                                width: 120,
-                                height: 120,
+                                width: productImageSquareSize,
+                                height: productImageSquareSize,
                               ),
-                              Container(
+                              SizedBox(
                                 width: 80,
                                 height: 150,
                                 child: Column(
@@ -73,9 +107,12 @@ class CartItemList extends StatelessWidget {
                               ),
                               Center(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 30),
-                                  padding: const EdgeInsets.all(5),
-                                  color: Colors.black.withOpacity(0.9),
+                                  margin: const EdgeInsets.only(
+                                      left: kDefaultSpaceBetweenWidgets),
+                                  padding:
+                                      const EdgeInsets.all(kDefaultPadding),
+                                  color: Colors.black
+                                      .withOpacity(buttonBackgroundOpacity),
                                   child: InkWell(
                                     onTap: () {
                                       context.read<CartBloc>().add(
@@ -83,8 +120,9 @@ class CartItemList extends StatelessWidget {
                                               product:
                                                   state.cart.products[index]));
                                     },
-                                    child: const Text(
-                                      'REMOVE',
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .removeButtonLabel,
                                       style: labelText,
                                     ),
                                   ),
@@ -98,9 +136,7 @@ class CartItemList extends StatelessWidget {
                   }),
             );
           }
-          return const Center(
-            child: Text('Something Wrong'),
-          );
+          return const ErrorScreen();
         },
       ),
     );

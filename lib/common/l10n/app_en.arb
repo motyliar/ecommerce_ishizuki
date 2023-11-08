@@ -75,6 +75,25 @@
     "textFormTitleZipCode" : "Zip-Code",
     "textFormTitleLong": "Long",
 
+    "@_CART_SCREEN": {},
+    "bottomInactiveDeliveryMessage": "Delivery price: ",
+    "@bottomInactiveDeliveryMessage": {
+        "description": "first of two value displayed to choose place to delivery"
+    },
+    "bottomActiveDeliveryMessage": "Choose place: ",
+    "@bottomActiveDeliveryMessage": {
+        "description" : "second of two value displayed to choose place to delivery"
+    },
+    "bottomProductPriceMessage": "Product price: ",
+    "bottomTotalPriceMessage": "Total price: ",
+    "bottomButtonConfirm": "confirm",
+    "removeButtonLabel": "Remove",
+    "alertDeliveryRules": "Delivery Rules",
+    "alertDeliveryDescription": "  We ship our product around the world. Delivery time may vary for different destinations.\n  Choose your place to know approximate price. After you confirm order we will send you email with total shipping price for those pieces.\n  We will send you message how fast how it will be possible include payment method to confirm order",
+    "alertDeliveryButton": "Check our delivery rules",
+
+
+
     
 
 

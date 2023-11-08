@@ -1,20 +1,54 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 
 import 'package:ecommerce_ishizuki/models/models_export.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
+// stack widget initial dimension
+const double kProductStackInitialSizeWidth = 250.0;
+const double kProductStackInitialSizeHeight = 220.0;
+// product image size
+const double kImageProductSizeSquare = 200.0;
+// position in Stack
+const double kImagePositionTop = 25.0;
+const double kImagePositionLeft = 30.0;
+
+const double kLabelsBackgroundOpacity = 0.7;
+// new label positions
+const double kNewLabelPosition = 10.0;
+// price label position
+const double kPriceLabelPositionBottom = 20.0;
+const double kPriceLabelPositionLeft = 5.0;
+// add to cart button position
+const double kAddToCartButtonPosition = 75.0;
+// sold label opacity and position
+const double kSoldLabelBackgroundOpacity = 0.4;
+const double kSoldLabelPositionTop = 28.0;
+const double kSoldLabelPositionLeft = 40.0;
+
 class ProductListWidget extends StatelessWidget {
-  final double size;
+  final double sizeOfImage;
   final double iconSize;
+  final double productStackInitialWidth;
+  final double productStackInitialHeight;
+  final double imagePositionTop;
+  final double imagePositionLeft;
+  final double labelBackgroundOpacity;
 
   final bool isSold;
   final Product product;
   const ProductListWidget({
     this.iconSize = 30,
-    this.size = 200,
+    this.sizeOfImage = kImageProductSizeSquare,
+    this.productStackInitialWidth = kProductStackInitialSizeWidth,
+    this.productStackInitialHeight = kProductStackInitialSizeHeight,
+    this.imagePositionTop = kImagePositionTop,
+    this.imagePositionLeft = kImagePositionLeft,
+    this.labelBackgroundOpacity = kLabelsBackgroundOpacity,
     required this.product,
     required this.isSold,
     super.key,
@@ -33,33 +67,34 @@ class ProductListWidget extends StatelessWidget {
           },
           child: Stack(
             children: [
-              const SizedBox(
-                width: 250,
-                height: 220,
+              SizedBox(
+                width: productStackInitialWidth,
+                height: productStackInitialHeight,
               ),
               Positioned(
-                left: 30,
-                top: 25,
+                left: imagePositionLeft,
+                top: imagePositionTop,
                 child: Image.network(
                   product.imgUrl[0],
-                  width: size,
-                  height: size,
+                  width: sizeOfImage,
+                  height: sizeOfImage,
                 ),
               ),
               product.isSold
                   ? Positioned(
-                      top: 28,
-                      left: 40,
+                      top: kSoldLabelPositionTop,
+                      left: kSoldLabelPositionLeft,
                       child: Container(
-                        width: size - 22,
-                        height: size - 22,
-                        color: Colors.black.withOpacity(0.4),
+                        width: sizeOfImage - kAvarageMediumPaddingOrMargin,
+                        height: sizeOfImage - kAvarageMediumPaddingOrMargin,
+                        color: Colors.black
+                            .withOpacity(kSoldLabelBackgroundOpacity),
                         child: Center(
                             child: Container(
                           color: labelColor,
-                          padding: const EdgeInsets.all(5),
-                          child: const Text(
-                            'SOLD',
+                          padding: const EdgeInsets.all(kDefaultPadding),
+                          child: Text(
+                            AppLocalizations.of(context)!.sold.toUpperCase(),
                             style: labelText,
                           ),
                         )),
@@ -69,11 +104,11 @@ class ProductListWidget extends StatelessWidget {
                 top: 5,
                 left: 10,
                 child: Container(
-                  color: backgroundColor.withOpacity(0.7),
-                  padding: const EdgeInsets.all(5),
+                  color: backgroundColor.withOpacity(labelBackgroundOpacity),
+                  padding: const EdgeInsets.all(kDefaultPadding),
                   child: Text(
                     product.name,
-                    style: labelText.copyWith(fontSize: 14),
+                    style: labelMidText,
                   ),
                 ),
               ),
@@ -82,25 +117,21 @@ class ProductListWidget extends StatelessWidget {
                   : BlocBuilder<CartBloc, CartState>(
                       builder: (context, state) {
                         return Positioned(
-                          top: 75,
-                          right: 15,
+                          top: kAddToCartButtonPosition,
+                          right: kAddToCartButtonPosition,
                           child: InkWell(
                             onTap: () {
                               context
                                   .read<CartBloc>()
                                   .add(AddCartEvent(product: product));
-                              final snackBar = SnackBar(
-                                content: Text('Add to Cart ${product.name}'),
-                                duration: Duration(seconds: 1),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                              Utils.snackBarMessage(context, product.name);
                             },
                             child: Container(
-                              padding: const EdgeInsets.all(5),
-                              height: iconSize + 10,
-                              width: iconSize + 10,
-                              color: backgroundColor.withOpacity(0.7),
+                              padding: const EdgeInsets.all(kDefaultPadding),
+                              height: iconSize + kMarginSideDefault,
+                              width: iconSize + kMarginSideDefault,
+                              color: backgroundColor
+                                  .withOpacity(labelBackgroundOpacity),
                               child: Icon(
                                 Icons.add_shopping_cart,
                                 size: iconSize,
@@ -112,28 +143,28 @@ class ProductListWidget extends StatelessWidget {
                       },
                     ),
               Positioned(
-                  bottom: 20,
-                  left: 5,
+                  bottom: kPriceLabelPositionBottom,
+                  left: kPriceLabelPositionLeft,
                   child: Container(
-                    padding: const EdgeInsets.all(5),
-                    color: mainTextColor.withOpacity(0.8),
+                    padding: const EdgeInsets.all(kDefaultPadding),
+                    color: mainTextColor.withOpacity(labelBackgroundOpacity),
                     child: Text(
-                        'Price: ${product.getStringPrice(context, product)} ',
-                        style: labelText.copyWith(
-                            color: Colors.white, fontSize: 18)),
+                        '${AppLocalizations.of(context)!.price} ${product.getStringPrice(context, product)} ',
+                        style: labelButtonText),
                   )),
               product.isNew
                   ? Positioned(
-                      top: 10,
-                      right: 10,
+                      top: kNewLabelPosition,
+                      right: kNewLabelPosition,
                       child: Container(
-                        padding: const EdgeInsets.all(9),
-                        color: pallet4.withOpacity(0.7),
+                        padding:
+                            const EdgeInsets.all(kDefaultSpaceBetweenWidgets),
+                        color: pallet4.withOpacity(labelBackgroundOpacity),
                         child: Text(
-                          'NEW',
-                          style: labelText.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 10),
-                        ),
+                            AppLocalizations.of(context)!
+                                .newDisplay
+                                .toUpperCase(),
+                            style: smallLabelText),
                       ))
                   : Container(),
             ],

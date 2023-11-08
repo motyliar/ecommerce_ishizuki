@@ -44,3 +44,9 @@ const TextStyle label16Text =
 
 const TextStyle orderNumberTextStyle =
     TextStyle(fontFamily: 'nunito', fontSize: 18, color: Colors.amber);
+
+const TextStyle smallLabelText = TextStyle(
+    fontFamily: 'nunito',
+    fontWeight: FontWeight.bold,
+    fontSize: 10,
+    color: Colors.white);

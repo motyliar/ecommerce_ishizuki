@@ -1,11 +1,56 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
+import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/screens/product/widgets_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 
+const double kVerticalListOfImageHeight = 240.0;
+const double kVerticalListOfImageWidth = 70.0;
+// initial value for view of vertical gallery
+const double kInitialViewOffsetOfVerticalGallery = 100.0;
+// vertical gallery padding
+const double kVerticalGalleryPadding = 2.0;
+// vertical gallery image size shape square
+const double kVerticalGalleryImageSizeSquare = 60.0;
+// single view of image stack
+const double kStackOfSingleImageDimension = 260.0;
+const double kSingleImageSizeSquare = 240.0;
+const double kStackPaddingHorizontal = 20.0;
+const double kStackPaddingVertical = 10.0;
+
+// product name label values
+// opacity background under image from product name label
+const double kProductNameLabelBackgroundOpacity = 0.6;
+// stack position of label in single gallery stack
+const double kProductNameLabelPositionLeft = 8.0;
+
 class GalleryWidget extends StatelessWidget {
+  final double verticalGalleryPadding;
+  final double verticalGalleryImageSizeSqaure;
+  final double verticalListOfImageHeight;
+  final double verticalListOfImageWidth;
+  final double initialViewOffsetOfVerticalGallery;
+  final double stackOFSingleImageDimension;
+  final double singleImageSizeSquare;
+  final double stackPaddingHorizontal;
+  final double stackPaddingVertical;
+  final double productNameLabelBackgroundOpacity;
+  final double productNameLabelPositionLeft;
   const GalleryWidget({
+    this.verticalGalleryPadding = kVerticalGalleryPadding,
+    this.verticalGalleryImageSizeSqaure = kVerticalGalleryImageSizeSquare,
+    this.verticalListOfImageHeight = kVerticalListOfImageHeight,
+    this.verticalListOfImageWidth = kVerticalListOfImageWidth,
+    this.initialViewOffsetOfVerticalGallery =
+        kInitialViewOffsetOfVerticalGallery,
+    this.stackOFSingleImageDimension = kStackOfSingleImageDimension,
+    this.singleImageSizeSquare = kSingleImageSizeSquare,
+    this.stackPaddingHorizontal = kStackPaddingHorizontal,
+    this.stackPaddingVertical = kStackPaddingVertical,
+    this.productNameLabelBackgroundOpacity = kProductNameLabelBackgroundOpacity,
+    this.productNameLabelPositionLeft = kProductNameLabelPositionLeft,
     super.key,
     required this.product,
   });
@@ -33,11 +78,16 @@ class GalleryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                    height: 240,
-                    width: 70,
+                    height: verticalListOfImageHeight,
+                    width: verticalListOfImageWidth,
+                    /*                   
+                     Start of vertical gallery, start from top left sides of Product Screen                                      
+                    */
                     child: ListView.builder(
                         controller: ScrollController(
-                            initialScrollOffset: 100, keepScrollOffset: true),
+                            initialScrollOffset:
+                                initialViewOffsetOfVerticalGallery,
+                            keepScrollOffset: true),
                         itemCount: product.imgUrl.length,
                         scrollDirection: Axis.vertical,
                         itemBuilder: ((context, index) {
@@ -47,23 +97,27 @@ class GalleryWidget extends StatelessWidget {
                                   image: product.imgUrl, index: index));
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(2.0),
+                              padding: EdgeInsets.all(verticalGalleryPadding),
                               child: Image.network(
                                 product.imgUrl[index],
-                                width: 60,
-                                height: 60,
+                                width: kVerticalGalleryImageSizeSquare,
+                                height: kVerticalGalleryImageSizeSquare,
                               ),
                             ),
                           );
                         })),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 10),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: stackPaddingHorizontal,
+                        vertical: stackPaddingVertical),
+                    /*
+                      Start Stack of single image
+                      */
                     child: Stack(children: [
-                      const SizedBox(
-                        width: 260,
-                        height: 260,
+                      SizedBox(
+                        width: stackOFSingleImageDimension,
+                        height: stackOFSingleImageDimension,
                       ),
                       GestureDetector(
                         onTap: () {
@@ -73,18 +127,19 @@ class GalleryWidget extends StatelessWidget {
                                   image: state.image, indexo: state.index));
                         },
                         child: Container(
-                          width: 240,
-                          height: 240,
+                          width: singleImageSizeSquare,
+                          height: singleImageSizeSquare,
                           child: Image.network(state.image[state.index]),
                         ),
                       ),
                       Positioned(
-                          bottom: 0,
-                          left: 8,
+                          bottom: kStackPositionDefault,
+                          left: productNameLabelPositionLeft,
                           child: Container(
-                            padding: const EdgeInsets.all(4),
+                            padding: const EdgeInsets.all(kDefaultPadding),
                             decoration: BoxDecoration(
-                                color: backgroundColor.withOpacity(0.6)),
+                                color: backgroundColor.withOpacity(
+                                    productNameLabelBackgroundOpacity)),
                             child: Text(
                               product.name,
                               style: bigLabelText,
@@ -97,7 +152,7 @@ class GalleryWidget extends StatelessWidget {
             ],
           );
         } else {
-          return const Text('Something Wrong');
+          return const ErrorScreen();
         }
       },
     );

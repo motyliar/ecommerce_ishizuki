@@ -48,6 +48,9 @@ const kDeliveryMediumWeightLbs = '11-22';
 const kDeliveryHighWeightLbs = '22-33';
 const kDeliveryMaximumWeightLbs = '33-55';
 
+// default starting stack position in stack widget
+const double kStackPositionDefault = 0.0;
+
 // delivery package range of package sizes
 
 const kDeliveryPackageWidthCm = '40';
@@ -216,72 +219,16 @@ const double kCategoryLogoImageWidth = 90.0;
 const double kCategoryLogoImageHeight = 60.0;
 
 //ABOUT SCREEN CONSTANS
-// space between widgets
-const double kAboutSpaceBetweenWidgetsHeight = 10.0;
-
-const double kAboutSpaceToAlignHeightOfRowHeight = 30.0;
-// opacity to set background color in text and image boxes
-const double kAboutOpacityOfMainColorScreenBackground = 0.07;
 //padding around text
 const double kAboutTextPadding = 10.0;
-// space values to calculate dimensions of container for about screen rows
-const double kAboutPaddingSpaceAndBorder = 23.0;
-const double kAboutImageHeightAddition = 50.0;
 
 //CARTSCREEN CONST
 
 // const of cart item list
 // every value are used in main container to show product list
-const double kCartMainContainerPaddingLeft = 15.0;
-const double kCartMainContainerPaddingRight = 20.0;
-const double kCartMainContainerPaddingBottom = 5.0;
-const double kCartMainContainerPaddingTop = 3.0;
-const double kCartMainContainerRadiusElipticalX = 20.0;
-const double kCartMainContainerRadiusElipticalY = 40.0;
-const double kCartMainContainerBackgroundOpacity = 0.3;
-const double kCartMainContainerGradientOpacity = 0.5;
-
-// opacity of remove button in cart item list
-const double kCartRemoveButtonOpacity = 0.9;
-
-// product image size in square shape
-const double kCartProductImageSize = 120.0;
-
-// dimensions of sized box which have inside price and remove button
-
-const double kCartSizedBoxWidth = 80.0;
-const double kCartSizedBoxHeight = 150.0;
-// delivery alert dialog consts
-const double kCartDeliveryDimensionOfDialog = 250.0;
 
 // margin space default
 const double kMarginSideDefault = 10.0;
-
-//CATEGORY SCREEN
-// size of display image of product in category screen
-const double kCategoryProductImageSize = 135.0;
-// size of add button icon in category screen
-const double kCategoryIconSize = 35.0;
-
-//CONFIRM SCREEN CONSTANS
-//Sized Box height
-const double kConfirmSizedBoxSpace = 10.0;
-// Right padding of total pricig
-const double kConfirmTotalPricePadding = 30.0;
-// Dimension of Product image in confirm product list
-const double kConfirmProductListImageDimension = 60.0;
-// increment number using to show postion on order list
-const int kConfirmIncrementIndex = 1;
-// padding of one product display in confirm product list
-const double kConfirmPaddingProductRight = 20.0;
-const double kConfirmPaddingProductTop = 5.0;
-// height of one product box used to multiply when is more then one product
-const double kConfirmSingleProductHeight = 95.0;
-// side padding to set width od single product box
-const double kConfirmSingleProductPadding = 10.0;
-// alert confirm
-const double kConfirmAlertMargin = 10.0;
-const double kConfirmAlertBackgroundOpacity = 0.5;
 
 //CONTACT SCREEN
 // Main constans of contact screen

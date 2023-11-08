@@ -145,8 +145,7 @@ class ProductListHome extends StatelessWidget {
                           color: mainTextColor.withOpacity(backgroundOpacity),
                           child: Text(
                               'Price: ${product.getStringPrice(context, product)} ',
-                              style: labelText.copyWith(
-                                  color: Colors.white, fontSize: 23)),
+                              style: labelTwentyTwoText),
                         ),
                       ],
                     )

@@ -1,13 +1,34 @@
+import 'package:ecommerce_ishizuki/common/constans/constans.dart';
+import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter/material.dart';
 
 import '../../../blocs/bloc_exports.dart';
 
-// ignore: must_be_immutable
+// scale for zoom view in gallery
+const double kMaxZoomView = 3.0;
+const double kMinZoomView = 0.3;
+// sizes of widget zoom view of single gallery
+const double kInitialSizeOfZoomGallery = 300.0;
+// yellow icon sizes
+const double kIconSize = 40.0;
+const double kIconPositionLeft = 160.0;
+const double kIconPositionRight = 90.0;
+
 class ImageDialog extends StatelessWidget {
   final List<String> image;
-
-  int indexo;
-  ImageDialog({super.key, required this.image, required this.indexo});
+  final double initialSizeOfZoomGallery;
+  final double iconSize;
+  final double iconPositionLeft;
+  final double iconPositionRight;
+  final int indexo;
+  const ImageDialog(
+      {super.key,
+      required this.image,
+      required this.indexo,
+      this.initialSizeOfZoomGallery = kInitialSizeOfZoomGallery,
+      this.iconSize = kIconSize,
+      this.iconPositionLeft = kIconPositionLeft,
+      this.iconPositionRight = kIconPositionRight});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -16,8 +37,8 @@ class ImageDialog extends StatelessWidget {
       child: GestureDetector(
         onTap: () => Navigator.pop(context),
         child: InteractiveViewer(
-          maxScale: 3,
-          minScale: 0.3,
+          maxScale: kMaxZoomView,
+          minScale: kMinZoomView,
           child: Dialog(
             child: BlocBuilder<SliderBloc, SliderState>(
               builder: (context, state) {
@@ -29,22 +50,22 @@ class ImageDialog extends StatelessWidget {
                 if (state is SliderLoadedState) {
                   return Stack(children: [
                     Container(
-                      width: 300,
-                      height: 300,
+                      width: initialSizeOfZoomGallery,
+                      height: initialSizeOfZoomGallery,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: NetworkImage(state.image[state.index]),
                               fit: BoxFit.scaleDown)),
                     ),
                     Positioned(
-                        bottom: 0,
-                        right: 160,
+                        bottom: kStackPositionDefault,
+                        right: iconPositionLeft,
                         child: state.isStart
                             ? IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.arrow_back_rounded,
                                   color: Colors.yellow,
-                                  size: 40,
+                                  size: iconSize,
                                 ),
                                 onPressed: () {
                                   context
@@ -54,14 +75,14 @@ class ImageDialog extends StatelessWidget {
                               )
                             : Container()),
                     Positioned(
-                        bottom: 0,
-                        right: 90,
+                        bottom: kStackPositionDefault,
+                        right: iconPositionRight,
                         child: state.isEnd
                             ? IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.arrow_forward_sharp,
                                   color: Colors.yellow,
-                                  size: 40,
+                                  size: iconSize,
                                 ),
                                 onPressed: () {
                                   context
@@ -72,7 +93,7 @@ class ImageDialog extends StatelessWidget {
                             : Container()),
                   ]);
                 } else {
-                  return const Text('wrong');
+                  return const ErrorScreen();
                 }
               },
             ),

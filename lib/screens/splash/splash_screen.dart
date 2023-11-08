@@ -26,7 +26,7 @@ class SplashScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: kSidesDefaultPadding),
               child: Image.network(
-                kSplashScreen,
+                kSplashScreenMiddleLogo,
                 width: kSplashCenterImageWidth,
                 height: kSpalshCenterImageHeight,
               ),

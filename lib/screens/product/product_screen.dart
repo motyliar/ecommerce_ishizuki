@@ -1,4 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
+import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
@@ -77,13 +78,8 @@ class ProductScreen extends StatelessWidget {
                                   context
                                       .read<CartBloc>()
                                       .add(AddCartEvent(product: product));
-                                  final snackBar = SnackBar(
-                                    content: Text(
-                                        '${AppLocalizations.of(context)!.addToCart}  ${product.name}'),
-                                    duration: Duration(seconds: 1),
-                                  );
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
+                                  Utils.snackBarMessage(context,
+                                      '${AppLocalizations.of(context)!.addToCart}  ${product.name}');
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.only(

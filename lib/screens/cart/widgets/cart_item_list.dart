@@ -6,6 +6,22 @@ import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
+// dimensions of sized box which have inside price and remove button
+const double kCartSizedBoxWidth = 80.0;
+const double kCartSizedBoxHeight = 150.0;
+// product image size in square shape
+const double kCartProductImageSize = 120.0;
+// opacity of remove button in cart item list
+const double kCartRemoveButtonOpacity = 0.9;
+const double kCartMainContainerPaddingLeft = 15.0;
+const double kCartMainContainerPaddingRight = 20.0;
+const double kCartMainContainerPaddingBottom = 5.0;
+const double kCartMainContainerPaddingTop = 3.0;
+const double kCartMainContainerRadiusElipticalX = 20.0;
+const double kCartMainContainerRadiusElipticalY = 40.0;
+const double kCartMainContainerBackgroundOpacity = 0.3;
+const double kCartMainContainerGradientOpacity = 0.5;
+
 class CartItemList extends StatelessWidget {
   final double productImageSquareSize;
   final double borderRadiusCircular;

@@ -7,6 +7,11 @@ import 'package:flutter/material.dart';
 import '../../models/models_export.dart';
 import '../../models/product/product_model.dart';
 
+// size of display image of product in category screen
+const double kCategoryProductImageSize = 135.0;
+// size of add button icon in category screen
+const double kCategoryIconSize = 35.0;
+
 class CategoryScreen extends StatelessWidget {
   final Category category;
 
@@ -50,7 +55,7 @@ class CategoryScreen extends StatelessWidget {
                   itemBuilder: ((context, index) {
                     return ProductListWidget(
                       product: products[index],
-                      size: kCategoryProductImageSize,
+                      sizeOfImage: kCategoryProductImageSize,
                       iconSize: kCategoryIconSize,
                       isSold: products[index].isSold,
                     );

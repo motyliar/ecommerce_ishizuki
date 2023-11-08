@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/config/config_exports.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
+// delivery alert dialog consts
+const double kCartDeliveryDimensionOfDialog = 250.0;
+
 class DeliveryDialog extends StatelessWidget {
   final double alertDialogSizeSquareShape;
   final double deliveryMessageLabelPaddingLeft;

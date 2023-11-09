@@ -1,15 +1,10 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
+
 import 'package:ecommerce_ishizuki/screens/network/network_disconnected_widget.dart';
 import 'package:ecommerce_ishizuki/screens/network/network_init_widget.dart';
 import 'package:flutter/material.dart';
 import '../screens_export.dart';
 
-/* TODO
- Need to network checker file to network
- Most important is create some of visual display for better looking of Internet Diconeccted
- Better experience
- */
 class NetworkChecker extends StatelessWidget {
   const NetworkChecker({super.key});
   static const routeName = '/network';

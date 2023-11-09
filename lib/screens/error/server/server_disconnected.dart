@@ -5,6 +5,8 @@ import 'package:ecommerce_ishizuki/common/theme_data/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 
+const double topHeightFromAppBar = 50.0;
+
 class ServerDisconnected extends StatelessWidget {
   final void Function()? onTap;
   const ServerDisconnected({super.key, required this.onTap});
@@ -16,10 +18,10 @@ class ServerDisconnected extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-              margin: EdgeInsets.only(
+              margin: const EdgeInsets.only(
                   left: kDefaultSpaceBetweenWidgets,
                   right: kDefaultSpaceBetweenWidgets,
-                  top: 50),
+                  top: topHeightFromAppBar),
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(kAvarageMediumPaddingOrMargin),
               decoration: BoxDecoration(
@@ -38,7 +40,7 @@ class ServerDisconnected extends StatelessWidget {
                   ),
                   Text(AppLocalizations.of(context)!.serverDisconnectedMessage,
                       style: labelTextMidBlack),
-                  SizedBox(
+                  const SizedBox(
                     height: kDefaultSpaceBetweenWidgets,
                   ),
                   InkWell(

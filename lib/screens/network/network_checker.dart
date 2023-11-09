@@ -1,5 +1,7 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
+import 'package:ecommerce_ishizuki/screens/network/network_disconnected_widget.dart';
+import 'package:ecommerce_ishizuki/screens/network/network_init_widget.dart';
 import 'package:flutter/material.dart';
 import '../screens_export.dart';
 
@@ -22,22 +24,15 @@ class NetworkChecker extends StatelessWidget {
     return BlocBuilder<NetworkBloc, NetworkState>(
       builder: (context, state) {
         if (state is NetworkInitial) {
-          return Scaffold(
-              body: SafeArea(
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      color: backgroundColor,
-                      child: const Text('Network Initial'))));
+          return const NetworkInitWidget();
         }
         if (state is NetworkConnected) {
           return const HomeScreen();
         }
         if (state is NetworkDisconnected) {
-          return const Scaffold(
-              body: SafeArea(child: Text('NetworkDisconnected')));
+          return const NetworkDisconnectedWidget();
         } else {
-          return const Scaffold(body: SafeArea(child: Text('Something Wrong')));
+          return const ErrorScreen();
         }
       },
     );

@@ -50,12 +50,9 @@ class HomeScreen extends StatelessWidget {
           child: BlocBuilder<FetchProductsBloc, FetchProductsState>(
         builder: (context, state) {
           if (state is FetchProductsInitial) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return InitialStateWidget();
           }
-          // TODO
-          // error page implements
+
           if (state is FetchProductServerError) {
             return ServerDisconnected(
                 onTap: (() => context

@@ -21,7 +21,7 @@ class ErrorScreen extends StatelessWidget {
               margin: const EdgeInsets.only(
                   left: kDefaultSpaceBetweenWidgets,
                   right: kDefaultSpaceBetweenWidgets,
-                  top: 50),
+                  top: topHeightFromAppBar),
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(kAvarageMediumPaddingOrMargin),
               decoration: BoxDecoration(

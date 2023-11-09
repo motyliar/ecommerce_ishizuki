@@ -140,7 +140,8 @@ const List<Category> kCategoryListForHomeScreen = [
       imgUrl: 'http://motyliar.webd.pro/.sharedphotos/slab.jpg',
       logoImgUrl: 'http://motyliar.webd.pro/.sharedphotos/slabs_logo.png'),
 ];
-
+// value used in error screens
+const double topHeightFromAppBar = 50.0;
 // durations
 const int kDefaultDurationINSeconds = 1;
 //Opacity for colors

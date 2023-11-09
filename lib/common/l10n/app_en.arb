@@ -102,6 +102,9 @@
         "description": "Message form about problem with server response"
     },
     "serverRequestRefresh": "Refresh",
+    "blocError": "App Error",
+    "blocErrorMessage": "Something went wrong with the application. Please click the refresh button or contact the application provider for assistance.",
+    "blocErrorButton": "Back",
 
 
 

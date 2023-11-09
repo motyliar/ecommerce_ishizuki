@@ -1,7 +1,7 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 
 import 'package:ecommerce_ishizuki/screens/confirm/widgets.dart';
 import 'package:ecommerce_ishizuki/screens/error/error_screen.dart';

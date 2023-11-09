@@ -1,6 +1,6 @@
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
-import 'package:ecommerce_ishizuki/config/box_decoration.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/box_decoration.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';
 import 'package:flutter/material.dart';

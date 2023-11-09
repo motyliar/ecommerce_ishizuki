@@ -1,5 +1,5 @@
 import 'package:ecommerce_ishizuki/common/constans/constans.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:flutter/material.dart';
 
 const double kWeightBoxWidth = 80.0;

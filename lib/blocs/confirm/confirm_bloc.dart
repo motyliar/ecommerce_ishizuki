@@ -1,15 +1,8 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/repository/emailAPI/email_repository.dart';
-import 'package:flutter/material.dart';
-
-import 'dart:math';
-
-import 'package:http/http.dart' as http;
-
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_ishizuki/repository/exports.dart';
 
@@ -156,18 +149,6 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
   }
 
   _getSymbol(OrderConfirmSymbol event, Emitter<ConfirmState> emit) {
-    // String creatingSymbol() {
-    //   final DateTime data = DateTime.now();
-    //   final dataFormat = data.month.toString();
-    //   String characters = 'ABCDEFGHIJKLMNOPRSTUWXYZ123456789';
-    //   List randomSymbol = [];
-    //   Random random = Random();
-    //   for (int i = 0; i < 6; i++) {
-    //     randomSymbol.add(characters[random.nextInt(characters.length)]);
-    //   }
-    //   return '2023 -${randomSymbol.join()}-${dataFormat}';
-    // }
-
     emit(ConfirmChanges(
         state.cart, state.address, state.status, Utils().creatingSymbol()));
   }
@@ -176,26 +157,6 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
     SendConfirmEmail event,
     Emitter<ConfirmState> emit,
   ) async {
-    // const serviceId = 'service_loy3rqq';
-    // const templateId = 'template_cwp9sg7';
-    // const userId = 'cdT7F_odFHGuBXuh3';
-    // final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-    // final response = await http.post(url,
-    //     headers: {
-    //       'origin': 'http://localhost',
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: json.encode({
-    //       'service_id': serviceId,
-    //       'template_id': templateId,
-    //       'user_id': userId,
-    //       'template_params': {
-    //         'user_name': state.address.name,
-    //         'user_email': state.address.email,
-    //         'user_order': state.orderSymbol
-    //       }
-    //     }));
-    // if (response.body == 'OK') {}
     _emailRepository.sendConfirmEmailToUser(
         userName: state.address.name,
         userEmail: state.address.email,
@@ -207,7 +168,7 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
       await _orderRepository.postOrder(
           state.orderSymbol, state.address, state.cart, state.cart.products);
     } catch (err) {
-      print(err);
+      Utils.printDebugError(errorMessage: err.toString());
     }
   }
 
@@ -217,7 +178,7 @@ class ConfirmBloc extends Bloc<ConfirmEvent, ConfirmState> {
     try {
       await _productRepository.updateSoldProduct(productsId);
     } catch (err) {
-      debugPrint('$err');
+      Utils.printDebugError(errorMessage: err.toString());
     }
   }
 }

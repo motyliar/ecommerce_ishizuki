@@ -2,7 +2,7 @@ import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:ecommerce_ishizuki/common/constans/routes_constans.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:ecommerce_ishizuki/routes/url_navigate.dart';
 
 // value used for create litlle space between widgets
@@ -87,16 +87,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         )
                       : Container(),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, kUserScreen);
-                    },
-                    icon: const Icon(
-                      FontAwesomeIcons.user,
-                      color: mainTextColor,
-                      size: 20,
-                    ),
-                  ),
+                  // IconButton(
+                  //   onPressed: () {
+                  //     Navigator.pushNamed(context, kUserScreen);
+                  //   },
+                  //   icon: const Icon(
+                  //     FontAwesomeIcons.user,
+                  //     color: mainTextColor,
+                  //     size: 20,
+                  //   ),
+                  // ),
                 ],
               )
             ],

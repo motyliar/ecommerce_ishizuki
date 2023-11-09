@@ -1,7 +1,7 @@
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'details_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 

@@ -6,7 +6,7 @@ import 'package:ecommerce_ishizuki/repository/exports.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/routes/app_routes.dart';
-import 'package:ecommerce_ishizuki/screens/splash/splash_screen.dart';
+
 import 'blocs/bloc_exports.dart';
 
 import 'package:flutter/material.dart';
@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
                 create: (context) => FetchProductsBloc(
                     RepositoryProvider.of<ProductRepository>(context))
                   ..add(LoadingProductEvent())),
-            BlocProvider(create: ((_) => GaleryBloc()..add(GaleryUpdate()))),
+            BlocProvider(
+                create: ((_) => GaleryBloc()..add(const GaleryUpdate()))),
             BlocProvider(
                 create: ((_) => SliderBloc()..add(SliderLoadingEvent()))),
             BlocProvider(

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecommerce_ishizuki/config/network/network_helper.dart';
+import 'package:ecommerce_ishizuki/connection/network/network_helper.dart';
 import 'package:equatable/equatable.dart';
 
 part 'network_event.dart';

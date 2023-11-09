@@ -1,4 +1,4 @@
-import 'package:ecommerce_ishizuki/config/colors.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/colors.dart';
 import 'package:flutter/material.dart';
 
 const TextStyle headDeliveryText =

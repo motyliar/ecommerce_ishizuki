@@ -1,6 +1,6 @@
 import 'package:ecommerce_ishizuki/common/constans/constans.dart';
-import 'package:ecommerce_ishizuki/config/box_decoration.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/box_decoration.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:flutter/material.dart';
 
 class TextContainer extends StatelessWidget {

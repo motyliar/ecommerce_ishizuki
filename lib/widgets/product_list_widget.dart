@@ -6,7 +6,7 @@ import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 
 // stack widget initial dimension
 const double kProductStackInitialSizeWidth = 250.0;

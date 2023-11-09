@@ -1,6 +1,6 @@
 import 'package:ecommerce_ishizuki/common/constans/constans.dart';
 import 'package:flutter/material.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 
 class DetailsText extends StatelessWidget {
   final String title;

@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/box_decoration.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/box_decoration.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:flutter/material.dart';
 
 // dimensions sizes of main container

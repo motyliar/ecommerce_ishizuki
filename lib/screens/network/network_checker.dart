@@ -1,5 +1,5 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:flutter/material.dart';
 import '../screens_export.dart';
 

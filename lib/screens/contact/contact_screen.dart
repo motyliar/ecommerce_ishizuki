@@ -4,7 +4,7 @@ import 'package:ecommerce_ishizuki/common/enums/enums.dart';
 import 'package:ecommerce_ishizuki/common/utils/utils.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 
 import 'package:ecommerce_ishizuki/widgets/custom_app_bar.dart';
 import 'package:ecommerce_ishizuki/widgets/custom_bottom_app_bar.dart';

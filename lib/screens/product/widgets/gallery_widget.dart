@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/screens/product/widgets_exports.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 
 const double kVerticalListOfImageHeight = 240.0;
 const double kVerticalListOfImageWidth = 70.0;

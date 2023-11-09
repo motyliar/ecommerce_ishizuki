@@ -2,7 +2,7 @@ import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/constans/exports.dart';
 import 'package:ecommerce_ishizuki/screens/screens_export.dart';
 import 'package:flutter_gen/gen_l10n/app_localization.dart';
-import 'package:ecommerce_ishizuki/config/config_exports.dart';
+import 'package:ecommerce_ishizuki/common/theme_data/config_exports.dart';
 import 'package:ecommerce_ishizuki/models/models_export.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_ishizuki/widgets/widgets_exports.dart';
@@ -57,9 +57,10 @@ class HomeScreen extends StatelessWidget {
           // TODO
           // error page implements
           if (state is FetchProductServerError) {
-            return Center(
-              child: Text('Server error'),
-            );
+            return ServerDisconnected(
+                onTap: (() => context
+                    .read<FetchProductsBloc>()
+                    .add(LoadingProductEvent())));
           }
           if (state is FetchProductLoaded) {
             List<Product> listOfNewProducts = state.product

@@ -8,3 +8,4 @@ export 'custom_order/custom_order_screen.dart';
 export 'confirm/confirm_screen.dart';
 export 'delivery/delivery_screen.dart';
 export 'error/error_screen.dart';
+export 'error/server/server_disconnected.dart';

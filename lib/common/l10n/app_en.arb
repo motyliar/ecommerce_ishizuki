@@ -95,7 +95,14 @@
 
 
 
-    
+    "@_ERRORS": {},
+    "server_error": "Server Error",
+    "serverDisconnectedMessage": "We apologize for the inconvenience, but it seems that the server is currently not responding or is temporarily offline. Please note that our application is hosted on a free testing server. We kindly ask for your patience and recommend waiting for approximately 2 minutes before attempting to reconnect. Thank you for your understanding.",
+    "@serverDisconnectedMessage": {
+        "description": "Message form about problem with server response"
+    },
+    "serverRequestRefresh": "Refresh",
+
 
 
 

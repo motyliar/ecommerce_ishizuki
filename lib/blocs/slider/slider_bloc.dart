@@ -1,8 +1,6 @@
 import 'package:ecommerce_ishizuki/blocs/bloc_exports.dart';
 import 'package:ecommerce_ishizuki/common/constans/constans.dart';
-
 import 'package:equatable/equatable.dart';
-
 part 'slider_event.dart';
 part 'slider_state.dart';
 
